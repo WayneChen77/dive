@@ -14,10 +14,10 @@ export default {
       messages: [],
     };
   },
-  inject: ['emitter'],
+  // inject: ['emitter'],
   mounted() {
     // 請自行補上 emitter 事件
-    this.emitter.on('push-msg', (msg) => {
+    this.$emitter.on('push-msg', (msg) => {
       const { style = 'succes', title, content } = msg;
 
       this.messages.push({ style, title, content });

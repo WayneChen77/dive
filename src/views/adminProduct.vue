@@ -76,6 +76,7 @@ export default {
     openModal(isNew, item) {
       if (isNew) {
         this.diveProduct = {};
+        this.diveProduct.unit = '人';
       } else {
         this.diveProduct = { ...item };
       }
@@ -106,7 +107,7 @@ export default {
           const modal = this.$refs.DeleteModal;
           this.getDiveProducts();
           modal.hideModal();
-          this.emitter.emit('push-msg', {
+          this.$emitter.emit('push-msg', {
             style: 'danger',
             title: res.data.message,
             content: res.data.message,
@@ -140,13 +141,13 @@ export default {
         if (res.data.success) {
           this.getDiveProducts();
 
-          this.emitter.emit('push-msg', {
+          this.$emitter.emit('push-msg', {
             style: 'success',
             title: res.data.message,
             content: res.data.message,
           });
         } else {
-          this.emitter.emit('push-msg', {
+          this.$emitter.emit('push-msg', {
             style: 'warning',
             title: '更新失敗',
             content: res.data.message.join(','),
@@ -172,7 +173,7 @@ export default {
   },
 
   //   從最父層取得bus使用 用來傳遞原件資料
-  inject: ['emitter'],
+  // inject: ['emitter'],
   created() {
     this.getDiveProducts();
   },

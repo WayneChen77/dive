@@ -12,17 +12,17 @@
 <script>
 // 使用mitt 直接父傳子下去讓所有原件使用 減少import程式碼
 import ToastMessages from '@/components/ToastMessages.vue';
-import mitt from 'mitt';
+// import mitt from 'mitt';
 
-const emitter = mitt();
+// const emitter = mitt();
 
 export default {
   components: {
     ToastMessages,
   },
-  provide() {
-    return { emitter };
-  },
+  // provide() {
+  //   return { emitter };
+  // },
   created() {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)userToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
     this.$http.defaults.headers.common.Authorization = token;

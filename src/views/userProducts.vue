@@ -34,6 +34,8 @@
               type="search"
               placeholder="Search"
               aria-label="Search"
+              v-model="search"
+              @change="filterData"
             />
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
@@ -41,36 +43,71 @@
 
         <hr class="mt-3" />
       </div>
-      <div class="main mb-3">
-        <div class="card shadow border-0" v-for="(i, key) in products" :key="key">
+      <div class="main mb-3 d-flex flex-wrap">
+        <div class="card shadow border-0 m-3" v-for="(i, key) in dataList" :key="key">
           <div class="card-img-top cardImg">
-            <img :src="i.imageUrl" alt="..." />
+            <img :src="i.imageUrl" alt="i.engtitle" />
           </div>
           <div class="overlay card-img-top">
-            <a href=""> <div class="text-center p-5 text-white">了解更多</div></a>
+            <a href="#" @click.prevent="userproduct(i)">
+              <div class="text-center p-5 text-white">了解更多</div>
+            </a>
           </div>
 
           <div class="card-body text-center">
             <h5 class="card-title">{{ i.title }}</h5>
             <p class="card-text">${{ i.price }}</p>
-            <a href="#" class="btn btn-outline-primary">馬上上課</a>
+            <a href="#" class="btn btn-outline-primary" @click.prevent="updateCart(i)">馬上上課</a>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <ToastMessages></ToastMessages>
 </template>
 
 <script>
+import ToastMessages from '@/components/ToastMessages.vue';
+
 export default {
   name: 'UserProducts',
 
   data() {
-    return { products: [], isLoading: false };
+    return { products: [], isLoading: false, search: '' };
   },
+  // 待設定更新購物車 下面是傳的方式
+  // inject: ['emitter'],
+  components: { ToastMessages },
   methods: {
+    //  進入商品業面
     userproduct(i) {
       this.$router.push(`/UserSelect/${i.id}`);
+    },
+    // 加入購物車
+    updateCart(i) {
+      this.isLoading = true;
+      console.log(i.id);
+      const cart = {
+        product_id: i.id,
+        qty: 1,
+      };
+      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
+      this.$http
+        .post(Api, { data: cart })
+        .then((res) => {
+          console.log(res.data.data.product_id);
+          //   吐司回覆
+          this.$emitter.emit('push-msg', {
+            style: 'success',
+            title: res.data.message,
+            content: res.data.message,
+          });
+
+          this.isLoading = false;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
     getproducts() {
       this.isLoading = true;
@@ -87,7 +124,12 @@ export default {
         });
     },
   },
-
+  computed: {
+    // search
+    dataList() {
+      return this.products.filter((i) => i.title.match(this.search));
+    },
+  },
   created() {
     this.getproducts();
   },
@@ -109,7 +151,7 @@ export default {
 
   .card {
     position: relative;
-    width: 12rem;
+    width: 18vw;
     .card-img-top {
       height: 30vh;
       overflow: hidden;

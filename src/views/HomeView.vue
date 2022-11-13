@@ -50,7 +50,7 @@
       /></swiper-slide>
     </swiper>
     <div class="container dive">
-      <div class="row align-items-center">
+      <div class="row align-items-center justify-content-center textItem">
         <div class="col-12 col-md-6 p-3">
           <img
             class="img-fluid"
@@ -58,7 +58,7 @@
             alt=""
           />
         </div>
-        <div class="col-12 col-md-6 p-3 text">
+        <div class="col-12 col-md-6 p-3 text text1">
           <div>
             <h4>自由潛水</h4>
             <p>
@@ -71,7 +71,7 @@
             </p>
           </div>
         </div>
-        <div class="col-12 col-md-6 p-3 text">
+        <div class="col-12 col-md-6 p-3 text text2">
           <div>
             <h4>水肺潛水</h4>
             <p>
@@ -110,7 +110,9 @@
                 alt=""
               />
               <div class="overlay rounded-circle">
-                <a href=""> <div class="text-center p-5 text-white">了解更多</div></a>
+                <router-link to="/userProducts">
+                  <div class="text-center p-5 text-white">了解更多</div></router-link
+                >
               </div>
             </div>
             <div class="text-center">
@@ -126,7 +128,9 @@
                 alt=""
               />
               <div class="overlay rounded-circle">
-                <a href=""> <div class="text-center p-5 text-white">了解更多</div></a>
+                <router-link to="/userProducts">
+                  <div class="text-center p-5 text-white">了解更多</div></router-link
+                >
               </div>
             </div>
             <div class="text-center">
@@ -144,7 +148,9 @@
                 alt=""
               />
               <div class="overlay rounded-circle">
-                <a href=""> <div class="text-center p-5 text-white">了解更多</div></a>
+                <router-link to="/userProducts">
+                  <div class="text-center p-5 text-white">了解更多</div></router-link
+                >
               </div>
             </div>
             <div class="text-center">
@@ -162,7 +168,6 @@
 
 <script>
 // @ is an alias to /src
-
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 import 'swiper/swiper-bundle.css';
@@ -214,8 +219,18 @@ export default {
   background-image: url('https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
   background-attachment: fixed;
 }
-.text div {
+// .textItem {
+//   margin-right: -10%;
+// }
+.text {
   background: rgba($color: #0cc6f0, $alpha: 0.3);
+  z-index: 1;
+}
+.text1 {
+  margin-left: -10%;
+}
+.text2 {
+  margin-right: -10%;
 }
 img {
   width: 100%;
@@ -235,12 +250,10 @@ img {
 .txt {
   padding: 1rem;
   color: white;
-  top: 30%;
+  top: 40%;
 
   left: 18%;
   width: 390px;
-
-  min-height: 30vh;
   background: rgba(0, 0, 0, 0.6);
   position: absolute;
 }

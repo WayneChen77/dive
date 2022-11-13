@@ -130,14 +130,13 @@ export default {
         if (res.data.success) {
           this.getCoupons();
 
-          this.emitter.emit('push-msg', {
+          this.$emitter.emit('push-msg', {
             style: 'success',
-
             title: res.data.message,
             content: res.data.message,
           });
         } else {
-          this.emitter.emit('push-msg', {
+          this.$emitter.emit('push-msg', {
             style: 'warning',
             title: '更新失敗',
             content: res.data.message.join(','),

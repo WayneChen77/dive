@@ -6,6 +6,7 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
+    meta: { title: "Wayne's Dive" },
   },
   {
     path: '/userProducts',
@@ -20,10 +21,10 @@ const routes = [
     component: () => import('../views/UserSelect.vue'),
   },
   {
-    path: '/addticket/:id',
-    name: 'addticket',
+    path: '/UserCarts',
+    name: 'UserCarts',
 
-    component: () => import('../views/AddTicket.vue'),
+    component: () => import('../views/UserCarts.vue'),
   },
   {
     path: '/candy',
@@ -66,6 +67,9 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
   linkActiveClass: 'active',
+  scrollBehavior() {
+    return { top: 0 };
+  },
 });
 
 export default router;

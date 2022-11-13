@@ -2,7 +2,7 @@
   <div class="nav">
     <div class="container pt-2">
       <nav class="navbar navbar-expand-lg">
-        <router-link class="text-dark" to="/">韋恩潛水</router-link>
+        <router-link class="text-dark" to="/">1</router-link>
         <button
           ref="navbarBtn"
           class="navbar-toggler"
@@ -33,11 +33,15 @@
         </div>
       </nav>
     </div>
+    <CartIcons></CartIcons>
   </div>
 </template>
-
 <script>
+import CartIcons from '@/components/CartIcons.vue';
+
 export default {
+  components: { CartIcons },
+
   watch: {
     $route() {
       if (document.body.offsetWidth < 992) {
