@@ -13,5 +13,15 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 'off',
     'jsx-a11y/label-has-for': 'off',
     'object-curly-newline': 'off',
+    'linebreak-style': [0, 'error', 'windows'],
+    'vuejs-accessibility/label-has-for': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
+      },
+    ],
+    'vuejs-accessibility/form-control-has-label': 'off',
   },
 };

@@ -25,6 +25,18 @@ const routes = [
     name: 'UserCarts',
 
     component: () => import('../views/UserCarts.vue'),
+    children: [
+      {
+        path: 'CartsItem',
+        name: 'CartsItem',
+        component: () => import('../views/CartsItem.vue'),
+      },
+      {
+        path: 'CartsForm',
+        name: 'CartsForm',
+        component: () => import('../views/CartsForm.vue'),
+      },
+    ],
   },
   {
     path: '/candy',

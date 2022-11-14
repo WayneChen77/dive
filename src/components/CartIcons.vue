@@ -4,7 +4,7 @@
       ><span class="badge rounded-pill cartnum">1</span
       ><span class="visually-hidden">unread messages</span></i
     >
-    <router-link to="/UserCarts"
+    <router-link to="/UserCarts/CartsItem"
       ><i class="bi bi-cart-fill position-relative d-block"
         ><span class="badge rounded-pill cartnum"
           >{{ cartNum }}<span class="visually-hidden">unread messages</span></span

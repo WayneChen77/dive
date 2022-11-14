@@ -74,7 +74,7 @@ export default {
 
       modal.showModal();
     },
-    // 開啟刪除開區塊
+    // 開啟刪除區塊
     deleteModal(item) {
       this.coupontemp = { ...item };
       const modal = this.$refs.DeleteModal;

@@ -53,14 +53,11 @@
         </button>
       </div>
     </div>
+    <!-- 下方區塊 -->
     <div class="row">
-      <div class="col-12 col-sm-8" v-if="carts">
-        <div class="box row">
-          <div class="title col-sm-7 col-8 my-3" v-for="(i, key) in carts" :key="key">
-            <h1>{{ i.product.title }}</h1>
-            <p>{{ i.product.engtitle }}</p>
-          </div>
-        </div>
+      <!-- 下方左區塊 -->
+      <div class="col-12 col-sm-8">
+        <router-view></router-view>
       </div>
       <div class="col-12 col-sm-4">
         right
@@ -78,20 +75,14 @@
             </button>
           </div>
         </div>
-        <div class="card-body text-gray">
-          <a
-            href="#"
-            class="btn btn-primary position-absolute end-0"
-            @click.prevent="removeCartItem"
-            >刪除
-          </a>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+// import CartsItem from '@/components/CartsItem';
+
 export default {
   data() {
     return {
@@ -101,34 +92,8 @@ export default {
       isLoading: false,
     };
   },
+  // components:{CartsItem},
   methods: {
-    // 移除資料
-    removeCartItem(i) {
-      this.isload = i.id;
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${i.id}`;
-      this.$http.delete(Api).then((res) => {
-        console.log(res);
-        // this.$httpMessageState(response, '移除購物車品項');
-      });
-    },
-    // 更新資料
-    updateCart(i) {
-      this.isload = true;
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${i.id}`;
-      //   this.isLoading = true;
-      //   this.status.loadingItem = item.id;
-      const cart = {
-        product_id: i.product_id,
-        // qty要調整
-        qty: i.qty,
-      };
-      this.$http.put(Api, { data: cart }).then((res) => {
-        console.log(res);
-        // this.status.loadingItem = '';
-        this.isload = false;
-        this.getusercarts();
-      });
-    },
     addCouponCode() {
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`;
       const coupon = {
@@ -150,9 +115,12 @@ export default {
       this.$http
         .get(Api)
         .then((res) => {
+          // 優惠碼價格資料建議從cartsitem取得 不然資料更新會delay
+          // 下傳上比較方便 要用mitt
+          console.log(res.data.data.total);
+          // final_total
           this.carts = res.data.data.carts;
           this.isLoading = false;
-          console.log(this.carts[0]);
         })
         .catch((e) => {
           console.log(e);
@@ -166,62 +134,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-// 設定卡片重疊陰影
-.productflex {
-  display: flex;
-  flex-wrap: wrap;
-}
-.addticket {
-  .product {
-    position: relative;
-    margin: 1rem;
-    width: 9rem;
-    height: 18rem;
-  }
-  img {
-    height: 73%;
-    width: 100%;
-  }
-  .product:hover {
-    .cardhover {
-      opacity: 0.6;
-    }
-  }
-  .cardhover {
-    display: flex;
-    min-width: 9rem;
-    width: 100%;
-    height: 73%;
-    background-color: black;
-
-    opacity: 0;
-    position: absolute;
-    transition: all 0.5s;
-    border-top-left-radius: 0.375rem;
-    border-top-right-radius: 0.375rem;
-
-    .hovertxt {
-      margin: auto;
-
-      i {
-        padding: 1rem;
-        border-radius: 50%;
-      }
-      a span {
-        height: 1px;
-        width: 1px;
-        position: absolute;
-        overflow: hidden;
-        top: -10px;
-      }
-    }
-  }
-  @media (max-width: 480px) {
-    .product {
-      width: 18rem;
-      height: 27rem;
-    }
-  }
-}
-</style>
+<style lang="scss" scoped></style>
