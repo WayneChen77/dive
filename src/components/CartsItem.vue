@@ -1,5 +1,7 @@
 <template>
-  <button class="btn btn-outline-secondary mb-3" type="button" @click="deleteCart">清空資料</button>
+  <button class="btn btn-outline-secondary mb-3" type="button" @click="$emit('dele-Cart')">
+    清空資料
+  </button>
   <div class="row">
     <div class="border">
       <div class="container mt-4" v-if="carts.length > 0">
@@ -21,7 +23,7 @@
                   <button
                     type="button"
                     class="btn d-md-block mx-auto btnClose"
-                    @click="removeCartItem(item.id)"
+                    @click="$emit('remove-Cart', item.id)"
                   >
                     <i class="bi bi-trash"></i>
                   </button>
@@ -40,7 +42,7 @@
                       <button
                         type="button"
                         class="btn btn-outline-dark"
-                        @click="updateCart(item, item.qty - 1)"
+                        @click="$emit('reduce-Cart', item)"
                         :disabled="item.qty == 1"
                       >
                         <i class="bi bi-dash" />
@@ -56,8 +58,8 @@
                       <button
                         type="button"
                         class="btn btn-outline-dark"
-                        @click="updateCart(item, item.qty + 1)"
-                        :disabled="item.qty == 10"
+                        @click="$emit('add-Cart', item)"
+                        :disabled="item.qty == 4"
                       >
                         <i class="bi bi-plus" />
                       </button>
@@ -71,7 +73,7 @@
                   <button
                     type="button"
                     class="btn btn-outline-dark"
-                    @click="updateCart(item, item.qty - 1)"
+                    @click="$emit('reduce-Cart', item)"
                     :disabled="item.qty == 1"
                   >
                     <i class="bi bi-dash" />
@@ -87,8 +89,8 @@
                   <button
                     type="button"
                     class="btn btn-outline-dark"
-                    @click="updateCart(item, item.qty + 1)"
-                    :disabled="item.qty === 10 || isLoad"
+                    @click="$emit('add-Cart', item)"
+                    :disabled="item.qty === 4"
                   >
                     <i class="bi bi-plus" />
                   </button>
@@ -101,7 +103,7 @@
                 <button
                   type="button"
                   class="btn d-md-block mx-auto btnClose"
-                  @click="removeCartItem(item.id)"
+                  @click="$emit('remove-Cart', item.id)"
                 >
                   <i class="bi bi-trash"></i>
                 </button>
@@ -128,81 +130,19 @@ export default {
   data() {
     return {
       carts: [],
-      coupon_code: '',
-      isLoading: false,
-      isLoad: false,
     };
   },
-  methods: {
-    // 清空資料
-    deleteCart() {
-      this.isLoading = true;
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
-      this.$http.delete(Api).then((res) => {
-        console.log(res);
-        this.isLoading = false;
-        // this.$httpMessageState(response, '移除購物車品項');
-        this.getusercarts();
-      });
-    },
-    // 移除資料
-    removeCartItem(i) {
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${i}`;
-      this.$http.delete(Api).then((res) => {
-        console.log(res);
-        // this.$httpMessageState(response, '移除購物車品項');
-        this.getusercarts();
-      });
-    },
-    // 更新資料
-    updateCart(i, num) {
-      this.isLoad = true;
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${i.id}`;
-      //   this.isLoading = true;
-      //   this.status.loadingItem = item.id;
-      const cart = {
-        product_id: i.product_id,
-        // qty要調整
-        qty: num,
-      };
-      this.$http.put(Api, { data: cart }).then((res) => {
-        console.log(res);
-        // this.status.loadingItem = '';
-        this.isLoad = false;
-        this.getusercarts();
-      });
-    },
-    addCouponCode() {
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`;
-      const coupon = {
-        code: this.coupon_code,
-      };
-      this.isLoading = true;
-      this.$http.post(Api, { data: coupon }).then((res) => {
-        // res.message 回覆吐司
-        // this.$httpMessageState(response, '加入優惠券');
-        console.log(res);
-        this.getusercarts();
-        this.isLoading = false;
-      });
-    },
-    // 取得購物車群資料
-    getusercarts() {
-      this.isLoading = true;
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.$http
-        .get(Api)
-        .then((res) => {
-          this.carts = res.data.data.carts;
-          this.isLoading = false;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+  props: {
+    data: { type: Object },
+    default() {
+      return {};
     },
   },
-  created() {
-    this.getusercarts();
+  emits: ['deleCart', 'addCart', 'removeCart', 'reduceCart'],
+  watch: {
+    data() {
+      this.carts = this.data;
+    },
   },
 };
 </script>

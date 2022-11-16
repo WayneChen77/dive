@@ -7,12 +7,25 @@ import Loading from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import mitt from 'mitt';
-// 套用千分號
+// 表單驗證
+import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate';
+import AllRules from '@vee-validate/rules';
+import { localize, setLocale } from '@vee-validate/i18n';
+import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
+// 套用千分號Y
 import { currency, date } from './methods/filter';
-
 import App from './App.vue';
 import router from './router';
 
+Object.keys(AllRules).forEach((rule) => {
+  defineRule(rule, AllRules[rule]);
+});
+configure({
+  generateMessage: localize({ zh_TW: zhTW }), // 載入繁體中文語系
+  validateOnInput: true, // 當輸入任何內容直接進行驗證
+});
+// 設定預設語系
+setLocale('zh_TW');
 const emitter = mitt();
 // 還有課程法在參考看用哪個好
 router.beforeEach((to, from, next) => {
@@ -29,6 +42,10 @@ app.config.globalProperties.$filters = {
   currency,
   date,
 };
+// 全域原件
+app.component('FormView', Form);
+app.component('FieldView', Field);
+app.component('ErrorMessage', ErrorMessage);
 
 app.component('LoadingView', Loading);
 app.use(VueAxios, axios);
