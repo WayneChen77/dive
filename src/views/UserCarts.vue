@@ -75,8 +75,7 @@
           @dele-Cart="deleteCart"
           v-if="!sendData"
         ></CartsItem>
-
-        <CartsForm v-if="sendData"></CartsForm>
+        <div class="rwd"></div>
       </div>
       <div class="col-12 col-md-4">
         right
@@ -149,6 +148,9 @@
             </div>
           </div>
         </div>
+        <teleport to=".rwd" v-if="isMounted" class="imgtp" :disabled="isDisabled">
+          <CartsForm v-if="sendData"></CartsForm
+        ></teleport>
       </div>
     </div>
   </div>
@@ -167,9 +169,27 @@ export default {
       sendData: false,
       isload: false,
       isLoading: false,
+      isMounted: false,
+      isDisabled: false,
     };
   },
   components: { CartsItem, CartsForm },
+  mounted() {
+    // 解決Teleport掛載問題
+    this.isMounted = true;
+    if (window.innerWidth < 430) {
+      this.isDisabled = true;
+    }
+    // 判斷當前螢幕關閉Teleport
+    window.addEventListener('resize', () => {
+      console.log(window.screen.width);
+      if (window.innerWidth < 430) {
+        this.isDisabled = true;
+      } else {
+        this.isDisabled = false;
+      }
+    });
+  },
   methods: {
     // 更新資料
     reduceCart(item) {

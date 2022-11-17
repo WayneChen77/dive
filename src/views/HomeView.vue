@@ -71,17 +71,8 @@
             </p>
           </div>
         </div>
-        <div class="col-12 col-md-6 p-3 text text2">
-          <div>
-            <h4>水肺潛水</h4>
-            <p>
-              水肺是一種輔助潛水者在水中呼吸的器具。水肺是在1943年，由雅克-伊夫·庫斯托和埃米爾·加尼昂共同發明的。
-              現代的水肺系統最少由四個部分組成，包括：浮力調節裝置、呼吸調節器、
-              潛水氣瓶和配重系統。調節器以活栓操控，將壓縮氣體由高壓狀態，轉化成可供人體正常呼吸的壓力。
-              潛水員所使用的氣瓶不稱為氧氣筒。氧氣筒(100%氧氣)是屬於醫療級的氣體。水肺使用的稱之為氣瓶(79%氮氣+21%氧氣)，氣瓶裡裝的是壓縮後的空氣，並非純氧氣
-            </p>
-          </div>
-        </div>
+        <div class="imgtop col-0 col-md-6 text text2"></div>
+
         <div class="col-12 col-md-6 p-3">
           <img
             class="img-fluid"
@@ -89,6 +80,19 @@
             alt=""
           />
         </div>
+        <teleport to=".imgtop" v-if="isMounted" class="imgtp" :disabled="isDisabled">
+          <div class="p-3 txtrwd">
+            <div>
+              <h4>水肺潛水</h4>
+              <p>
+                水肺是一種輔助潛水者在水中呼吸的器具。水肺是在1943年，由雅克-伊夫·庫斯托和埃米爾·加尼昂共同發明的。
+                現代的水肺系統最少由四個部分組成，包括：浮力調節裝置、呼吸調節器、
+                潛水氣瓶和配重系統。調節器以活栓操控，將壓縮氣體由高壓狀態，轉化成可供人體正常呼吸的壓力。
+                潛水員所使用的氣瓶不稱為氧氣筒。氧氣筒(100%氧氣)是屬於醫療級的氣體。水肺使用的稱之為氣瓶(79%氮氣+21%氧氣)，氣瓶裡裝的是壓縮後的空氣，並非純氧氣
+              </p>
+            </div>
+          </div>
+        </teleport>
       </div>
       <div class="a123 p-5 m-2 text-white">
         <h4>每年3次，出團潛入世界</h4>
@@ -175,18 +179,36 @@ import 'swiper/swiper-bundle.css';
 export default {
   name: 'HomeView',
   data() {
-    return { modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay] };
+    return {
+      isMounted: false,
+      isDisabled: false,
+      modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay],
+    };
+  },
+
+  mounted() {
+    // 解決Teleport掛載問題
+    this.isMounted = true;
+    if (window.innerWidth < 430) {
+      this.isDisabled = true;
+    }
+    // 判斷當前螢幕關閉Teleport
+    window.addEventListener('resize', () => {
+      console.log(window.screen.width);
+      if (window.innerWidth < 430) {
+        this.isDisabled = true;
+      } else {
+        this.isDisabled = false;
+      }
+    });
   },
   components: {
     Swiper,
     SwiperSlide,
   },
-  created() {
-    console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH);
-  },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 // 圓形遮罩
 .home {
   .wrap {
@@ -258,6 +280,14 @@ img {
   position: absolute;
 }
 @media screen and (max-width: 430px) {
+  .txtrwd {
+    background: rgba($color: #0cc6f0, $alpha: 0.3);
+    z-index: 1;
+  }
+  .text1,
+  .text2 {
+    margin: 0%;
+  }
   .txt {
     left: 0;
     right: 0;

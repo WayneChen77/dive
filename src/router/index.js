@@ -27,10 +27,33 @@ const routes = [
     component: () => import('../views/UserCarts.vue'),
   },
   {
-    path: '/candy',
-    name: 'CandyView',
+    path: '/about',
+    name: 'AboutView',
 
-    component: () => import('../views/CandyView.vue'),
+    component: () => import('../views/Front/AboutView.vue'),
+  },
+  {
+    path: '/Contact',
+    name: 'ContactView',
+
+    component: () => import('../views/Front/ContactView.vue'),
+  },
+  {
+    path: '/Order',
+    name: 'OrderView',
+    component: () => import('../views/Front/OrderView.vue'),
+    children: [
+      {
+        path: 'CheckOut/:id',
+        name: 'CheckOut',
+        component: () => import('../views/Front/CheckOut.vue'),
+      },
+      {
+        path: 'PayView/:id',
+        name: 'PayView',
+        component: () => import('../views/Front/PayView.vue'),
+      },
+    ],
   },
   {
     path: '/login',

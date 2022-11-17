@@ -1,16 +1,12 @@
 <template>
   <footer class="footer bg-titleblue">
     <address class="copyright">
-      <p class="text-center text-white">
-        Copyright © 2022 影城 Wayne Cinemas. All Rights Reserved.
-      </p>
+      <p class="text-center text-white">Copyright © 2022 Wayne Dives. All Rights Reserved.</p>
       <ul class="addressLink">
-        <li><a href="">關於影城</a></li>
-        <li><a href="">人才招募</a></li>
+        <li><a href="">關於我們</a></li>
+        <li><a href="">連絡我們</a></li>
         <li><a href="">電子發票</a></li>
-        <li><a href="">隱私權政策</a></li>
-        <li class="close">本網站照片來源</li>
-        <li class="close">網站地圖</li>
+        <li>本網站照片來源</li>
       </ul>
     </address>
   </footer>
@@ -21,12 +17,16 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+.footer {
+  width: 100%;
+}
 .copyright {
-  height: 20vh;
+  height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
+  flex-wrap: wrap;
 
   ul {
     left: 0;
@@ -38,7 +38,7 @@ export default {};
     li {
       color: white;
 
-      margin-left: 1.5rem;
+      margin: 0.5rem;
       a {
         color: white;
         text-decoration: none;

@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center p-md-0 p-3">
     <h3 class="text-center fs-3">顧客聯絡資料</h3>
     <FormView
       class="col-md-10 bg-titleblue rounded my-3 text-warning"
@@ -120,12 +120,12 @@ export default {
       return phoneNumber.test(value) ? true : '需要正確的電話號碼';
     },
     createOrder() {
-      // const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`;
-      // const order = this.form;
-      // this.$http.post(Api, { data: order }).then((res) => {
-      //   console.log(res);
-      this.$router.push('order');
-      // });
+      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`;
+      const order = this.form;
+      this.$http.post(Api, { data: order }).then((res) => {
+        //   console.log(res);
+        this.$router.push(`/Order/PayView/${res.data.orderId}`);
+      });
     },
   },
 };

@@ -18,13 +18,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link class="nav-link" to="/">關於我們</router-link>
+              <router-link class="nav-link" to="/about">關於我們</router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/userProducts">產品介紹</router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/Candy">潛水知識</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/contact">連絡我們</router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/login">管理登入</router-link>
