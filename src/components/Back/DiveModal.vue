@@ -246,17 +246,16 @@ export default {
     },
   },
   watch: {
+    // 監聽傳入資料 避免舊資料宣染
     product() {
       this.diveProduct = this.product;
       if (!this.diveProduct.images) {
         this.diveProduct.images = [];
       }
-      // if (!this.diveProduct.actors) {
-      //   this.diveProduct.actors = [];
-      // }
     },
   },
   methods: {
+    // 上傳照片檔取得網址
     uploadFile() {
       const uploadedFile = this.$refs.fileInput.files[0];
       const formData = new FormData();
@@ -281,12 +280,9 @@ export default {
       });
     },
   },
+  // 通用model開啟
   mixins: [modalmixiins],
 };
 </script>
 
-<style lang="scss" scoped>
-// .form-control.col-8 {
-//   width: 66%;
-// }
-</style>
+<style lang="scss" scoped></style>

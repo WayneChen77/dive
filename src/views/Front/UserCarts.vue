@@ -78,7 +78,7 @@
         <div class="rwd"></div>
       </div>
       <div class="col-12 col-md-4">
-        right
+        <!-- 右區塊 -->
         <div class="input-group mb-3 input-group-sm" v-if="!sendData">
           <label for="coupon"
             ><input
@@ -88,7 +88,13 @@
               placeholder="請輸入優惠碼"
           /></label>
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" @click="addCouponCode">
+            <!-- 沒商品禁用 disabled -->
+            <button
+              :disabled="carts.length < 1"
+              class="btn btn-outline-secondary"
+              type="button"
+              @click="addCouponCode"
+            >
               套用優惠碼
             </button>
           </div>
@@ -126,20 +132,22 @@
           <div class="col-12 col-md-8 border rounded p-3">
             <div class="text-gray">
               商品金額:
-              <p class="text-end">${{ price.total }}</p>
+              <p class="text-end">${{ this.$filters.currency(price.total) }}</p>
             </div>
             <div v-if="price.total != price.final_total">
               折扣金額:
-              <p class="text-end">${{ price.total - price.final_total }}</p>
+              <p class="text-end">${{ this.$filters.currency(price.total - price.final_total) }}</p>
             </div>
             <div class="text-danger">
               總金額:
-              <p class="text-end">${{ price.final_total }}</p>
+              <p class="text-end">${{ this.$filters.currency(price.final_total) }}</p>
             </div>
+            <!-- 沒商品禁用 :disabled-->
             <div class="text-end">
               <button
                 class="btn btn-outline-secondary mb-3"
                 type="button"
+                :disabled="carts.length < 1"
                 @click="sendData = true"
                 v-if="!sendData"
               >
@@ -157,8 +165,8 @@
 </template>
 
 <script>
-import CartsItem from '@/components/CartsItem.vue';
-import CartsForm from '@/components/CartsForm.vue';
+import CartsItem from '@/components/Front/CartsItem.vue';
+import CartsForm from '@/components/Front/CartsForm.vue';
 
 export default {
   data() {
@@ -166,9 +174,12 @@ export default {
       carts: [],
       price: {},
       coupon_code: '',
+      // 控制畫面顯示近度
       sendData: false,
       isload: false,
       isLoading: false,
+
+      // Teleport掛載使用
       isMounted: false,
       isDisabled: false,
     };
@@ -189,6 +200,11 @@ export default {
         this.isDisabled = false;
       }
     });
+
+    // 確認有資料更新已抓取api刷新畫面
+    this.$emitter.on('push-cart', () => {
+      this.getusercarts();
+    });
   },
   methods: {
     // 更新資料
@@ -200,7 +216,11 @@ export default {
         qty: item.qty - 1,
       };
       this.$http.put(Api, { data: cart }).then((res) => {
-        console.log(res);
+        this.$emitter.emit('push-cart', {
+          style: 'warning',
+          title: res.data.message,
+          content: res.data.message,
+        });
         this.isLoad = false;
         this.getusercarts();
       });
@@ -213,17 +233,24 @@ export default {
         qty: item.qty + 1,
       };
       this.$http.put(Api, { data: cart }).then((res) => {
-        console.log(res);
+        this.$emitter.emit('push-cart', {
+          style: 'success',
+          title: res.data.message,
+          content: res.data.message,
+        });
         this.isLoad = false;
         this.getusercarts();
       });
     },
-    // 移除資料
+    // 移除單一比資料
     removeCartItem(id) {
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`;
       this.$http.delete(Api).then((res) => {
-        console.log(res);
-        // this.$httpMessageState(response, '移除購物車品項');
+        this.$emitter.emit('push-cart', {
+          style: 'warning',
+          title: res.data.message,
+          content: res.data.message,
+        });
         this.getusercarts();
       });
     },
@@ -234,11 +261,14 @@ export default {
       this.$http.delete(Api).then((res) => {
         console.log(res);
         this.isLoading = false;
-        // this.$httpMessageState(response, '移除購物車品項');
+        this.$emitter.emit('push-cart', {
+          style: 'danger',
+          title: res.data.message,
+          content: res.data.message,
+        });
         this.getusercarts();
       });
     },
-
     addCouponCode() {
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`;
       const coupon = {
@@ -246,9 +276,11 @@ export default {
       };
       this.isLoading = true;
       this.$http.post(Api, { data: coupon }).then((res) => {
-        // res.message 回覆吐司
-        // this.$httpMessageState(response, '加入優惠券');
-        console.log(res);
+        this.$emitter.emit('push-cart', {
+          style: 'info',
+          title: res.data.message,
+          content: res.data.message,
+        });
         this.getusercarts();
         this.isLoading = false;
       });
@@ -268,9 +300,7 @@ export default {
           console.log(e);
         });
     },
-    toForm() {},
   },
-
   created() {
     this.getusercarts();
   },

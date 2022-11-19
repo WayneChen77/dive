@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-outline-secondary mb-3" type="button" @click="$emit('dele-Cart')">
+  <button class="btn btn-outline-secondary mb-3" type="button" @click="$emit('deleCart')">
     清空資料
   </button>
   <div class="row">
@@ -23,7 +23,7 @@
                   <button
                     type="button"
                     class="btn d-md-block mx-auto btnClose"
-                    @click="$emit('remove-Cart', item.id)"
+                    @click="$emit('removeCart', item.id)"
                   >
                     <i class="bi bi-trash"></i>
                   </button>
@@ -42,7 +42,7 @@
                       <button
                         type="button"
                         class="btn btn-outline-dark"
-                        @click="$emit('reduce-Cart', item)"
+                        @click="$emit('reduceCart', item)"
                         :disabled="item.qty == 1"
                       >
                         <i class="bi bi-dash" />
@@ -58,7 +58,7 @@
                       <button
                         type="button"
                         class="btn btn-outline-dark"
-                        @click="$emit('add-Cart', item)"
+                        @click="$emit('addCart', item)"
                         :disabled="item.qty == 4"
                       >
                         <i class="bi bi-plus" />
@@ -73,7 +73,7 @@
                   <button
                     type="button"
                     class="btn btn-outline-dark"
-                    @click="$emit('reduce-Cart', item)"
+                    @click="$emit('reduceCart', item)"
                     :disabled="item.qty == 1"
                   >
                     <i class="bi bi-dash" />
@@ -89,7 +89,7 @@
                   <button
                     type="button"
                     class="btn btn-outline-dark"
-                    @click="$emit('add-Cart', item)"
+                    @click="$emit('addCart', item)"
                     :disabled="item.qty === 4"
                   >
                     <i class="bi bi-plus" />
@@ -103,7 +103,7 @@
                 <button
                   type="button"
                   class="btn d-md-block mx-auto btnClose"
-                  @click="$emit('remove-Cart', item.id)"
+                  @click="$emit('removeCart', item.id)"
                 >
                   <i class="bi bi-trash"></i>
                 </button>

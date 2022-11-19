@@ -48,6 +48,7 @@
           class="d-block w-100"
           alt="'圖片+i'"
       /></swiper-slide>
+      <div class="titledown"></div>
     </swiper>
     <div class="container dive">
       <div class="row align-items-center justify-content-center textItem">
@@ -209,6 +210,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.titledown {
+  height: 80px;
+  width: 100%;
+  position: absolute;
+  background-image: url(https://www.longjing.com.tw/Templates/TEZ_109061EZW/images/all/banner_bottom.png);
+  background-position: center bottom;
+  background-size: 150% 100%;
+  bottom: -1px;
+  z-index: 2;
+  background-attachment: scroll;
+}
 // 圓形遮罩
 .home {
   .wrap {

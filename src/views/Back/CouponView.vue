@@ -2,7 +2,7 @@
   <!-- 全域原件 -->
   <LoadingView :active="isLoading"></LoadingView>
 
-  <div class="container">
+  <div class="text-end">
     <button class="btn btn-titleblue col-2" @click="openModal(true)">新增折扣</button>
   </div>
 
@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import CouponModal from '@/components/CouponModal.vue';
-import DeleteModal from '@/components/DeleteModal.vue';
+import CouponModal from '@/components/Back/CouponModal.vue';
+import DeleteModal from '@/components/Back/DeleteModal.vue';
 // 分頁資訊
 
 export default {

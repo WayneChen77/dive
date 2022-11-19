@@ -28,6 +28,7 @@
               v-model="user.password"
           /></label>
         </div>
+        <span class="bg-warning" v-if="warnMsg">帳號或密碼錯誤</span>
         <div class="text-end mt-4">
           <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
         </div>
@@ -45,6 +46,7 @@ export default {
         username: '',
         password: '',
       },
+      warnMsg: '',
     };
   },
   methods: {
@@ -57,6 +59,8 @@ export default {
             const { token, expired } = res.data;
             document.cookie = `userToken=${token}; expires=${new Date(expired)}`;
             this.$router.push('dashboard/adminProduct');
+          } else {
+            this.warnMsg = ' ';
           }
         })
         .catch((e) => {

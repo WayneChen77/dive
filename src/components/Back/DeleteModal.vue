@@ -30,7 +30,6 @@
         </div>
         <div class="modal-body">
           <h5 class="modal-title" id="exampleModalLabel">
-            <p>日期:待設定</p>
             <p>
               <span>{{ product.theater }}</span>
 
@@ -42,7 +41,7 @@
               折數<span>{{ product.percent }}</span>
             </p>
             <p v-if="product.due_date">
-              到期日<span>{{ product.due_date }}</span>
+              到期日<span>{{ this.$filters.date(product.due_date) }}</span>
             </p>
             <p v-if="product.time">
               場次時間<span>{{ product.time }}</span>
@@ -77,17 +76,6 @@ export default {
     },
   },
   mixins: [modalmixiins],
-  //   mounted() {
-  //     this.modal = new Modal(this.$refs.modal);
-  //   },
-  //   methods: {
-  //     showModal() {
-  //       this.modal.show();
-  //     },
-  //     hideModal() {
-  //       this.modal.hide();
-  //     },
-  //   },
 };
 </script>
 

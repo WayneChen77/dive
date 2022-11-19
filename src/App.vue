@@ -18,5 +18,8 @@ export default {
 };
 </script>
 <style lang="scss">
+.body {
+  min-height: 85vh;
+}
 @import './assets/all.scss';
 </style>

@@ -18,7 +18,7 @@
     <div class="container">
       <div class="title my-3 row">
         <div class="col-md-9 col-12">
-          <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+          <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
                 <router-link class="text-decoration-none" to="/">韋恩潛水</router-link>
@@ -53,31 +53,38 @@
               <div class="text-center p-5 text-white">了解更多</div>
             </a>
           </div>
-
+          <i
+            class="bi bi-heart position-absolute like"
+            :class="{ liked: isLiked(i) }"
+            @click="liked(i)"
+            @keyup="liked(i)"
+          ></i>
           <div class="card-body text-center">
             <h5 class="card-title">{{ i.title }}</h5>
-            <p class="card-text">${{ i.price }}</p>
+            <p class="card-text">${{ this.$filters.currency(i.price) }}</p>
             <a href="#" class="btn btn-outline-primary" @click.prevent="updateCart(i)">馬上上課</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <ToastMessages></ToastMessages>
 </template>
 
 <script>
-import ToastMessages from '@/components/ToastMessages.vue';
+// import ToastMessages from '@/components/ToastMessages.vue';
 
 export default {
   name: 'UserProducts',
 
   data() {
-    return { products: [], isLoading: false, search: '' };
+    return { products: [], isLoading: false, search: '', likedData: [] };
   },
-  // 待設定更新購物車 下面是傳的方式
-  // inject: ['emitter'],
-  components: { ToastMessages },
+  mounted() {
+    // 最愛
+    this.$emitter.on('push-like', () => {
+      this.getLikes();
+    });
+  },
   methods: {
     //  進入商品業面
     userproduct(i) {
@@ -86,7 +93,6 @@ export default {
     // 加入購物車
     updateCart(i) {
       this.isLoading = true;
-      console.log(i.id);
       const cart = {
         product_id: i.id,
         qty: 1,
@@ -95,9 +101,8 @@ export default {
       this.$http
         .post(Api, { data: cart })
         .then((res) => {
-          console.log(res.data.data.product_id);
           //   吐司回覆
-          this.$emitter.emit('push-msg', {
+          this.$emitter.emit('push-cart', {
             style: 'success',
             title: res.data.message,
             content: res.data.message,
@@ -116,12 +121,43 @@ export default {
         .get(Api)
         .then((res) => {
           this.products = res.data.products;
-          console.log(this.products);
           this.isLoading = false;
         })
         .catch((e) => {
           console.log(e);
         });
+    },
+    // 判斷css狀態
+    isLiked(item) {
+      if (this.likedData.indexOf(item.id) > -1) {
+        return true;
+      }
+      return false;
+    },
+    // 取得localStorage計算最愛數量
+    getLikes() {
+      this.likedData = JSON.parse(localStorage.getItem('liked'));
+    },
+    // 推送資料到localStorage
+    liked(item) {
+      const data = localStorage.getItem('liked');
+      const dataArry = JSON.parse(data) ?? [];
+      const a = dataArry.indexOf(item.id);
+      if (a > -1) {
+        dataArry.splice(a, 1);
+        this.likedData = dataArry;
+      } else {
+        dataArry.push(item.id);
+        this.likedData = dataArry;
+      }
+      localStorage.setItem('liked', JSON.stringify(this.likedData));
+
+      //   吐司回覆
+      this.$emitter.emit('push-like', {
+        style: 'success',
+        title: '關注',
+        content: '已更新最愛標籤',
+      });
     },
   },
   computed: {
@@ -132,6 +168,8 @@ export default {
   },
   created() {
     this.getproducts();
+    // 取得localStorage計算最愛數量
+    this.getLikes();
   },
 };
 </script>
@@ -152,9 +190,14 @@ export default {
   .card {
     position: relative;
     width: 18vw;
+    overflow: hidden;
     .card-img-top {
       height: 30vh;
       overflow: hidden;
+      img {
+        height: 30vh;
+        width: 100%;
+      }
     }
     .overlay {
       position: absolute;
@@ -174,6 +217,19 @@ export default {
         transition: all 0.5s;
         opacity: 1;
       }
+    }
+    .like {
+      top: 0;
+      left: 2vw;
+      z-index: 5;
+      font-size: 2.5rem;
+      color: gray;
+      &:hover {
+        color: white;
+      }
+    }
+    .liked {
+      color: bisque;
     }
   }
   @media screen and (max-width: 430px) {

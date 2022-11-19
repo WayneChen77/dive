@@ -1,9 +1,19 @@
 <template>
   <div class="container-fluid">
-    後台管理
-    <router-link class="text-dark" to="CouponView">coupon</router-link>
-    <router-link class="text-dark" to="EditCandy">candy後台</router-link>
-    <router-link class="text-dark" to="filmproduct">film後台</router-link>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <router-link class="text-dark" to="CouponView">優惠券後台</router-link>
+        </li>
+        <li class="breadcrumb-item">
+          <router-link class="text-dark" to="EditCandy">candy後台</router-link>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          <router-link class="text-dark" to="adminProduct">產品後台</router-link>
+        </li>
+      </ol>
+    </nav>
+
     <router-view></router-view>
   </div>
   <ToastMessages></ToastMessages>

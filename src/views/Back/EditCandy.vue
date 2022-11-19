@@ -2,8 +2,8 @@
   <!-- 全域原件 -->
   <LoadingView :active="isLoading"></LoadingView>
 
-  <div class="container">
-    <button class="btn btn-titleblue col-2" @click="openModal(true)">新增餐飲</button>
+  <div class="text-end">
+    <button class="btn btn-titleblue col-2" @click="openModal(true)">新增內容</button>
   </div>
 
   <table class="table mt-4 container">
@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import CandyModal from '@/components/CandyModal.vue';
-import DeleteModal from '@/components/DeleteModal.vue';
+import CandyModal from '@/components/Back/CandyModal.vue';
+import DeleteModal from '@/components/Back/DeleteModal.vue';
 // 分頁資訊
 
 export default {

@@ -104,6 +104,7 @@ export default {
       },
     };
   },
+
   methods: {
     isName(value) {
       const name = /^[\u4e00-\u9fa5A-Za-z]{0,}$/;
@@ -123,7 +124,11 @@ export default {
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`;
       const order = this.form;
       this.$http.post(Api, { data: order }).then((res) => {
-        //   console.log(res);
+        this.$emitter.emit('push-cart', {
+          style: 'success',
+          title: res.data.message,
+          content: res.data.message,
+        });
         this.$router.push(`/Order/PayView/${res.data.orderId}`);
       });
     },

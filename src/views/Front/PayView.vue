@@ -82,7 +82,6 @@ export default {
         .get(Api)
         .then((res) => {
           this.dataList = res.data.order;
-          console.log(res.data.order);
         })
         .catch((e) => {
           console.log(e);
@@ -94,7 +93,11 @@ export default {
       this.$http
         .post(Api)
         .then((res) => {
-          console.log(res);
+          this.$emitter.emit('push-cart', {
+            style: 'success',
+            title: res.data.message,
+            content: res.data.message,
+          });
         })
         .catch((e) => console.log(e));
       this.$router.push(`/Order/CheckOut/${id}`);

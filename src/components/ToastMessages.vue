@@ -16,10 +16,21 @@ export default {
   },
   // inject: ['emitter'],
   mounted() {
-    // 請自行補上 emitter 事件
+    // 後台
     this.$emitter.on('push-msg', (msg) => {
       const { style = 'succes', title, content } = msg;
 
+      this.messages.push({ style, title, content });
+    });
+    // 前台
+    this.$emitter.on('push-cart', (msg) => {
+      const { style = 'succes', title, content } = msg;
+
+      this.messages.push({ style, title, content });
+    });
+    // 最愛
+    this.$emitter.on('push-like', (msg) => {
+      const { style = 'succes', title, content } = msg;
       this.messages.push({ style, title, content });
     });
   },

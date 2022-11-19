@@ -1,15 +1,14 @@
 <template>
   <!-- 全域原件 -->
   <LoadingView :active="isLoading"></LoadingView>
-
-  <button class="btn btn-titleblue col-2" @click="openModal(true)">新增映演</button>
-
+  <div class="text-end">
+    <button class="btn btn-titleblue col-2" @click="openModal(true)">新增課程</button>
+  </div>
   <table class="table mt-4 container diveProduct">
     <thead>
       <tr>
         <th class="rwd">分類</th>
         <th class="rwdname">名稱</th>
-
         <th class="rwd">原價</th>
         <th class="rwd">優惠價</th>
         <th>上架</th>
@@ -23,10 +22,8 @@
           {{ i.title }} <br />
           {{ `(${i.engtitle})` }}
         </td>
-
         <td class="text-right">{{ $filters.currency(i.origin_price) }}原價</td>
         <td class="text-right rwd">{{ $filters.currency(i.price) }}</td>
-
         <td>
           <span class="text-success">{{ i.is_enabled === 1 ? '(上架)' : '(下架)' }}</span>
         </td>
@@ -42,16 +39,17 @@
     </tbody>
   </table>
   <!-- 區域原件 -->
+  <!-- 這邊有操作頁碼讀取當前資料業面資料 -->
   <DivePagination :pages="pagination" @change-pagination="getDiveProducts"></DivePagination>
   <DiveModal :product="diveProduct" @update-product="updateProduct" ref="DiveModal"></DiveModal>
   <DeleteModal :product="diveProduct" @del-item="delitem" ref="DeleteModal"></DeleteModal>
 </template>
 
 <script>
-import DiveModal from '@/components/DiveModal.vue';
-import DeleteModal from '@/components/DeleteModal.vue';
+import DiveModal from '@/components/Back/DiveModal.vue';
+import DeleteModal from '@/components/Back/DeleteModal.vue';
 // 分頁資訊
-import DivePagination from '@/components/DivePagination.vue';
+import DivePagination from '@/components/Back/DivePagination.vue';
 
 export default {
   data() {
@@ -65,10 +63,6 @@ export default {
       diveProduct: {},
       isNew: false,
       isLoading: false,
-      // 搜尋後台資料
-      // searchTitle: '',
-      // searchDay: '',
-      // isShowing: null,
     };
   },
   components: { DiveModal, DeleteModal, DivePagination },
@@ -76,6 +70,7 @@ export default {
     openModal(isNew, item) {
       if (isNew) {
         this.diveProduct = {};
+        // 沒用到隨意設定
         this.diveProduct.unit = '人';
       } else {
         this.diveProduct = { ...item };
@@ -83,17 +78,15 @@ export default {
       // this.isNew = isNew;這個讓下方update方法判斷用put還是post
       this.isNew = isNew;
       const modal = this.$refs.DiveModal;
-
       modal.showModal();
     },
     // 開啟刪除開區塊
     deleteModal(item) {
       this.diveProduct = { ...item };
       const modal = this.$refs.DeleteModal;
-
       modal.showModal();
     },
-    // 刪除資料/api/:api_path/admin/product/:product_id
+    // 刪除資料
     delitem(item) {
       // 開啟讀取效果
       this.isLoading = true;
@@ -134,13 +127,9 @@ export default {
       // 這邊如果將modal 放到139行
       modal.hideModal();
       this.$http[httpMethod](Api, { data: this.diveProduct }).then((res) => {
-        // 如果放到這 或141下方 load都會被moadl蓋住 是否要使用css設定z-index還是有內建設定的方式
-        // 關閉讀取效果
         this.isLoading = false;
-
         if (res.data.success) {
           this.getDiveProducts();
-
           this.$emitter.emit('push-msg', {
             style: 'success',
             title: res.data.message,
@@ -155,6 +144,7 @@ export default {
         }
       });
     },
+    // 預設取得資料為第一頁
     getDiveProducts(page = 1) {
       this.isLoading = true;
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`;
@@ -163,7 +153,6 @@ export default {
         .then((res) => {
           this.diveProducts = res.data.products;
           this.pagination = res.data.pagination;
-
           this.isLoading = false;
         })
         .catch((e) => {
@@ -171,9 +160,6 @@ export default {
         });
     },
   },
-
-  //   從最父層取得bus使用 用來傳遞原件資料
-  // inject: ['emitter'],
   created() {
     this.getDiveProducts();
   },

@@ -56,7 +56,7 @@ export default {};
   position: absolute;
   background-image: url(https://www.divevillage.com.tw/images/indextop/titledown.png);
   background-position: center bottom;
-  bottom: -1px;
+  bottom: -2px;
   z-index: 2;
   background-attachment: scroll;
 }

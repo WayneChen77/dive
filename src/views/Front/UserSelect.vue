@@ -3,7 +3,7 @@
   <LoadingView :active="isLoading"></LoadingView>
   <div class="container">
     <div class="title mb-5">
-      <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+      <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <router-link class="text-decoration-none" to="/">韋恩潛水</router-link>
@@ -15,8 +15,17 @@
       <hr />
     </div>
     <div class="row px-5">
-      <div class="col-12 col-md-6">
-        <img :src="product.imageUrl" :alt="product.engtitle" :title="product.title" />
+      <div class="col-12 col-md-6 row mainimg g-3">
+        <img :src="mainImg" :alt="product.engtitle" :title="product.title" />
+        <button
+          v-for="(i, index) in product.images"
+          :key="i.id"
+          class="col-4 propimg border-0"
+          @click="pickPic(i, index)"
+        >
+          <img class="rounded" :src="i" :alt="product.engtitle" :title="product.title" />
+          <div class="overlay" :class="{ noneOverlay: index === classIndex }"></div>
+        </button>
       </div>
       <div class="col-12 col-md-6">
         <h3>{{ product.title }}</h3>
@@ -77,6 +86,8 @@ export default {
     return {
       product: {},
       isLoading: false,
+      mainImg: '',
+      classIndex: -1,
       productNum: 1, // modules: [Navigation, Pagination, Scrollbar, A11y],
     };
   },
@@ -95,6 +106,13 @@ export default {
         .get(Api)
         .then((res) => {
           this.product = res.data.product;
+          if (this.product.images) {
+            const mainImg = this.product.images[0];
+            this.mainImg = mainImg;
+            this.classIndex = 0;
+          } else {
+            this.mainImg = this.product.imageUrl;
+          }
           this.isLoading = false;
         })
         .catch((e) => {
@@ -112,11 +130,9 @@ export default {
       this.$http
         .post(Api, { data: cart })
         .then((res) => {
-          console.log(res.data);
-          console.log(res.data.data.product_id);
           //   吐司回覆
-          this.$emitter.emit('push-msg', {
-            style: 'danger',
+          this.$emitter.emit('push-cart', {
+            style: 'success',
             title: res.data.message,
             content: res.data.message,
           });
@@ -126,6 +142,10 @@ export default {
         .catch((e) => {
           console.log(e);
         });
+    },
+    pickPic(i, index) {
+      this.classIndex = index;
+      this.mainImg = i;
     },
   },
   watch: {
@@ -143,6 +163,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.mainimg {
+  img {
+    width: 100%;
+  }
+  .propimg {
+    position: relative;
+    img {
+      width: 100%;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color: white, $alpha: 0.6);
+      opacity: 1;
+    }
+    .noneOverlay {
+      opacity: 0;
+    }
+  }
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

@@ -1,6 +1,6 @@
 <template>
   <footer class="footer bg-titleblue">
-    <address class="copyright">
+    <div class="copyright">
       <p class="text-center text-white">Copyright © 2022 Wayne Dives. All Rights Reserved.</p>
       <ul class="addressLink">
         <li><a href="">關於我們</a></li>
@@ -8,7 +8,7 @@
         <li><a href="">電子發票</a></li>
         <li>本網站照片來源</li>
       </ul>
-    </address>
+    </div>
   </footer>
 </template>
 
