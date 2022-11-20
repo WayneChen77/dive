@@ -31,13 +31,13 @@
         <h3>{{ product.title }}</h3>
         <p>{{ product.engtitle }}</p>
         <p>{{ product.category }}</p>
-        <p>{{ product.content }}</p>
+        <p style="white-space: pre-wrap">{{ product.content }}</p>
         <div class="text-end">
           <small>
-            <s>${{ product.origin_price }}</s></small
+            <s>${{ this.$filters.currency(product.origin_price) }}</s></small
           >
           <br />
-          <b class="fs-4">售價$:{{ product.price }}/人</b>
+          <b class="fs-4">售價$:{{ this.$filters.currency(product.price) }}/人</b>
           <div class="mb-3">
             <button
               class="btn btn-outline-secondary rounded-0"
@@ -59,16 +59,19 @@
               +
             </button>
           </div>
-          <button type="button" class="btn btn-titleblue w-50" @click.prevent="updateCart">
-            加入購物車
-          </button>
+          <div class="like" :class="{ liked: isLiked() }">
+            <i class="bi bi-heart" @click="liked()" @keyup="liked()"></i>
+            <button type="button" class="btn btn-titleblue w-50" @click.prevent="updateCart">
+              加入購物車
+            </button>
+          </div>
         </div>
       </div>
     </div>
     <div class="text-center mt-5 p-3 bg-gray">
       <div class="bg-white m-3">
-        <h4>課程內容:</h4>
-        <p>{{ product.description }}</p>
+        <h4>課程須知:</h4>
+        <p style="white-space: pre-wrap">{{ product.description }}</p>
       </div>
     </div>
   </div>
@@ -88,7 +91,8 @@ export default {
       isLoading: false,
       mainImg: '',
       classIndex: -1,
-      productNum: 1, // modules: [Navigation, Pagination, Scrollbar, A11y],
+      productNum: 1,
+      likedData: [], // modules: [Navigation, Pagination, Scrollbar, A11y],
     };
   },
   components: {
@@ -96,7 +100,47 @@ export default {
     // Swiper,
     // SwiperSlide,
   },
+  mounted() {
+    // 最愛
+    this.$emitter.on('push-like', () => {
+      this.getLikes();
+    });
+  },
   methods: {
+    // 判斷css狀態
+    isLiked() {
+      if (this.likedData.indexOf(this.product.id) > -1) {
+        return true;
+      }
+      return false;
+    },
+    // 取得localStorage計算最愛數量
+    getLikes() {
+      this.likedData = JSON.parse(localStorage.getItem('liked'));
+    },
+    // 推送資料到localStorage
+    // 改寫mixing? 修改傳入資料
+    liked() {
+      const data = localStorage.getItem('liked');
+      const dataArry = JSON.parse(data) ?? [];
+      const a = dataArry.indexOf(this.product.id);
+      if (a > -1) {
+        dataArry.splice(a, 1);
+        this.likedData = dataArry;
+      } else {
+        dataArry.push(this.product.id);
+        this.likedData = dataArry;
+      }
+      localStorage.setItem('liked', JSON.stringify(this.likedData));
+
+      //   吐司回覆
+      this.$emitter.emit('push-like', {
+        style: 'success',
+        title: '關注',
+        content: '已更新最愛標籤',
+      });
+    },
+
     getproduct() {
       this.isLoading = true;
 
@@ -113,6 +157,7 @@ export default {
           } else {
             this.mainImg = this.product.imageUrl;
           }
+          console.log(this.product);
           this.isLoading = false;
         })
         .catch((e) => {
@@ -186,6 +231,20 @@ export default {
       opacity: 0;
     }
   }
+}
+
+.like {
+  font-size: 2.5rem;
+  i {
+    margin-right: 1rem;
+  }
+  color: blue;
+  &:hover {
+    color: bisque;
+  }
+}
+.liked {
+  color: red;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

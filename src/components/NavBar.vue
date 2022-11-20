@@ -2,7 +2,7 @@
   <div class="nav">
     <div class="container pt-2">
       <nav class="navbar navbar-expand-lg">
-        <router-link class="text-dark" to="/home">1</router-link>
+        <router-link class="text-dark" to="/home"><i class="bi bi-tsunami fs-1"></i></router-link>
         <button
           ref="navbarBtn"
           class="navbar-toggler"
@@ -29,11 +29,14 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/contact">連絡我們</router-link>
             </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/login">管理登入</router-link>
-            </li>
+            <router-link class="nav-link text-end position-absolute end-0 me-4" to="/login"
+              ><i class="bi bi-gear fs-3"></i
+            ></router-link>
           </ul>
         </div>
+        <!-- <router-link class="nav-link text-end position-absolute end-0 me-4" to="/login"
+          ><i class="bi bi-gear fs-3"></i
+        ></router-link> -->
       </nav>
     </div>
   </div>

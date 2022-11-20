@@ -15,16 +15,27 @@
     <div class="collapse" id="collapseExample">
       <div class="card card-body cartBlock">
         <h3 class="col-12 text-center">關注中</h3>
-        <div class="row justify-content-center col-12 g-3" v-for="i in likedStore" :key="i.title">
-          <span class="col-2 fs-3" @click="deleLike" @keyup="deleLike(i)"
-            ><i class="bi bi-trash"></i
-          ></span>
-          <div class="col-4"><img :src="i.imageUrl" :alt="i.engtitle" /></div>
-          <span type="button" class="col-4">{{ i.title }}</span>
-          <span class="col-2 fs-3" @click="updateCart(i)" @keyup="updateCart(i)"
-            ><i class="bi bi-cart-plus"></i>
-          </span>
-          <hr />
+        <div v-if="likedStore.length > 0">
+          <div class="row justify-content-center col-12 g-3" v-for="i in likedStore" :key="i.title">
+            <span class="col-2 fs-3" @click="deleLike" @keyup="deleLike(i)"
+              ><i class="bi bi-trash"></i
+            ></span>
+            <div class="col-4"><img :src="i.imageUrl" :alt="i.engtitle" /></div>
+            <span type="button" class="col-4">{{ i.title }}</span>
+            <span class="col-2 fs-3" @click="updateCart(i)" @keyup="updateCart(i)"
+              ><i class="bi bi-cart-plus"></i>
+            </span>
+            <hr />
+          </div>
+        </div>
+        <div class="" v-else>
+          <div class="text-center">
+            <i class="bi bi-cart4 display-1 fw-bold text-dark" />
+            <h6 class="p-3">目前沒有商品唷</h6>
+            <!-- <router-link to="/UserProducts" class="btn btn-outline-dark btn-lg mb-5"
+              >查詢商品</router-link
+            > -->
+          </div>
         </div>
       </div>
     </div>

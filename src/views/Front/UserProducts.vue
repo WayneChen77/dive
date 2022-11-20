@@ -21,7 +21,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <router-link class="text-decoration-none" to="/">韋恩潛水</router-link>
+                <router-link class="text-decoration-none" to="/home">韋恩潛水</router-link>
               </li>
               <li class="breadcrumb-item active" aria-current="page">潛水假期</li>
             </ol>
@@ -44,7 +44,12 @@
         <hr class="mt-3" />
       </div>
       <div class="main mb-3 d-flex flex-wrap">
-        <div class="card shadow border-0 m-3" v-for="(i, key) in dataList" :key="key">
+        <div
+          class="card shadow border-0 m-3"
+          v-for="(i, key) in dataList"
+          :key="key"
+          data-aos="flip-left"
+        >
           <div class="card-img-top cardImg">
             <img :src="i.imageUrl" alt="i.engtitle" />
           </div>
@@ -190,6 +195,7 @@ export default {
   .card {
     position: relative;
     width: 18vw;
+    height: 50vh;
     overflow: hidden;
     .card-img-top {
       height: 30vh;
@@ -237,6 +243,14 @@ export default {
       position: relative;
       width: 90%;
       margin: auto;
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    .card {
+      position: relative;
+      width: 18vw;
+      height: 40vh;
     }
   }
 }

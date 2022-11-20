@@ -163,7 +163,7 @@
               <div class="row gx-2">
                 <div class="mb-3 col-md-12">
                   <label for="description" class="form-label"
-                    >描述介紹
+                    >注意事項
                     <textarea
                       id="description"
                       type="text"
@@ -177,7 +177,7 @@
               <div class="row gx-2">
                 <div class="mb-3 col-12">
                   <label for="content" class="form-label"
-                    >說明內容(暫時未設定)
+                    >描述內容(暫時未設定)
                     <textarea
                       id="content"
                       type="text"

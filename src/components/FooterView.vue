@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer bg-titleblue">
+  <footer class="footer bg-titleblue py-3">
     <div class="copyright">
       <p class="text-center text-white">Copyright © 2022 Wayne Dives. All Rights Reserved.</p>
       <ul class="addressLink">

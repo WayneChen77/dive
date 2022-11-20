@@ -9,7 +9,7 @@
   <table class="table mt-4 container">
     <thead>
       <tr>
-        <th width="120">折扣名稱(代碼)</th>
+        <th width="140">折扣名稱(代碼)</th>
         <th>折數</th>
         <th>期限</th>
         <th>開啟</th>

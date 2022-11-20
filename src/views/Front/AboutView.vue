@@ -8,7 +8,7 @@
       <div class="col-12 col-md-10 my-3">
         <h3>公司介紹</h3>
         <hr />
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" data-aos="zoom-in">
           <div class="col-12 col-md-4 mt-3">
             <h4 class="text-titleblue">[Wayne's Dive]</h4>
             <p class="text-center lh-lg">
@@ -16,7 +16,7 @@
               多年來我們的教練以專業、認真與熱忱，提供給您最佳的潛水教學與服務。透過多年累積的經驗，我們也經常為各大專院校的科系社團、消防單位、救難團體等單位提供專業的代訓服務。
             </p>
           </div>
-          <div class="col-12 col-md-8 imgwrap">
+          <div class="col-12 col-md-8 imgwrap" data-aos="zoom-in">
             <img
               class="col"
               src="https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg"

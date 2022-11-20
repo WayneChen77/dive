@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <swiper
-      class=""
       :modules="modules"
       :slides-per-view="1"
       :space-between="50"
@@ -14,19 +13,19 @@
       :pagination="{ clickable: true }"
     >
       <swiper-slide>
-        <div class="txt">
+        <div class="txt" data-aos="zoom-in">
           <h3>韋恩潛旅</h3>
           一起來探索龜之島小琉球，以及水下70%的神秘世界
         </div>
         <img
           src="https://images.pexels.com/photos/2397653/pexels-photo-2397653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          class="d-block w-100"
+          class="d-block w-100 img-fluid"
           alt="'圖片+i'"
         />
         ></swiper-slide
       >
       <swiper-slide>
-        <div class="txt">
+        <div class="txt" data-aos="zoom-in">
           <h3>潛水旅遊</h3>
 
           「向陸地請個假，下來吧！來海底！」
@@ -37,7 +36,7 @@
           alt="'圖片+i'"
       /></swiper-slide>
       <swiper-slide>
-        <div class="txt">
+        <div class="txt" data-aos="zoom-in">
           <h3>放鬆、閉氣、下潛</h3>
           你也想要嘗試憑藉一口氣潛入水裡的感覺嗎？
           自由潛水基礎課程可以在短時間內滿足你對自由潛水的好奇心
@@ -52,14 +51,14 @@
     </swiper>
     <div class="container dive">
       <div class="row align-items-center justify-content-center textItem">
-        <div class="col-12 col-md-6 p-3">
+        <div class="col-12 col-md-6 p-3" data-aos="fade-right">
           <img
             class="img-fluid"
             src="https://images.pexels.com/photos/2404370/pexels-photo-2404370.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt=""
           />
         </div>
-        <div class="col-12 col-md-6 p-3 text text1">
+        <div class="col-12 col-md-6 p-3 text text1" data-aos="fade-left">
           <div>
             <h4>自由潛水</h4>
             <p>
@@ -72,17 +71,20 @@
             </p>
           </div>
         </div>
-        <div class="imgtop col-0 col-md-6 text text2"></div>
+        <div class="imgtop col-0 col-md-6 text text2" data-aos="fade-right"></div>
 
-        <div class="col-12 col-md-6 p-3">
+        <div class="col-12 col-md-6 p-3" data-aos="fade-left">
           <img
             class="img-fluid"
             src="https://images.pexels.com/photos/37530/divers-scuba-divers-diving-underwater-37530.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt=""
           />
         </div>
-        <teleport to=".imgtop" v-if="isMounted" class="imgtp" :disabled="isDisabled">
-          <div class="p-3 txtrwd">
+
+        <teleport to=".imgtop" v-if="isMounted" :disabled="isDisabled">
+          <div class="p-3 txtrwd" :data-aos="[isDisabled ? 'fade-right' : 'none']">
+            <!-- v-bind:class="{ active: isActive, error: hasError }" -->
+            <!-- v-bind:class="[isActive ? activeClass : '', errorClass]" -->
             <div>
               <h4>水肺潛水</h4>
               <p>
@@ -186,7 +188,6 @@ export default {
       modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay],
     };
   },
-
   mounted() {
     // 解決Teleport掛載問題
     this.isMounted = true;
@@ -209,6 +210,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" scoped>
 .titledown {
   height: 80px;
@@ -275,11 +277,11 @@ img {
   height: 80vh;
   object-fit: cover;
 }
-.botswiper {
-  width: 100%;
-  height: 20vh;
-  object-fit: cover;
-}
+// .botswiper {
+//   width: 100%;
+//   height: 20vh;
+//   object-fit: cover;
+// }
 
 .txt {
   padding: 1rem;
@@ -303,6 +305,12 @@ img {
   .txt {
     left: 0;
     right: 0;
+    top: 25%;
+  }
+  .swiper {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
   }
 }
 </style>

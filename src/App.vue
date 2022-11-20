@@ -1,7 +1,6 @@
 <template>
-  <NavBar></NavBar>
-
-  <router-view />
+  <NavBar class="nav"></NavBar>
+  <div class="main"><router-view /></div>
 
   <Footer></Footer>
 </template>
@@ -18,8 +17,9 @@ export default {
 };
 </script>
 <style lang="scss">
-.body {
-  min-height: 85vh;
+.nav{min-height: 10vh;}
+.main {
+  min-height: 80vh; /*減去footer高度*/
 }
 @import './assets/all.scss';
 </style>

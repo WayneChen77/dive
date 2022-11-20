@@ -6,7 +6,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <router-link class="text-decoration-none" to="/">韋恩潛水</router-link>
+            <router-link class="text-decoration-none" to="/home">韋恩潛水</router-link>
           </li>
           <li class="breadcrumb-item active" aria-current="page">購物車</li>
         </ol>
@@ -99,6 +99,7 @@
             </button>
           </div>
         </div>
+        <!-- 伸縮品項 -->
         <div class="col-12 col-md-8 rounded mb-3" v-if="sendData">
           <div class="accordion w-100" id="accordionExample">
             <div class="accordion-item">
@@ -121,8 +122,11 @@
                 data-bs-parent="#accordionExample"
               >
                 <div class="accordion-body">
-                  <strong>This is the first item's accordion body.</strong> It is shown by default,
-                  until the collapse plugin adds the appropriate classes that we use to style each
+                  <div class="row" v-for="i in carts" :key="i.id">
+                    <div class="col-8">{{ i.product.title }}</div>
+                    <div class="col-4 text-end">X{{ i.qty }}</div>
+                    <hr />
+                  </div>
                 </div>
               </div>
             </div>

@@ -12,8 +12,13 @@ import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate';
 import AllRules from '@vee-validate/rules';
 import { localize, setLocale } from '@vee-validate/i18n';
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
+
+// 套用動畫
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 // 套用千分號Y
 import { currency, date } from './methods/filter';
+
 import App from './App.vue';
 import router from './router';
 
@@ -42,6 +47,19 @@ app.config.globalProperties.$filters = {
   currency,
   date,
 };
+// 套用動畫
+// app.use(AOS);
+
+AOS.init({
+  offset: 120, // 移動距離 (單位為像素)
+  delay: 0, // 延遲時間，範圍從 0-3000
+  duration: 800, // 完成動畫所需的時間，範圍從 0-3000
+  easing: 'ease-inout-sine', // 動畫曲線
+  once: false, // 動畫是否只跑一次
+  mirror: false,
+  anchorPlacement: 'top-bottom', // 動畫觸發的位置
+});
+
 // 全域原件
 app.component('FormView', Form);
 app.component('FieldView', Field);
