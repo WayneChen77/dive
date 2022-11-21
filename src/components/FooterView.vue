@@ -3,10 +3,10 @@
     <div class="copyright">
       <p class="text-center text-white">Copyright © 2022 Wayne Dives. All Rights Reserved.</p>
       <ul class="addressLink">
-        <li><a href="">關於我們</a></li>
-        <li><a href="">連絡我們</a></li>
-        <li><a href="">電子發票</a></li>
-        <li>本網站照片來源</li>
+        <li><router-link class="nav-link" to="/about">關於我們</router-link></li>
+        <li><router-link class="nav-link" to="/contact">連絡我們</router-link></li>
+        <li><router-link class="nav-link" to="/userProducts">產品介紹</router-link></li>
+        <li><a href="https://www.pexels.com/zh-tw/" target="_blank"> 本網站照片來源</a></li>
       </ul>
     </div>
   </footer>

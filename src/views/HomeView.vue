@@ -254,6 +254,7 @@ export default {
 .a123 {
   background-image: url('https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
   background-attachment: fixed;
+  background-size:cover;
 }
 // .textItem {
 //   margin-right: -10%;

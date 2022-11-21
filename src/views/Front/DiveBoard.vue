@@ -15,6 +15,9 @@ export default {
     ToastMessages,
     CartIcons,
   },
+  created() {
+    this.$router.push('/home');
+  },
 };
 </script>
 

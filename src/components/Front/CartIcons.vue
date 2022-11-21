@@ -160,7 +160,6 @@ export default {
         const a = data.filter((i) => i.id === this.likedData[n]);
         likeArry.push(a[0]);
       }
-      console.log(likeArry);
       return likeArry;
     },
   },

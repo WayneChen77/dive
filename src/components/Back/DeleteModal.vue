@@ -8,15 +8,6 @@
     aria-hidden="true"
     ref="modal"
   >
-    <!-- <div class="modal-dialog" role="document">
-      <div class="modal-content border-0">
-        <h5 class="modal-title" id="exampleModalLabel">
-          <span>{{ product.title }}</span>
-        </h5>
-        <button @click="$emit('del-item', product)">刪除</button>
-        <button @click="hideModal">取消</button>
-      </div>
-    </div> -->
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-warning">
@@ -31,8 +22,7 @@
         <div class="modal-body">
           <h5 class="modal-title" id="exampleModalLabel">
             <p>
-              <span>{{ product.theater }}</span>
-
+              <!-- 產品/優惠券資料 -->
               <span>{{ product.title }}</span>
               <span v-if="product.code">折扣碼:{{ product.code }}</span>
               <span v-if="product.price">$:{{ product.price }}</span>
@@ -43,9 +33,9 @@
             <p v-if="product.due_date">
               到期日<span>{{ this.$filters.date(product.due_date) }}</span>
             </p>
-            <p v-if="product.time">
-              場次時間<span>{{ product.time }}</span>
-            </p>
+            <!-- 已成立訂單資料 -->
+            <p>訂單編號:{{ product.id }}</p>
+            <p v-if="product.user">客戶:{{ product.user.name }}</p>
           </h5>
         </div>
         <div class="modal-footer">
@@ -60,7 +50,6 @@
 </template>
 
 <script>
-// import Modal from 'bootstrap/js/dist/modal';
 import modalmixiins from '@/mixins/modalmixins';
 
 export default {

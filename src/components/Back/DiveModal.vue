@@ -163,7 +163,7 @@
               <div class="row gx-2">
                 <div class="mb-3 col-md-12">
                   <label for="description" class="form-label"
-                    >注意事項
+                    >課程描述
                     <textarea
                       id="description"
                       type="text"
@@ -177,13 +177,27 @@
               <div class="row gx-2">
                 <div class="mb-3 col-12">
                   <label for="content" class="form-label"
-                    >描述內容(暫時未設定)
+                    >課程內容
                     <textarea
                       id="content"
                       type="text"
                       class="form-control"
-                      placeholder="請輸入說明內容"
+                      placeholder="請輸入課程內容"
                       v-model="diveProduct.content"
+                    ></textarea>
+                  </label>
+                </div>
+              </div>
+              <div class="row gx-2">
+                <div class="mb-3 col-12">
+                  <label for="precautions" class="form-label"
+                    >注意事項
+                    <textarea
+                      id="precautions"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入注意事項"
+                      v-model="diveProduct.precautions"
                     ></textarea>
                   </label>
                 </div>

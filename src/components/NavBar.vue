@@ -34,9 +34,6 @@
             ></router-link>
           </ul>
         </div>
-        <!-- <router-link class="nav-link text-end position-absolute end-0 me-4" to="/login"
-          ><i class="bi bi-gear fs-3"></i
-        ></router-link> -->
       </nav>
     </div>
   </div>

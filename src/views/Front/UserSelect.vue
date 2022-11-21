@@ -27,11 +27,11 @@
           <div class="overlay" :class="{ noneOverlay: index === classIndex }"></div>
         </button>
       </div>
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 m-auto">
         <h3>{{ product.title }}</h3>
         <p>{{ product.engtitle }}</p>
         <p>{{ product.category }}</p>
-        <p style="white-space: pre-wrap">{{ product.content }}</p>
+        <p style="white-space: pre-wrap">{{ product.description }}</p>
         <div class="text-end">
           <small>
             <s>${{ this.$filters.currency(product.origin_price) }}</s></small
@@ -68,10 +68,14 @@
         </div>
       </div>
     </div>
-    <div class="text-center mt-5 p-3 bg-gray">
-      <div class="bg-white m-3">
-        <h4>課程須知:</h4>
-        <p style="white-space: pre-wrap">{{ product.description }}</p>
+    <div class="mt-5 row justify-content-center bottxt">
+      <div class="col-5 text-center">
+        <h4>課程內容:</h4>
+        <p style="white-space: pre-wrap">{{ product.content }}</p>
+      </div>
+      <div class="col-5 text-center">
+        <h4>注意事項:</h4>
+        <p style="white-space: pre-wrap">{{ product.precautions }}</p>
       </div>
     </div>
   </div>
@@ -157,7 +161,6 @@ export default {
           } else {
             this.mainImg = this.product.imageUrl;
           }
-          console.log(this.product);
           this.isLoading = false;
         })
         .catch((e) => {
@@ -231,6 +234,10 @@ export default {
       opacity: 0;
     }
   }
+}
+.bottxt {
+  padding-top: 1rem;
+  background-color: rgba($color: blue, $alpha: 0.2);
 }
 
 .like {

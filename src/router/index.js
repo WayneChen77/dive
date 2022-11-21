@@ -88,9 +88,9 @@ const routes = [
         component: () => import('../views/Back/CouponView.vue'),
       },
       {
-        path: 'EditCandy',
-        name: 'EditCandy',
-        component: () => import('../views/Back/EditCandy.vue'),
+        path: 'Orders',
+        name: 'OrdersView',
+        component: () => import('../views/Back/OrdersView.vue'),
       },
     ],
   },

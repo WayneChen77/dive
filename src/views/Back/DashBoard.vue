@@ -5,11 +5,12 @@
         <li class="breadcrumb-item">
           <router-link class="text-dark" to="CouponView">優惠券後台</router-link>
         </li>
-        <li class="breadcrumb-item">
-          <router-link class="text-dark" to="EditCandy">candy後台</router-link>
-        </li>
+
         <li class="breadcrumb-item active" aria-current="page">
           <router-link class="text-dark" to="adminProduct">產品後台</router-link>
+        </li>
+        <li class="breadcrumb-item">
+          <router-link class="text-dark" to="Orders">訂單資料</router-link>
         </li>
       </ol>
     </nav>
@@ -20,19 +21,12 @@
 </template>
 
 <script>
-// 使用mitt 直接父傳子下去讓所有原件使用 減少import程式碼
 import ToastMessages from '@/components/ToastMessages.vue';
-// import mitt from 'mitt';
-
-// const emitter = mitt();
 
 export default {
   components: {
     ToastMessages,
   },
-  // provide() {
-  //   return { emitter };
-  // },
   created() {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)userToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
     this.$http.defaults.headers.common.Authorization = token;
