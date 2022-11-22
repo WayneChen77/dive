@@ -8,7 +8,7 @@
       aria-controls="collapseExample"
     >
       <i class="bi bi-heart" type="button">
-        <span class="badge rounded-pill cartnum">{{ likedData.length }}</span
+        <span class="badge rounded-pill cartnum" v-if="likedData">{{ likedData.length }}</span
         ><span class="visually-hidden">unread messages</span></i
       >
     </a>
@@ -53,7 +53,7 @@
 <script>
 export default {
   data() {
-    return { carts: [], products: [], likedData: [], cartNum: 0 };
+    return { carts: [], products: [], likedData: [], likedStore: [], cartNum: 0 };
   },
   mounted() {
     // 確認有資料更新已抓取api刷新畫面
@@ -106,14 +106,14 @@ export default {
     },
     getLikes() {
       this.likedData = JSON.parse(localStorage.getItem('liked'));
-      // const num = this.likedData.length;
-      // const data = this.products;
-      // const likeArry = [];
-      // for (let n = 0; n < num; n += 1) {
-      //   const a = data.filter((i) => i.id === this.likedData[n]);
-      //   likeArry.push(a[0]);
-      // }
-      // this.likedStore = likeArry;
+      const num = this.likedData.length;
+      const data = this.products;
+      const likeArry = [];
+      for (let n = 0; n < num; n += 1) {
+        const a = data.filter((i) => i.id === this.likedData[n]);
+        likeArry.push(a[0]);
+      }
+      this.likedStore = likeArry;
     },
     // 取得資料計算購物車數量
     getusercarts() {
@@ -151,17 +151,18 @@ export default {
     },
   },
   computed: {
+    // 會報錯找不到
     // 監聽資料輸出最愛
-    likedStore() {
-      const num = this.likedData.length;
-      const data = this.products;
-      const likeArry = [];
-      for (let n = 0; n < num; n += 1) {
-        const a = data.filter((i) => i.id === this.likedData[n]);
-        likeArry.push(a[0]);
-      }
-      return likeArry;
-    },
+    // likedStore() {
+    //   const num = this.likedData.length ?? 10;
+    //   const data = this.products;
+    //   const likeArry = [];
+    //   for (let n = 0; n < num; n += 1) {
+    //     const a = data.filter((i) => i.id === this.likedData[n]);
+    //     likeArry.push(a[0]);
+    //   }
+    //   return likeArry;
+    // },
   },
   // watch: {
   //   likedData() {

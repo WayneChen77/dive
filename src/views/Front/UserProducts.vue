@@ -141,7 +141,7 @@ export default {
     },
     // 取得localStorage計算最愛數量
     getLikes() {
-      this.likedData = JSON.parse(localStorage.getItem('liked'));
+      this.likedData = JSON.parse(localStorage.getItem('liked')) || [];
     },
     // 推送資料到localStorage
     liked(item) {

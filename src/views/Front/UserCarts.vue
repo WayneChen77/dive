@@ -98,6 +98,7 @@
               套用優惠碼
             </button>
           </div>
+          <span class="mt-3 text-primary">迎接假期！輸入： happyvacation ，即享88折優惠</span>
         </div>
         <!-- 伸縮品項 -->
         <div class="col-12 col-md-8 rounded mb-3" v-if="sendData">
@@ -133,16 +134,19 @@
           </div>
         </div>
         <div class="row ms-1 pe-2">
-          <div class="col-12 col-md-8 border rounded p-3">
-            <div class="text-gray">
+          <div class="col-12 col-md-8 border rounded p-0">
+            <div class="bg-bgblue rounded-top text-center text-textblue py-3">
+              <h3>訂單資料</h3>
+            </div>
+            <div class="text-gray mx-3">
               商品金額:
               <p class="text-end">${{ this.$filters.currency(price.total) }}</p>
             </div>
-            <div v-if="price.total != price.final_total">
+            <div v-if="price.total != price.final_total" class="mx-3">
               折扣金額:
               <p class="text-end">${{ this.$filters.currency(price.total - price.final_total) }}</p>
             </div>
-            <div class="text-danger">
+            <div class="text-danger mx-3">
               總金額:
               <p class="text-end">${{ this.$filters.currency(price.final_total) }}</p>
             </div>
@@ -263,7 +267,6 @@ export default {
       this.isLoading = true;
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
       this.$http.delete(Api).then((res) => {
-        console.log(res);
         this.isLoading = false;
         this.$emitter.emit('push-cart', {
           style: 'danger',

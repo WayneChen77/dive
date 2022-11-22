@@ -24,8 +24,11 @@
               <router-link class="nav-link" to="/userProducts">產品介紹</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/Know">潛水知識</router-link>
+              <router-link class="nav-link" to="/searchorder">訂單查詢</router-link>
             </li>
+            <!-- <li class="nav-item">
+              <router-link class="nav-link" to="/Know">潛水知識</router-link>
+            </li> -->
             <li class="nav-item">
               <router-link class="nav-link" to="/contact">連絡我們</router-link>
             </li>

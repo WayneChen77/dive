@@ -6,9 +6,11 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <router-link class="text-decoration-none" to="/">韋恩潛水</router-link>
+            <router-link class="text-decoration-none" to="/home">韋恩潛水</router-link>
           </li>
-          <li class="breadcrumb-item" aria-current="page">潛水假期</li>
+          <li class="breadcrumb-item" aria-current="page">
+            <router-link class="text-decoration-none" to="/userProducts">潛水假期</router-link>
+          </li>
           <li class="breadcrumb-item active" aria-current="page">潛水課程</li>
         </ol>
       </nav>
@@ -78,15 +80,13 @@
         <p style="white-space: pre-wrap">{{ product.precautions }}</p>
       </div>
     </div>
+    <h3 class="text-textblue mt-3">你可能有興趣</h3>
+    <OtherCard></OtherCard>
   </div>
-  <ToastMessages></ToastMessages>
 </template>
 
 <script>
-import ToastMessages from '@/components/ToastMessages.vue';
-// import { Swiper, SwiperSlide } from 'swiper/vue';
-// import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-// import 'swiper/swiper-bundle.css';
+import OtherCard from '@/components/Front/OtherCard.vue';
 
 export default {
   data() {
@@ -96,13 +96,11 @@ export default {
       mainImg: '',
       classIndex: -1,
       productNum: 1,
-      likedData: [], // modules: [Navigation, Pagination, Scrollbar, A11y],
+      likedData: [],
     };
   },
   components: {
-    ToastMessages,
-    // Swiper,
-    // SwiperSlide,
+    OtherCard,
   },
   mounted() {
     // 最愛
@@ -147,7 +145,6 @@ export default {
 
     getproduct() {
       this.isLoading = true;
-
       const { id } = this.$route.params;
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`;
       this.$http
@@ -202,6 +199,10 @@ export default {
         //  吐司訊息
         this.productNum = o;
       }
+    },
+    //  路由改變時強制刷新
+    $route() {
+      this.getproduct();
     },
   },
   created() {

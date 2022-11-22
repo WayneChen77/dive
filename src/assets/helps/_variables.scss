@@ -321,7 +321,7 @@ $theme-colors: (
   'danger': $danger,
   'light': $light,
   'dark': $dark,
-  // 自定
+  // 自定color
   'titleblue': $titleblue,
   'white': white,
   'gray': gray,
@@ -329,6 +329,8 @@ $theme-colors: (
   'P': $primary,
   'PG': rgb(240, 179, 64),
   'R': red,
+  'bgblue': #e7f1ff,
+  'textblue': #0c63e4,
 ) !default;
 // scss-docs-end theme-colors-map
 
