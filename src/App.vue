@@ -17,9 +17,11 @@ export default {
 };
 </script>
 <style lang="scss">
-.nav{min-height: 10vh;}
+.nav {
+  min-height: 10vh;
+}
 .main {
-  min-height: 80vh; /*減去footer高度*/
+  min-height: 80vh;
 }
 @import './assets/all.scss';
 </style>

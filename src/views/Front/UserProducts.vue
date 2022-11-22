@@ -76,8 +76,6 @@
 </template>
 
 <script>
-// import ToastMessages from '@/components/ToastMessages.vue';
-
 export default {
   name: 'UserProducts',
 

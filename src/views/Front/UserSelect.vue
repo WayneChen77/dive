@@ -121,7 +121,6 @@ export default {
       this.likedData = JSON.parse(localStorage.getItem('liked'));
     },
     // 推送資料到localStorage
-    // 改寫mixing? 修改傳入資料
     liked() {
       const data = localStorage.getItem('liked');
       const dataArry = JSON.parse(data) ?? [];

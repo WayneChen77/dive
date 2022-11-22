@@ -182,7 +182,7 @@ export default {
       carts: [],
       price: {},
       coupon_code: '',
-      // 控制畫面顯示近度
+      // 控制畫面顯示進度
       sendData: false,
       isload: false,
       isLoading: false,
@@ -250,7 +250,7 @@ export default {
         this.getusercarts();
       });
     },
-    // 移除單一比資料
+    // 移除單一資料
     removeCartItem(id) {
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`;
       this.$http.delete(Api).then((res) => {

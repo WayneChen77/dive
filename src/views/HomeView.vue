@@ -174,7 +174,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 import 'swiper/swiper-bundle.css';
@@ -278,11 +277,6 @@ img {
   height: 80vh;
   object-fit: cover;
 }
-// .botswiper {
-//   width: 100%;
-//   height: 20vh;
-//   object-fit: cover;
-// }
 
 .txt {
   padding: 1rem;

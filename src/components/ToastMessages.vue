@@ -14,7 +14,6 @@ export default {
       messages: [],
     };
   },
-  // inject: ['emitter'],
   mounted() {
     // 後台
     this.$emitter.on('push-msg', (msg) => {

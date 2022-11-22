@@ -87,7 +87,6 @@ export default {
 .card {
   position: relative;
   width: 20vw;
-  // height: 50vh;
   overflow: hidden;
   .card-img-top {
     height: 30vh;
@@ -142,7 +141,6 @@ export default {
   .card {
     position: relative;
     width: 18vw;
-    // height: 40vh;
   }
 }
 </style>

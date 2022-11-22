@@ -19,7 +19,6 @@
     </thead>
     <tbody>
       <tr v-for="(i, index, key) in coupons" :key="key">
-        <!-- <tr> -->
         <td>{{ i.title + `(${i.code})` }}</td>
         <td>{{ i.percent }}</td>
         <td>{{ $filters.date(i.due_date) }}</td>
@@ -39,7 +38,6 @@
     </tbody>
   </table>
   <!-- 區域原件 -->
-  <!-- update-coupon -->
   <CouponModal :coupon="coupontemp" @update-coupon="updateCoupon" ref="CouponModal"></CouponModal>
   <DeleteModal :product="coupontemp" @del-item="delitem" ref="DeleteModal"></DeleteModal>
 </template>
@@ -120,10 +118,8 @@ export default {
         Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${item.id}`;
         httpMethod = 'put';
       }
-      // 這邊如果將modal 放到139行
       modal.hideModal();
       this.$http[httpMethod](Api, { data: this.coupontemp }).then((res) => {
-        // 如果放到這 或141下方 load都會被moadl蓋住 是否要使用css設定z-index還是有內建設定的方式
         // 關閉讀取效果
         this.isLoading = false;
         console.log(res.data.message);

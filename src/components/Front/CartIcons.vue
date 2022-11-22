@@ -32,9 +32,6 @@
           <div class="text-center">
             <i class="bi bi-cart4 display-1 fw-bold text-dark" />
             <h6 class="p-3">目前沒有商品唷</h6>
-            <!-- <router-link to="/UserProducts" class="btn btn-outline-dark btn-lg mb-5"
-              >查詢商品</router-link
-            > -->
           </div>
         </div>
       </div>
@@ -104,6 +101,7 @@ export default {
           console.log(e);
         });
     },
+    // 最愛資料
     getLikes() {
       this.likedData = JSON.parse(localStorage.getItem('liked'));
       const num = this.likedData.length;

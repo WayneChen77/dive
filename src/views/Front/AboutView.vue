@@ -59,7 +59,6 @@ img {
   width: 100%;
   background-size: 100% 100%;
   clip-path: url('#svgPath');
-  //   -webkit-clip-path: inset(10% 20% 30% 10% round 20% 5% 50% 30%);
 }
 .pathscale {
   transform: scale(0.9, 0.9);
