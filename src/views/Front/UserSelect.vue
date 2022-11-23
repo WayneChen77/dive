@@ -246,9 +246,6 @@ export default {
     margin-right: 1rem;
   }
   color: blue;
-  &:hover {
-    color: bisque;
-  }
 }
 .liked {
   color: red;

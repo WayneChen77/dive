@@ -7,7 +7,7 @@
       aria-expanded="false"
       aria-controls="collapseExample"
     >
-      <i class="bi bi-heart" type="button">
+      <i class="bi bi-heart fs-3" type="button">
         <span class="badge rounded-pill cartnum" v-if="likedData">{{ likedData.length }}</span
         ><span class="visually-hidden">unread messages</span></i
       >
@@ -37,13 +37,18 @@
       </div>
     </div>
     <router-link to="/UserCarts"
-      ><i class="bi bi-cart-fill position-relative d-block"
+      ><i class="bi bi-cart-fill position-relative d-block fs-3"
         ><span class="badge rounded-pill cartnum"
           >{{ cartNum }}<span class="visually-hidden">unread messages</span></span
         ></i
       ></router-link
     >
-    <i class="bi bi-arrow-up-square d-block" type="button" @click="toTop" @keyup.enter="toTop"></i>
+    <i
+      class="bi bi-arrow-up-square d-block fs-3"
+      type="button"
+      @click="toTop"
+      @keyup.enter="toTop"
+    ></i>
   </div>
 </template>
 
@@ -197,7 +202,7 @@ export default {
 .fixbtn {
   position: fixed;
   z-index: 99;
-  bottom: 10vh;
+  bottom: 30vh;
   right: 5vw;
   background-color: rgba($color: rgb(7, 7, 78), $alpha: 0.3);
 

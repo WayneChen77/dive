@@ -6,7 +6,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <router-link class="text-decoration-none" to="/home">韋恩潛水</router-link>
+            <router-link class="text-decoration-none" to="/home">首頁</router-link>
           </li>
           <li class="breadcrumb-item active" aria-current="page">購物車</li>
         </ol>

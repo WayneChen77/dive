@@ -6,13 +6,24 @@
     </TopImg>
     <div class="container">
       <div class="row justify-content-center py-3">
-        <input
-          type="text"
-          placeholder="請輸入訂單編號"
-          v-model="searchID"
-          @keydown.enter="getOrders(searchID)"
-          class="col-8 my-3 rounded"
-        />
+        <div class="text-center col-10">
+          <input
+            type="text"
+            placeholder="請輸入訂單編號"
+            v-model="searchID"
+            @keydown.enter="getOrders"
+            class="my-3 rounded me-3"
+          />
+          <input
+            type="button"
+            value="送出"
+            class="btn-outline-gray btn btn-sm"
+            @keydown.enter="getOrders"
+            @click="getOrders"
+          />
+          <!-- <button type="button" value="送出" class="btn-outline-gray btn btn-sm">送出</button> -->
+        </div>
+
         <!-- 錯誤資料 -->
         <div v-if="show" class="text-center top col-12 col-md-8 my-3 shadow" data-aos="zoom-in">
           <h2>訂單品項</h2>
@@ -116,8 +127,9 @@ export default {
   },
   components: { TopImg },
   methods: {
-    getOrders(id) {
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`;
+    getOrders() {
+      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.searchID}`;
+      console.log(Api);
       this.$http
         .get(Api)
         .then((res) => {

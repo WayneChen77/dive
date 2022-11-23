@@ -11,7 +11,7 @@
         <div class="row justify-content-center" data-aos="zoom-in">
           <div class="col-12 col-md-4 mt-3">
             <h4 class="text-titleblue">[Wayne's Dive]</h4>
-            <p class="text-center lh-lg">
+            <p class="lh-lg">
               座落在美麗的南灣附近，是擁有國際潛水機構五星認證的專業潛水渡假中心。
               多年來我們的教練以專業、認真與熱忱，提供給您最佳的潛水教學與服務。透過多年累積的經驗，我們也經常為各大專院校的科系社團、消防單位、救難團體等單位提供專業的代訓服務。
             </p>

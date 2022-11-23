@@ -4,7 +4,7 @@
       <h2 class="">連絡我們</h2>
       <p>CONTACT</p>
     </TopImg>
-    <div class="row text-center p-3">
+    <div class="text-center p-3">
       <h2>Wayne Dive</h2>
       <div>
         <p>台北市潛水區深潛路66號</p>

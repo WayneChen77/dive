@@ -2,7 +2,7 @@
   <!-- 全域原件 -->
   <LoadingView :active="isLoading"></LoadingView>
   <div class="product">
-    <div class="row position-relative">
+    <div class="position-relative">
       <img
         src="https://images.pexels.com/photos/302549/pexels-photo-302549.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         alt=""
@@ -21,9 +21,9 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <router-link class="text-decoration-none" to="/home">韋恩潛水</router-link>
+                <router-link class="text-decoration-none" to="/home">首頁</router-link>
               </li>
-              <li class="breadcrumb-item active" aria-current="page">潛水假期</li>
+              <li class="breadcrumb-item active" aria-current="page">產品介紹</li>
             </ol>
           </nav>
         </div>
@@ -178,15 +178,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 .product {
-  .row.position-relative {
+  .position-relative {
     img {
       width: 100%;
       height: 30vh;
     }
   }
   .text {
-    color: aqua;
-    background-color: rgba($color: white, $alpha: 0.3);
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
     text-align: center;
   }
 
@@ -228,12 +228,9 @@ export default {
       z-index: 5;
       font-size: 2.5rem;
       color: gray;
-      &:hover {
-        color: white;
-      }
     }
     .liked {
-      color: bisque;
+      color: red;
     }
   }
   @media screen and (max-width: 430px) {

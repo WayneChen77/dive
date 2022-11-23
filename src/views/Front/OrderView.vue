@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <router-link class="text-decoration-none" to="/">韋恩潛水</router-link>
+          <router-link class="text-decoration-none" to="/">首頁</router-link>
         </li>
         <li class="breadcrumb-item" aria-current="page">
           <router-link class="text-decoration-none" to="/UserCarts">購物車</router-link>

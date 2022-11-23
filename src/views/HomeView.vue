@@ -1,17 +1,26 @@
 <template>
   <div class="home">
+    <!-- <div class="qqqqq">有效按鈕1</div>
+    <div class="qqqqq">有效按鈕1</div>
+    <button @click="swiper" class="">按鈕有效2</button> -->
+
     <swiper
+      class=""
       :modules="modules"
       :slides-per-view="1"
       :space-between="50"
       :loop="true"
-      :autoplay="{
+      :navigation="{ nextEl: '.qqqqq' }"
+      :effect="'fade'"
+      :pagination="{ clickable: true }"
+      ref="ss"
+    >
+      <!-- <button @click="testswiper" class="position-absolute top-0 zindex-tooltip">按鈕無效3</button> -->
+      <!-- :autoplay="{
         delay: 5000,
         disableOnInteraction: false,
-      }"
-      navigation
-      :pagination="{ clickable: true }"
-    >
+      }" -->
+
       <swiper-slide>
         <div class="txt" data-aos="zoom-in">
           <h1>韋恩潛旅</h1>
@@ -49,6 +58,7 @@
       /></swiper-slide>
       <div class="titledown"></div>
     </swiper>
+
     <div class="container dive">
       <div class="row align-items-center justify-content-center textItem">
         <div class="col-12 col-md-6 p-3" data-aos="fade-right">
@@ -174,8 +184,8 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/vue';
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectFade } from 'swiper';
 import 'swiper/swiper-bundle.css';
 
 export default {
@@ -184,7 +194,7 @@ export default {
     return {
       isMounted: false,
       isDisabled: false,
-      modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay],
+      modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectFade],
     };
   },
   mounted() {
@@ -203,6 +213,25 @@ export default {
       }
     });
   },
+  methods: {
+    swiper() {
+      // 按鈕2
+      // this.$refs.ss.$el.swiper.slideNext();
+      this.$refs.ss.$el.swiper.slidePrev();
+      console.log(this.$refs.ss);
+
+      console.log(this.$refs.ss.$el.swiper);
+    },
+    testswiper() {
+      // 按鈕3
+      // 無法使用 抓不到資料
+      const a = useSwiper();
+      console.log(a);
+      // useSwiper().slideNext();
+      useSwiper();
+      // inject() can only be used inside setup() or functional components.???
+    },
+  },
   components: {
     Swiper,
     SwiperSlide,
@@ -211,6 +240,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.zindex-tooltip {
+  z-index: 100;
+}
+// .qqq {
+//   overflow: hidden;
+// }
 .titledown {
   height: 80px;
   width: 100%;
