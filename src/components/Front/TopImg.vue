@@ -3,7 +3,7 @@
     <div class="img"></div>
     <div class="titledown"></div>
     <div
-      class="position-absolute text-center text text-light shadow"
+      class="position-absolute text-center text text-light shadow py-3 imgbg"
       style="width: 30%; min-height: 10vh"
     >
       <slot>
@@ -23,6 +23,9 @@ export default {};
   width: 100%;
   height: 40vh;
   overflow: hidden;
+  .imgbg {
+    background-color: rgba($color: #000000, $alpha: 0.3);
+  }
   .img {
     width: 100%;
     height: 800px;

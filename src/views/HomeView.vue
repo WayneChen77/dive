@@ -15,16 +15,18 @@
       :pagination="{ clickable: true }"
       ref="ss"
     >
-      <!-- <button @click="testswiper" class="position-absolute top-0 zindex-tooltip">按鈕無效3</button> -->
       <!-- :autoplay="{
         delay: 5000,
         disableOnInteraction: false,
       }" -->
+      <!-- <button @click="a.slideNext()" class="position-absolute top-0 zindex-tooltip">
+        按鈕無效3
+      </button> -->
 
       <swiper-slide>
         <div class="txt" data-aos="zoom-in">
           <h1>韋恩潛旅</h1>
-          一起來探索龜之島小琉球，以及水下70%的神秘世界
+          一起來探索龜之島小琉球，以及水下70%的神秘世界！
         </div>
         <img
           src="https://images.pexels.com/photos/2397653/pexels-photo-2397653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -37,7 +39,7 @@
         <div class="txt" data-aos="zoom-in">
           <h3>潛水旅遊</h3>
 
-          「向陸地請個假，下來吧！來海底！」
+          向陸地請個假，下來吧！來海底！
         </div>
         <img
           src="https://images.pexels.com/photos/847393/pexels-photo-847393.jpeg"
@@ -48,8 +50,8 @@
         <div class="txt" data-aos="zoom-in">
           <h3>放鬆、閉氣、下潛</h3>
           你也想要嘗試憑藉一口氣潛入水裡的感覺嗎？
-          自由潛水基礎課程可以在短時間內滿足你對自由潛水的好奇心
-          這是一堂完全沒有壓力的體驗課程，非常適合水性不佳的同學來嘗試看看
+          自由潛水基礎課程可以在短時間內滿足你對自由潛水的好奇心！
+          這是一堂完全沒有壓力的體驗課程，非常適合水性不佳的同學來嘗試看看！
         </div>
         <img
           src="https://images.pexels.com/photos/762103/pexels-photo-762103.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -101,7 +103,7 @@
                 水肺是一種輔助潛水者在水中呼吸的器具。水肺是在1943年，由雅克-伊夫·庫斯托和埃米爾·加尼昂共同發明的。
                 現代的水肺系統最少由四個部分組成，包括：浮力調節裝置、呼吸調節器、
                 潛水氣瓶和配重系統。調節器以活栓操控，將壓縮氣體由高壓狀態，轉化成可供人體正常呼吸的壓力。
-                潛水員所使用的氣瓶不稱為氧氣筒。氧氣筒(100%氧氣)是屬於醫療級的氣體。水肺使用的稱之為氣瓶(79%氮氣+21%氧氣)，氣瓶裡裝的是壓縮後的空氣，並非純氧氣
+                潛水員所使用的氣瓶不稱為氧氣筒。氧氣筒(100%氧氣)是屬於醫療級的氣體。水肺使用的稱之為氣瓶(79%氮氣+21%氧氣)，氣瓶裡裝的是壓縮後的空氣，並非純氧氣。
               </p>
             </div>
           </div>
@@ -133,8 +135,8 @@
               </div>
             </div>
             <div class="text-center">
-              水肺潛水
-              <p>任何人都可以嘗試，以最簡單的方式下潛到水深12米以內，欣賞海底世界的奇幻與美妙</p>
+              <h4 class="my-3">水肺潛水</h4>
+              <p>任何人都可以嘗試，以最簡單的方式下潛到水深12米以內，欣賞海底世界的奇幻與美妙。</p>
             </div>
           </div>
           <div class="col-12 col-md-4">
@@ -151,9 +153,9 @@
               </div>
             </div>
             <div class="text-center">
-              自由潛水
+              <h4 class="my-3">自由潛水</h4>
               <p>
-                基礎課程可以讓你在短時間裡面進入自由潛水的世界，並憑著自己一口氣開始做有深度的自由潛水探索
+                基礎課程可以讓你在短時間裡面進入自由潛水的世界，並憑著自己一口氣開始做有深度的自由潛水探索。
               </p>
             </div>
           </div>
@@ -171,7 +173,7 @@
               </div>
             </div>
             <div class="text-center">
-              水上活動
+              <h4 class="my-3">水上活動</h4>
               <p>
                 雖然在任何水域戴上潛水鏡和呼吸管都可以稱為是浮潛，但是一般浮潛是在礁石、沉船或者其它水下物體附近進行的。
               </p>
@@ -194,6 +196,7 @@ export default {
     return {
       isMounted: false,
       isDisabled: false,
+      a: '',
       modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectFade],
     };
   },
@@ -225,12 +228,15 @@ export default {
     testswiper() {
       // 按鈕3
       // 無法使用 抓不到資料
-      const a = useSwiper();
-      console.log(a);
-      // useSwiper().slideNext();
-      useSwiper();
+
+      this.a.slideNext();
+
       // inject() can only be used inside setup() or functional components.???
     },
+  },
+  created() {
+    this.a = useSwiper();
+    console.log('a', this.a, useSwiper());
   },
   components: {
     Swiper,
@@ -259,6 +265,9 @@ export default {
 }
 // 圓形遮罩
 .home {
+  .dive {
+    overflow-x: hidden;
+  }
   .wrap {
     object-fit: cover;
     position: relative;
@@ -336,6 +345,7 @@ img {
     left: 0;
     right: 0;
     top: 25%;
+    width: 100%;
   }
   .swiper {
     width: 100%;

@@ -8,7 +8,7 @@
         alt=""
       />
       <div
-        class="position-absolute text-center text"
+        class="position-absolute text-center text py-3"
         style="width: 30%; min-height: 10vh; top: 30%; left: 18%"
       >
         <h4>潛水假期</h4>

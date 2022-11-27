@@ -102,7 +102,10 @@
         <h3 class="col-8">重要提醒</h3>
         <div class="border p-3 col-8">
           <ul>
-            <li>訂單編號範例：-NHU1TGpWvTfNIDLXduD</li>
+            <li>
+              訂單編號範例：<br />
+              <span class="text-danger"> -NHU1TGpWvTfNIDLXduD</span>
+            </li>
             <li>
               如購買過程有任何疑問，歡迎 <router-link to="/contact"> 聯繫我們</router-link>，
               我們會盡快回覆您。

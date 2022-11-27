@@ -75,30 +75,30 @@
           @dele-Cart="deleteCart"
           v-if="!sendData"
         ></CartsItem>
-        <div class="rwd"></div>
+        <div class="cartsrwd"></div>
       </div>
       <div class="col-12 col-md-4">
         <!-- 右區塊 -->
-        <div class="input-group mb-3 input-group-sm" v-if="!sendData">
+        <div class="input-group mt-md-0 mt-3 mb-3 input-group-sm" v-if="!sendData">
           <label for="coupon"
             ><input
               type="text"
-              class="form-control"
+              class="form-control mb-3"
               v-model="coupon_code"
               placeholder="請輸入優惠碼"
           /></label>
-          <div class="input-group-append">
+          <div class="input-group-append ms-3">
             <!-- 沒商品禁用 disabled -->
             <button
               :disabled="carts.length < 1"
-              class="btn btn-outline-secondary"
+              class="btn btn-outline-primary"
               type="button"
               @click="addCouponCode"
             >
               套用優惠碼
             </button>
           </div>
-          <span class="mt-3 text-primary">迎接假期！輸入： happyvacation ，即享88折優惠</span>
+          <span class="mt-3 text-primary">迎接假期！輸入： godive ，即享88折優惠！</span>
         </div>
         <!-- 伸縮品項 -->
         <div class="col-12 col-md-8 rounded mb-3" v-if="sendData">
@@ -133,7 +133,7 @@
             </div>
           </div>
         </div>
-        <div class="row ms-1 pe-2">
+        <div class="row ms-1 mb-3 pe-2">
           <div class="col-12 col-md-8 border rounded p-0">
             <div class="bg-bgblue rounded-top text-center text-textblue py-3">
               <h3>訂單資料</h3>
@@ -153,7 +153,7 @@
             <!-- 沒商品禁用 :disabled-->
             <div class="text-end">
               <button
-                class="btn btn-outline-secondary mb-3"
+                class="btn btn-outline-primary m-3"
                 type="button"
                 :disabled="carts.length < 1"
                 @click="sendData = true"
@@ -164,9 +164,9 @@
             </div>
           </div>
         </div>
-        <teleport to=".rwd" v-if="isMounted" class="imgtp" :disabled="isDisabled">
-          <CartsForm v-if="sendData"></CartsForm
-        ></teleport>
+        <teleport to=".cartsrwd" v-if="isMounted" class="imgtp" :disabled="isDisabled">
+          <CartsForm v-if="sendData"></CartsForm>
+        </teleport>
       </div>
     </div>
   </div>
@@ -192,7 +192,10 @@ export default {
       isDisabled: false,
     };
   },
-  components: { CartsItem, CartsForm },
+  components: {
+    CartsItem,
+    CartsForm,
+  },
   mounted() {
     // 解決Teleport掛載問題
     this.isMounted = true;
@@ -229,6 +232,7 @@ export default {
           title: res.data.message,
           content: res.data.message,
         });
+        console.log(res);
         this.isLoad = false;
         this.getusercarts();
       });
@@ -246,6 +250,7 @@ export default {
           title: res.data.message,
           content: res.data.message,
         });
+        console.log(res);
         this.isLoad = false;
         this.getusercarts();
       });

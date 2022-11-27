@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-outline-secondary mb-3" type="button" @click="$emit('deleCart')">
+  <button class="btn btn-outline-primary mb-3" type="button" @click="$emit('deleCart')">
     清空資料
   </button>
   <div class="row">
