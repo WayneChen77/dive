@@ -186,7 +186,7 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectFade } from 'swiper';
 import 'swiper/swiper-bundle.css';
 
@@ -196,7 +196,6 @@ export default {
     return {
       isMounted: false,
       isDisabled: false,
-      a: '',
       modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectFade],
     };
   },
@@ -225,18 +224,6 @@ export default {
 
       console.log(this.$refs.ss.$el.swiper);
     },
-    testswiper() {
-      // 按鈕3
-      // 無法使用 抓不到資料
-
-      this.a.slideNext();
-
-      // inject() can only be used inside setup() or functional components.???
-    },
-  },
-  created() {
-    this.a = useSwiper();
-    console.log('a', this.a, useSwiper());
   },
   components: {
     Swiper,
