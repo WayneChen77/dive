@@ -318,7 +318,7 @@ img {
 
   left: 18%;
   width: 390px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.3);
   position: absolute;
 }
 @media screen and (max-width: 430px) {

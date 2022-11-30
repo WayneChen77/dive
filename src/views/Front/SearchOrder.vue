@@ -17,7 +17,7 @@
           <input
             type="button"
             value="送出"
-            class="btn-outline-gray btn btn-sm"
+            class="btn-outline-titleblue btn btn-sm"
             @keydown.enter="getOrders"
             @click="getOrders"
           />

@@ -73,6 +73,7 @@
           @add-Cart="addCart"
           @remove-Cart="removeCartItem"
           @dele-Cart="deleteCart"
+          @adj-Cart="adjCart"
           v-if="!sendData"
         ></CartsItem>
         <div class="cartsrwd"></div>
@@ -101,7 +102,7 @@
           <span class="mt-3 text-primary">迎接假期！輸入： godive ，即享88折優惠！</span>
         </div>
         <!-- 伸縮品項 -->
-        <div class="col-12 col-md-8 rounded mb-3" v-if="sendData">
+        <div class="col-12 col-md-10 rounded mb-3" v-if="sendData">
           <div class="accordion w-100" id="accordionExample">
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingOne">
@@ -133,9 +134,9 @@
             </div>
           </div>
         </div>
-        <div class="row ms-1 mb-3 pe-2">
-          <div class="col-12 col-md-8 border rounded p-0">
-            <div class="bg-bgblue rounded-top text-center text-textblue py-3">
+        <div class="mb-3 pe-2 col-12 col-md-10">
+          <div class="border rounded p-0">
+            <div class="bg-bgblue rounded-top text-center text-textblue py-3 mb-3">
               <h3>訂單資料</h3>
             </div>
             <div class="text-gray mx-3">
@@ -243,6 +244,24 @@ export default {
       const cart = {
         product_id: item.product_id,
         qty: item.qty + 1,
+      };
+      this.$http.put(Api, { data: cart }).then((res) => {
+        this.$emitter.emit('push-cart', {
+          style: 'success',
+          title: res.data.message,
+          content: res.data.message,
+        });
+        console.log(res);
+        this.isLoad = false;
+        this.getusercarts();
+      });
+    },
+    adjCart(item) {
+      this.isLoad = true;
+      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
+      const cart = {
+        product_id: item.product_id,
+        qty: item.qty,
       };
       this.$http.put(Api, { data: cart }).then((res) => {
         this.$emitter.emit('push-cart', {

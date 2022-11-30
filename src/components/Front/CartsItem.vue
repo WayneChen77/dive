@@ -34,11 +34,11 @@
                   :alt="item.product.title"
                   :title="item.product.title"
                 />
-                <div class="text-start py-4">
+                <div class="text-center py-4">
                   <div class="h5 fw-bolder">{{ item.product.title }}</div>
                   <div class="d-md-none">
                     <div class="py-2">NT${{ $filters.currency(item.total) }}</div>
-                    <div class="input-group">
+                    <!-- <div class="input-group">
                       <button
                         type="button"
                         class="btn btn-outline-dark"
@@ -63,13 +63,26 @@
                       >
                         <i class="bi bi-plus" />
                       </button>
-                    </div>
+                    </div> -->
+                    <select
+                      style="width: 50vw; padding: auto"
+                      class="form-select text-center"
+                      v-model.number="item.qty"
+                      aria-label="Default select example"
+                      @change="$emit('adjCart', item)"
+                    >
+                      <!-- <option selected disabled>{{ item.qty }}人</option> -->
+                      <option value="1">1人</option>
+                      <option value="2">2人</option>
+                      <option value="3">3人</option>
+                      <option value="4">4人</option>
+                    </select>
                   </div>
                 </div>
               </td>
               <!-- 電腦版 -->
               <td class="d-none d-md-table-cell text-end align-middle">
-                <div class="input-group">
+                <!-- <div class="input-group">
                   <button
                     type="button"
                     class="btn btn-outline-dark"
@@ -94,7 +107,19 @@
                   >
                     <i class="bi bi-plus" />
                   </button>
-                </div>
+                </div> -->
+                <select
+                  class="form-select px-1"
+                  v-model.number="item.qty"
+                  aria-label="Default select example"
+                  @change="$emit('adjCart', item)"
+                >
+                  <!-- <option selected disabled>{{ item.qty }}人</option> -->
+                  <option value="1">1人</option>
+                  <option value="2">2人</option>
+                  <option value="3">3人</option>
+                  <option value="4">4人</option>
+                </select>
               </td>
               <td class="d-none d-md-table-cell text-end h5">
                 NT${{ $filters.currency(item.total) }}
@@ -138,7 +163,7 @@ export default {
       return {};
     },
   },
-  emits: ['deleCart', 'addCart', 'removeCart', 'reduceCart'],
+  emits: ['deleCart', 'addCart', 'removeCart', 'reduceCart', 'adjCart'],
   watch: {
     data() {
       this.carts = this.data;

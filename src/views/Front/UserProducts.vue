@@ -2,12 +2,12 @@
   <!-- 全域原件 -->
   <LoadingView :active="isLoading"></LoadingView>
   <div class="product">
-    <div class="position-relative">
+    <div class="position-relative row align-items-center">
       <div
         class="position-absolute text-center text py-3"
-        style="width: 30%; min-height: 10vh; top: 30%; left: 18%"
+        style="width: 30%; min-height: 10vh; left: 18%"
       >
-        <h4>潛水假期</h4>
+        <h2>潛水假期</h2>
         <p>馬上展開您的潛水假期</p>
       </div>
     </div>
@@ -51,7 +51,7 @@
           </div>
           <div class="overlay card-img-top">
             <a href="#" @click.prevent="userproduct(i)">
-              <div class="text-center p-5 text-bgblue">了解更多</div>
+              <div class="text-center py-5 text-bgblue">了解更多</div>
             </a>
           </div>
           <i
@@ -189,7 +189,7 @@ export default {
   }
   .text {
     color: white;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.3);
     text-align: center;
   }
 
@@ -201,11 +201,12 @@ export default {
   .card {
     position: relative;
     width: 20%;
-    height: 50vh;
+    min-height: 50vh;
     margin: 1%;
+
     overflow: hidden;
     .card-img-top {
-      height: 30vh;
+      min-height: 30vh;
       overflow: hidden;
       img {
         height: 30vh;
@@ -248,6 +249,7 @@ export default {
       position: relative;
       width: 90%;
       margin: auto;
+      margin-bottom: 1.5rem;
     }
     .position-relative {
       background-position: center;
@@ -256,7 +258,7 @@ export default {
 
   @media screen and (min-width: 1600px) {
     .card {
-      height: 40vh;
+      min-height: 40vh;
     }
   }
 }
