@@ -9,14 +9,14 @@
         <h3>公司介紹</h3>
         <hr />
         <div class="row justify-content-center" data-aos="zoom-in">
-          <div class="col-12 col-md-4 mt-3">
+          <div class="col-12 col-xl-3 mt-3">
             <h4 class="text-titleblue">Wayne's Dive</h4>
             <p class="lh-lg">
               座落在美麗的南灣附近，是擁有國際潛水機構五星認證的專業潛水渡假中心。
               多年來我們的教練以專業、認真與熱忱，提供給您最佳的潛水教學與服務。透過多年累積的經驗，我們也經常為各大專院校的科系社團、消防單位、救難團體等單位提供專業的代訓服務。
             </p>
           </div>
-          <div class="col-12 col-md-8 imgwrap" data-aos="zoom-in">
+          <div class="col-12 col-xl-9 imgwrap" data-aos="zoom-in">
             <img
               class="col"
               src="https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg"
@@ -63,9 +63,15 @@ img {
 .pathscale {
   transform: scale(0.9, 0.9);
 }
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 600px) {
   .pathscale {
     transform: scale(0.5, 0.5);
+  }
+}
+
+@media screen and (max-width: 993px) {
+  .pathscale {
+    transform: scale(0.7, 0.7);
   }
 }
 </style>

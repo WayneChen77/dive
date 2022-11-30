@@ -13,51 +13,73 @@
       :navigation="{ nextEl: '.qqqqq' }"
       :effect="'fade'"
       :pagination="{ clickable: true }"
-      ref="ss"
-    >
-      <!-- :autoplay="{
+      :autoplay="{
         delay: 5000,
         disableOnInteraction: false,
-      }" -->
+      }"
+      ref="ss"
+    >
       <!-- <button @click="a.slideNext()" class="position-absolute top-0 zindex-tooltip">
         按鈕無效3
       </button> -->
 
       <swiper-slide>
-        <div class="txt" data-aos="zoom-in">
-          <h1>韋恩潛旅</h1>
-          一起來探索龜之島小琉球，以及水下70%的神秘世界！
-        </div>
-        <img
+        <div
+          class="titleup"
+          style="
+            background-image: url(https://images.pexels.com/photos/2397653/pexels-photo-2397653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+          "
+        >
+          <div class="txt" data-aos="zoom-in">
+            <h1>韋恩潛旅</h1>
+            一起來探索龜之島小琉球，以及水下70%的神秘世界！
+          </div>
+          <!-- <img
           src="https://images.pexels.com/photos/2397653/pexels-photo-2397653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           class="d-block w-100 img-fluid"
           alt="圖片"
-        />
-        ></swiper-slide
-      >
-      <swiper-slide>
-        <div class="txt" data-aos="zoom-in">
-          <h3>潛水旅遊</h3>
-
-          向陸地請個假，下來吧！來海底！
+        /> -->
         </div>
-        <img
+      </swiper-slide>
+      <swiper-slide>
+        <div
+          class="titleup"
+          style="
+            background-image: url(https://images.pexels.com/photos/847393/pexels-photo-847393.jpeg);
+          "
+        >
+          <div class="txt" data-aos="zoom-in">
+            <h3>潛水旅遊</h3>
+
+            向陸地請個假，下來吧！來海底！
+          </div>
+          <!-- <img
           src="https://images.pexels.com/photos/847393/pexels-photo-847393.jpeg"
           class="d-block w-100"
           alt="圖片"
-      /></swiper-slide>
-      <swiper-slide>
-        <div class="txt" data-aos="zoom-in">
-          <h3>放鬆、閉氣、下潛</h3>
-          你也想要嘗試憑藉一口氣潛入水裡的感覺嗎？
-          自由潛水基礎課程可以在短時間內滿足你對自由潛水的好奇心！
-          這是一堂完全沒有壓力的體驗課程，非常適合水性不佳的同學來嘗試看看！
+      /> -->
         </div>
-        <img
+      </swiper-slide>
+      <swiper-slide>
+        <div
+          class="titleup"
+          style="
+            background-image: url(https://images.pexels.com/photos/762103/pexels-photo-762103.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+          "
+        >
+          <div class="txt" data-aos="zoom-in">
+            <h3>放鬆、閉氣、下潛</h3>
+            你也想要嘗試憑藉一口氣潛入水裡的感覺嗎？
+            自由潛水基礎課程可以在短時間內滿足你對自由潛水的好奇心！
+            這是一堂完全沒有壓力的體驗課程，非常適合水性不佳的同學來嘗試看看！
+          </div>
+          <!-- <img
           src="https://images.pexels.com/photos/762103/pexels-photo-762103.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           class="d-block w-100"
           alt="圖片"
-      /></swiper-slide>
+      /> -->
+        </div>
+      </swiper-slide>
       <div class="titledown"></div>
     </swiper>
 
@@ -241,6 +263,13 @@ export default {
 // .qqq {
 //   overflow: hidden;
 // }
+
+.titleup {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+}
 .titledown {
   height: 80px;
   width: 100%;
@@ -315,11 +344,17 @@ img {
   padding: 1rem;
   color: white;
   top: 40%;
-
   left: 18%;
   width: 390px;
   background: rgba(0, 0, 0, 0.3);
   position: absolute;
+}
+@media screen and (max-width: 650px) {
+  .txt {
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
 }
 @media screen and (max-width: 430px) {
   .txtrwd {

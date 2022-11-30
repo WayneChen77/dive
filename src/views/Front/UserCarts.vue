@@ -56,7 +56,7 @@
         </button>
         <button
           type="button"
-          class="position-absolute top-0 translate-middle btn btn-secondary rounded-pill btnadj"
+          class="position-absolute top-0 translate-middle btn btn-primary rounded-pill btnadj"
           style="left: 100%"
         >
           <i class="bi bi-emoji-smile"></i>

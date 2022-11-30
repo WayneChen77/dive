@@ -1,27 +1,27 @@
 <template>
-  <div class="container mt-5">
-    <form class="row justify-content-center" @submit.prevent="signin">
-      <div class="col-md-6">
-        <h1 class="h3 mb-3 font-weight-normal">管理員登入</h1>
+  <div class="border-top">
+    <form class="mt-5 row justify-content-center" @submit.prevent="signin">
+      <div class="col-md-5 col-8">
+        <h1 class="h3 mb-3 font-weight-900">管理員登入</h1>
         <div class="mb-2">
-          <label for="inputEmail" class="sr-only"
-            >Email address
+          <label for="inputEmail " class="d-block"
+            >請輸入管理員帳號
             <input
               type="email"
               id="inputEmail"
-              class="form-control"
+              class="w-100 p-2"
               placeholder="Email address"
               required
               v-model="user.username"
           /></label>
         </div>
         <div class="mb-2">
-          <label for="inputPassword" class="sr-only"
-            >Password
+          <label for="inputPassword" class="d-block"
+            >請輸入管理員密碼
             <input
               type="password"
               id="inputPassword"
-              class="form-control"
+              class="w-100 p-2"
               placeholder="Password"
               required
               autocomplete="off"
@@ -29,8 +29,8 @@
           /></label>
         </div>
         <span class="bg-warning" v-if="warnMsg">帳號或密碼錯誤</span>
-        <div class="text-end mt-4">
-          <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
+        <div class="mt-4">
+          <button class="text-white bg-titleblue p-2 w-100" type="submit">登入</button>
         </div>
       </div>
     </form>

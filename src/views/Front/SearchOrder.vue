@@ -12,7 +12,7 @@
             placeholder="請輸入訂單編號"
             v-model="searchID"
             @keydown.enter="getOrders"
-            class="my-3 rounded me-3"
+            class="my-3 rounded me-3 border border-titleblue aaa"
           />
           <input
             type="button"
@@ -152,4 +152,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.aaa:focus {
+  box-shadow: 0 0 00.3rem rgba(#2660a9, 0.5);
+  // box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
+}
+</style>
