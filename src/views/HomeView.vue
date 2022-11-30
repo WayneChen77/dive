@@ -31,7 +31,7 @@
         <img
           src="https://images.pexels.com/photos/2397653/pexels-photo-2397653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           class="d-block w-100 img-fluid"
-          alt="'圖片+i'"
+          alt="圖片"
         />
         ></swiper-slide
       >
@@ -44,7 +44,7 @@
         <img
           src="https://images.pexels.com/photos/847393/pexels-photo-847393.jpeg"
           class="d-block w-100"
-          alt="'圖片+i'"
+          alt="圖片"
       /></swiper-slide>
       <swiper-slide>
         <div class="txt" data-aos="zoom-in">
@@ -56,7 +56,7 @@
         <img
           src="https://images.pexels.com/photos/762103/pexels-photo-762103.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           class="d-block w-100"
-          alt="'圖片+i'"
+          alt="圖片"
       /></swiper-slide>
       <div class="titledown"></div>
     </swiper>
@@ -67,7 +67,8 @@
           <img
             class="img-fluid"
             src="https://images.pexels.com/photos/2404370/pexels-photo-2404370.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt=""
+            alt="dive.pic"
+            title="自由潛水"
           />
         </div>
         <div class="col-12 col-md-6 p-3 text text1" data-aos="fade-left">
@@ -89,7 +90,8 @@
           <img
             class="img-fluid"
             src="https://images.pexels.com/photos/37530/divers-scuba-divers-diving-underwater-37530.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt=""
+            alt="dive.pic"
+            title="水肺潛水"
           />
         </div>
 
@@ -113,7 +115,7 @@
         <h4>每年3次，出團潛入世界</h4>
         <p>
           拿到海洋入場券後，想要到國外看不同的生物，但又不知道如何安排嗎？
-          業的學生們不用擔心，一年會舉行三次的國外潛旅等著你們！
+          結業的學生們不用擔心，一年會舉行三次的國外潛旅等著你們！
         </p>
       </div>
 
@@ -130,7 +132,7 @@
               />
               <div class="overlay rounded-circle">
                 <router-link to="/userProducts">
-                  <div class="text-center p-5 text-white">了解更多</div></router-link
+                  <div class="text-center py-5 text-white">了解更多</div></router-link
                 >
               </div>
             </div>
@@ -148,7 +150,7 @@
               />
               <div class="overlay rounded-circle">
                 <router-link to="/userProducts">
-                  <div class="text-center p-5 text-white">了解更多</div></router-link
+                  <div class="text-center py-5 text-white">了解更多</div></router-link
                 >
               </div>
             </div>
@@ -168,7 +170,7 @@
               />
               <div class="overlay rounded-circle">
                 <router-link to="/userProducts">
-                  <div class="text-center p-5 text-white">了解更多</div></router-link
+                  <div class="text-center py-5 text-white">了解更多</div></router-link
                 >
               </div>
             </div>

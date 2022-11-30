@@ -35,28 +35,28 @@
         </div>
         <button
           type="button"
-          class="position-absolute top-0 translate-middle btn btn-primary rounded-pill"
+          class="position-absolute top-0 translate-middle btn btn-primary rounded-pill btnadj"
           style="left: 0"
         >
           <i class="bi bi-cart2"></i>
         </button>
         <button
           type="button"
-          class="position-absolute top-0 translate-middle btn btn-primary rounded-pill"
+          class="position-absolute top-0 translate-middle btn btn-primary rounded-pill btnadj"
           style="left: 33%"
         >
           <i class="bi bi-card-checklist"></i>
         </button>
         <button
           type="button"
-          class="position-absolute top-0 translate-middle btn btn-primary rounded-pill"
+          class="position-absolute top-0 translate-middle btn btn-primary rounded-pill btnadj"
           style="will-change: ; left: 66%"
         >
           <i class="bi bi-cash-coin"></i>
         </button>
         <button
           type="button"
-          class="position-absolute top-0 translate-middle btn btn-secondary rounded-pill"
+          class="position-absolute top-0 translate-middle btn btn-secondary rounded-pill btnadj"
           style="left: 100%"
         >
           <i class="bi bi-emoji-smile"></i>
@@ -91,7 +91,7 @@
             <!-- 沒商品禁用 disabled -->
             <button
               :disabled="carts.length < 1"
-              class="btn btn-outline-primary"
+              class="btn btn-outline-titleblue"
               type="button"
               @click="addCouponCode"
             >
@@ -153,7 +153,7 @@
             <!-- 沒商品禁用 :disabled-->
             <div class="text-end">
               <button
-                class="btn btn-outline-primary m-3"
+                class="btn btn-outline-titleblue m-3"
                 type="button"
                 :disabled="carts.length < 1"
                 @click="sendData = true"
@@ -319,4 +319,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.btnadj {
+  cursor: default;
+}
+</style>

@@ -18,7 +18,7 @@
             @keyup="liked(i)"
           ></i> -->
           <div class="card-body text-center">
-            <h5 class="card-title fs-5">{{ i.title }}</h5>
+            <h5 class="card-title fs-5 text-truncate">{{ i.title }}</h5>
           </div>
         </div></swiper-slide
       >

@@ -61,8 +61,13 @@
               +
             </button>
           </div>
-          <div class="like" :class="{ liked: isLiked() }">
-            <i class="bi bi-heart" @click="liked()" @keyup="liked()"></i>
+          <div class="like">
+            <i
+              class="bi"
+              :class="isLiked() ? 'bi-heart-fill' : 'bi-heart'"
+              @click="liked()"
+              @keyup="liked()"
+            ></i>
             <button type="button" class="btn btn-titleblue w-50" @click.prevent="updateCart">
               加入購物車
             </button>
@@ -70,7 +75,7 @@
         </div>
       </div>
     </div>
-    <div class="mt-5 row justify-content-center bottxt">
+    <div class="mt-5 row justify-content-center bottxt bg-bgblue pt-3">
       <div class="col-5 text-center">
         <h4>課程內容:</h4>
         <p style="white-space: pre-wrap">{{ product.content }}</p>
@@ -235,21 +240,22 @@ export default {
     }
   }
 }
-.bottxt {
-  padding-top: 1rem;
-  background-color: rgba($color: blue, $alpha: 0.2);
-}
+// .bottxt {
+//   padding-top: 1rem;
+//   background-color: rgba($color: blue, $alpha: 0.2);
+// }
 
 .like {
   font-size: 2.5rem;
+  cursor: pointer;
   i {
     margin-right: 1rem;
   }
-  color: blue;
-}
-.liked {
   color: red;
 }
+// .liked {
+//   color: red;
+// }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

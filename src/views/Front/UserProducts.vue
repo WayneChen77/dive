@@ -3,10 +3,6 @@
   <LoadingView :active="isLoading"></LoadingView>
   <div class="product">
     <div class="position-relative">
-      <img
-        src="https://images.pexels.com/photos/302549/pexels-photo-302549.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        alt=""
-      />
       <div
         class="position-absolute text-center text py-3"
         style="width: 30%; min-height: 10vh; top: 30%; left: 18%"
@@ -37,15 +33,15 @@
               v-model="search"
               @change="filterData"
             />
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
           </form>
         </div>
 
         <hr class="mt-3" />
       </div>
-      <div class="main mb-3 d-flex flex-wrap">
+      <div class="main mb-3 d-flex flex-wrap justify-content-between">
         <div
-          class="card shadow border-0 m-3"
+          class="card shadow border-0"
           v-for="(i, key) in dataList"
           :key="key"
           data-aos="flip-left"
@@ -55,21 +51,26 @@
           </div>
           <div class="overlay card-img-top">
             <a href="#" @click.prevent="userproduct(i)">
-              <div class="text-center p-5 text-white">了解更多</div>
+              <div class="text-center p-5 text-bgblue">了解更多</div>
             </a>
           </div>
           <i
-            class="bi bi-heart position-absolute like"
-            :class="{ liked: isLiked(i) }"
+            class="bi position-absolute like"
+            :class="isLiked(i) ? 'bi-heart-fill' : 'bi-heart'"
             @click="liked(i)"
             @keyup="liked(i)"
           ></i>
           <div class="card-body text-center">
-            <h5 class="card-title">{{ i.title }}</h5>
+            <h5 class="card-title text-truncate">{{ i.title }}</h5>
             <p class="card-text">${{ this.$filters.currency(i.price) }}</p>
-            <a href="#" class="btn btn-outline-primary" @click.prevent="updateCart(i)">馬上上課</a>
+            <a href="#" class="btn btn-outline-titleblue" @click.prevent="updateCart(i)"
+              >馬上上課</a
+            >
           </div>
         </div>
+        <span class="flexwrap"></span>
+        <span class="flexwrap"></span>
+        <span class="flexwrap"></span>
       </div>
     </div>
   </div>
@@ -179,10 +180,12 @@ export default {
 <style lang="scss" scoped>
 .product {
   .position-relative {
-    img {
-      width: 100%;
-      height: 30vh;
-    }
+    width: 100%;
+    height: 30vh;
+    overflow: hidden;
+    background-image: url(https://images.pexels.com/photos/302549/pexels-photo-302549.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+    background-position: center 45vh;
+    background-size: cover;
   }
   .text {
     color: white;
@@ -190,10 +193,16 @@ export default {
     text-align: center;
   }
 
+  // 排版用
+  .flexwrap {
+    width: 20%;
+    margin: 1%;
+  }
   .card {
     position: relative;
-    width: 18vw;
+    width: 20%;
     height: 50vh;
+    margin: 1%;
     overflow: hidden;
     .card-img-top {
       height: 30vh;
@@ -227,11 +236,12 @@ export default {
       left: 2vw;
       z-index: 5;
       font-size: 2.5rem;
-      color: gray;
-    }
-    .liked {
       color: red;
+      cursor: pointer;
     }
+    // .liked {
+    //   color: red;
+    // }
   }
   @media screen and (max-width: 430px) {
     .card {
@@ -239,12 +249,13 @@ export default {
       width: 90%;
       margin: auto;
     }
+    .position-relative {
+      background-position: center;
+    }
   }
 
   @media screen and (min-width: 1600px) {
     .card {
-      position: relative;
-      width: 18vw;
       height: 40vh;
     }
   }

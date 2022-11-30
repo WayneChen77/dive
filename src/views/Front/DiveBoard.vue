@@ -8,6 +8,7 @@
 
 <script>
 import ToastMessages from '@/components/ToastMessages.vue';
+// import ToastView from '@/components/ToastView.vue';
 import CartIcons from '@/components/Front/CartIcons.vue';
 
 export default {

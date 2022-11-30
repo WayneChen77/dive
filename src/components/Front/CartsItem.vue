@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-outline-primary mb-3" type="button" @click="$emit('deleCart')">
+  <button class="btn btn-outline-titleblue mb-3" type="button" @click="$emit('deleCart')">
     清空資料
   </button>
   <div class="row">
@@ -116,7 +116,7 @@
         <div class="text-center">
           <i class="bi bi-cart4 display-1 fw-bold text-dark" />
           <h3 class="p-3">目前購物車還沒有商品唷</h3>
-          <router-link to="/UserProducts" class="btn btn-outline-dark btn-lg mb-5"
+          <router-link to="/UserProducts" class="btn btn-outline-titleblue btn-lg mb-5"
             >選購商品</router-link
           >
         </div>

@@ -14,15 +14,25 @@
     </a>
     <div class="collapse" id="collapseExample">
       <div class="card card-body cartBlock">
-        <h3 class="col-12 text-center">關注中</h3>
+        <div class="position-relative">
+          <h3 class="col-12 text-center">關注中</h3>
+          <button
+            type="button"
+            data-bs-toggle="collapse"
+            aria-label="Close"
+            href="#collapseExample"
+            class="position-absolute end-0 top-0 btn-close"
+          ></button>
+        </div>
+
         <div v-if="likedStore.length > 0">
           <div class="row justify-content-center col-12 g-3" v-for="i in likedStore" :key="i.title">
-            <span class="col-2 fs-3" @click="deleLike" @keyup="deleLike(i)"
+            <span class="col-2 fs-3 btn" @click="deleLike" @keyup="deleLike(i)"
               ><i class="bi bi-trash"></i
             ></span>
             <div class="col-4"><img :src="i.imageUrl" :alt="i.engtitle" /></div>
-            <span type="button" class="col-4">{{ i.title }}</span>
-            <span class="col-2 fs-3" @click="updateCart(i)" @keyup="updateCart(i)"
+            <span class="col-4">{{ i.title }}</span>
+            <span class="col-2 fs-3 btn" @click="updateCart(i)" @keyup="updateCart(i)"
               ><i class="bi bi-cart-plus"></i>
             </span>
             <hr />
@@ -193,11 +203,25 @@ export default {
   top: -200px;
   width: 350px;
   height: 200px;
+  overflow-x: scroll;
+
+  //   ::-webkit-scrollbar：捲軸本身，可以設定寬度
+
+  // ::-webkit-scrollbar-track：捲軸空的地方，也可以說背景的顏色
+
+  // ::-webkit-scrollbar-thumb：捲軸可以拉的部分
   img {
     width: 100%;
     height: 100%;
   }
   // overflow: scroll;
+}
+.cartBlock::-webkit-scrollbar {
+  width: 5px;
+  height: 2px;
+}
+.cartBlock::-webkit-scrollbar-thumb {
+  background: #aaa;
 }
 .fixbtn {
   position: fixed;
