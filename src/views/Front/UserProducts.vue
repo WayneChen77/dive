@@ -2,7 +2,7 @@
   <!-- 全域原件 -->
   <LoadingView :active="isLoading"></LoadingView>
   <div class="product">
-    <div class="position-relative row align-items-center">
+    <div class="position-relative d-flex align-items-center">
       <div
         class="position-absolute text-center text py-3"
         style="width: 30%; min-height: 10vh; left: 18%"

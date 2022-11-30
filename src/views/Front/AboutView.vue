@@ -63,15 +63,15 @@ img {
 .pathscale {
   transform: scale(0.9, 0.9);
 }
-@media screen and (max-width: 600px) {
-  .pathscale {
-    transform: scale(0.5, 0.5);
-  }
-}
 
 @media screen and (max-width: 993px) {
   .pathscale {
     transform: scale(0.7, 0.7);
+  }
+}
+@media screen and (max-width: 600px) {
+  .pathscale {
+    transform: scale(0.5, 0.5);
   }
 }
 </style>
