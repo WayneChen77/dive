@@ -40,6 +40,51 @@
         </div>
       </div>
     </div>
+    <div class="contact">
+      <div class="text-center border p-3">
+        <h3>聯絡我門</h3>
+        <div>
+          <p>服務專線:0800-888-666</p>
+          <p>營業時間:AM09:00~PM20:00</p>
+          <p>LIND ID:Wayne-Dive</p>
+          <p>Email:Wayne-Dive@divelife.com.tw</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- <h3>店家地址</h3> -->
+        <div class="col-12 col-md-7 p-3">
+          <iframe
+            title="店家地址"
+            width="100%"
+            height="100%"
+            frameborder="0"
+            scrolling="no"
+            marginheight="0"
+            marginwidth="0"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29602.827564249696!2d120.72637006209982!3d21.959393957336626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3471b1abbb7d8d55%3A0x45724d191a9be279!2z5qiC5rS75Y2X54Gj6YGK5oap5Y2A!5e0!3m2!1szh-TW!2stw!4v1669995908699!5m2!1szh-TW!2stw"
+          ></iframe>
+        </div>
+
+        <div class="col-12 col-md-5 p-3">
+          <h4 class="mb-3">946屏東縣恆春鎮南灣路223號</h4>
+          <span class="mb-3">透過以下方式前往 ——</span>
+
+          <ol>
+            <li class="mb-3">
+              火車：於枋寮車站轉搭公車8239至潮州恆春轉運站轉公車101B、101墾丁街車橘線至鵝鑾鼻
+              恆南南光路口再步行約17分。
+            </li>
+            <li class="mb-3">
+              汽車，可走國道3號，朝屏東前進並於424-南州出口下交流道沿屏鵝公路前往目的地恆春。
+            </li>
+            <li class="mb-3">
+              跨縣市前往可搭乘高鐵至左營並搭乘接"9189台灣好行墾丁快線駁車"前往並步行6分鐘至實體店。
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

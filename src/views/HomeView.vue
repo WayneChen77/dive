@@ -32,7 +32,8 @@
         >
           <div class="txt" data-aos="zoom-in">
             <h1>韋恩潛旅</h1>
-            一起來探索龜之島小琉球，以及水下70%的神秘世界！
+            一起來探索10大潛水景點，以及水下70%的神秘世界！
+            <button class="btn-animation pulse">來去看看</button>
           </div>
           <!-- <img
           src="https://images.pexels.com/photos/2397653/pexels-photo-2397653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -49,9 +50,9 @@
           "
         >
           <div class="txt" data-aos="zoom-in">
-            <h3>潛水旅遊</h3>
-
+            <h3>潛入您的生活</h3>
             向陸地請個假，下來吧！來海底！
+            <button class="btn-animation pulse">來去看看</button>
           </div>
           <!-- <img
           src="https://images.pexels.com/photos/847393/pexels-photo-847393.jpeg"
@@ -68,10 +69,9 @@
           "
         >
           <div class="txt" data-aos="zoom-in">
-            <h3>放鬆、閉氣、下潛</h3>
-            你也想要嘗試憑藉一口氣潛入水裡的感覺嗎？
-            自由潛水基礎課程可以在短時間內滿足你對自由潛水的好奇心！
-            這是一堂完全沒有壓力的體驗課程，非常適合水性不佳的同學來嘗試看看！
+            <h3>挑戰你的極限</h3>
+            馬上展開您的冒險，韋恩潛旅給您最大的折扣！
+            <button class="btn-animation pulse">來去看看</button>
           </div>
           <!-- <img
           src="https://images.pexels.com/photos/762103/pexels-photo-762103.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -257,12 +257,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.zindex-tooltip {
-  z-index: 100;
+.btn-animation {
+  background: none;
+
+  border: 2px solid;
+
+  line-height: 1;
+  margin: 0.5rem;
+  padding: 0.5rem 1em;
+  color: white;
 }
-// .qqq {
-//   overflow: hidden;
-// }
+.pulse:hover {
+  transform: scale(1);
+  animation: pulse 1s;
+  // color: rgba($color: blue, $alpha: 0.25);
+  box-shadow: 0 0 0 0 rgba($color: white, $alpha: 0.25);
+}
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba($color: white, $alpha: 0.25);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba($color: white, $alpha: 0.15);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba($color: blue, $alpha: 0);
+  }
+}
 
 .titleup {
   width: 100%;
