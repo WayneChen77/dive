@@ -42,7 +42,7 @@
     </div>
     <div class="contact">
       <div class="text-center border p-3">
-        <h3>聯絡我門</h3>
+        <h3>聯絡我們</h3>
         <div>
           <p>服務專線:0800-888-666</p>
           <p>營業時間:AM09:00~PM20:00</p>
@@ -52,7 +52,7 @@
       </div>
 
       <div class="row">
-        <!-- <h3>店家地址</h3> -->
+        <h3>店面地址</h3>
         <div class="col-12 col-md-7 p-3">
           <iframe
             title="店家地址"

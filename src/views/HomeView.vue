@@ -32,8 +32,9 @@
         >
           <div class="txt" data-aos="zoom-in">
             <h1>韋恩潛旅</h1>
-            一起來探索10大潛水景點，以及水下70%的神秘世界！
-            <button class="btn-animation pulse">來去看看</button>
+
+            <p>一起探索世界潛水景點，以及水下的神秘世界！</p>
+            <router-link to="/userProducts" class="btn-animation pulse">來去看看</router-link>
           </div>
           <!-- <img
           src="https://images.pexels.com/photos/2397653/pexels-photo-2397653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -51,8 +52,8 @@
         >
           <div class="txt" data-aos="zoom-in">
             <h3>潛入您的生活</h3>
-            向陸地請個假，下來吧！來海底！
-            <button class="btn-animation pulse">來去看看</button>
+            <p>向陸地請個假，下來吧！來海底！</p>
+            <router-link to="/userProducts" class="btn-animation pulse">來去看看</router-link>
           </div>
           <!-- <img
           src="https://images.pexels.com/photos/847393/pexels-photo-847393.jpeg"
@@ -70,8 +71,8 @@
         >
           <div class="txt" data-aos="zoom-in">
             <h3>挑戰你的極限</h3>
-            馬上展開您的冒險，韋恩潛旅給您最大的折扣！
-            <button class="btn-animation pulse">來去看看</button>
+            <p>馬上展開您的冒險，韋恩潛旅給您最大的折扣！</p>
+            <router-link to="/userProducts" class="btn-animation pulse">來去看看</router-link>
           </div>
           <!-- <img
           src="https://images.pexels.com/photos/762103/pexels-photo-762103.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -133,6 +134,54 @@
           </div>
         </teleport>
       </div>
+    </div>
+    <div class="midAbout my-3 text-titleblue" data-aos="zoom-in">
+      <div class="container text-center p-3">
+        <h3 class="m-3">韋恩潛旅，超值服務</h3>
+
+        <div class="row">
+          <div class="col-12 col-md-3">
+            <img
+              src="../assets/icons/icons8-cargo-ship-64.svg"
+              alt="ship.pic"
+              style="width: 64px"
+            />
+            <h4>遊艇</h4>
+
+            <p>
+              引進墾丁52人座遊艇，讓您體驗富豪般的海上生活，不需遠赴國外即可與朋友們一同在船上享受墾丁美麗的碧海藍天，開派對、跳水、浮潛、水上活動、烤肉，把您的假期花在值得的事情上吧!
+            </p>
+          </div>
+          <div class="col-12 col-md-3">
+            <img src="../assets/icons/icons8-dive-64.svg" alt="dive.pic" style="width: 64px" />
+            <h4>潛水</h4>
+            <p>
+              我們的教練以專業、認真與熱忱，提供給您最佳的潛水教學與服務。全世界有海洋面積約占地球表面積71%，沒有去過這71%你不算去過全世界！
+            </p>
+          </div>
+          <div class="col-12 col-md-3">
+            <img src="../assets/icons/icons8-palm-tree-50.svg" alt="tree.pic" style="width: 64px" />
+            <h4>渡假</h4>
+            <p>
+              多樣客製化服務，絕對是您的休閒首選，遊艇烤肉BBQ、專人交通接送、多樣水上活動，您還在等什麼!
+            </p>
+          </div>
+          <div class="col-12 col-md-3">
+            <img
+              src="../assets/icons/icons8-real-estate-50.svg"
+              alt="house.pic"
+              style="width: 64px"
+            />
+            <h4>住宿</h4>
+            <p>
+              清靜優雅的庭園獨棟渡假小屋，提供您舒適優雅的度假環境。寬敞的四人空間，限量超值豪華套房，
+              室內為兩房一廳的大空間，將休憩區和睡眠區區分開， 提升睡眠品質，好好享受您的愉快渡假。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
       <div class="a123 p-5 m-2 text-white">
         <h4>每年3次，出團潛入世界</h4>
         <p>
@@ -211,8 +260,9 @@
 
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectFade } from 'swiper';
+import { Navigation, Pagination, Scrollbar, Autoplay, EffectFade } from 'swiper';
 import 'swiper/swiper-bundle.css';
+// A11y,
 
 export default {
   name: 'HomeView',
@@ -220,7 +270,7 @@ export default {
     return {
       isMounted: false,
       isDisabled: false,
-      modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectFade],
+      modules: [Navigation, Pagination, Scrollbar, Autoplay, EffectFade],
     };
   },
   mounted() {
@@ -259,6 +309,7 @@ export default {
 <style lang="scss" scoped>
 .btn-animation {
   background: none;
+  text-decoration: none;
 
   border: 2px solid;
 
@@ -346,7 +397,8 @@ export default {
 // .textItem {
 //   margin-right: -10%;
 // }
-.text {
+.text,
+.midAbout {
   background: rgba($color: #0cc6f0, $alpha: 0.3);
   z-index: 1;
 }
@@ -356,10 +408,10 @@ export default {
 .text2 {
   margin-right: -10%;
 }
-img {
-  width: 100%;
-  height: 100%;
-}
+// img {
+//   width: 100%;
+//   height: 100%;
+// }
 .swiper {
   width: 100%;
   height: 80vh;
@@ -401,6 +453,9 @@ img {
     width: 100%;
     height: 40vh;
     object-fit: cover;
+  }
+  .midAbout {
+    background: white;
   }
 }
 </style>

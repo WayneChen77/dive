@@ -33,9 +33,9 @@
             <!-- <li class="nav-item">
               <router-link class="nav-link" to="/Know">潛水知識</router-link>
             </li> -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link class="nav-link" to="/contact">連絡我們</router-link>
-            </li>
+            </li> -->
             <li class="nav-item">
               <router-link class="nav-link phoneRwd" to="/login">管理員登入</router-link>
             </li>
