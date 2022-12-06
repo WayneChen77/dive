@@ -1,31 +1,20 @@
 <template>
   <div class="home">
-    <!-- <div class="qqqqq">有效按鈕1</div>
-    <div class="qqqqq">有效按鈕1</div>
-    <button @click="swiper" class="">按鈕有效2</button> -->
-
     <swiper
-      class=""
       :modules="modules"
       :slides-per-view="1"
       :space-between="50"
       :loop="true"
-      :navigation="{ nextEl: '.qqqqq' }"
       :effect="'fade'"
       :pagination="{ clickable: true }"
       :autoplay="{
         delay: 5000,
         disableOnInteraction: false,
       }"
-      ref="ss"
     >
-      <!-- <button @click="a.slideNext()" class="position-absolute top-0 zindex-tooltip">
-        按鈕無效3
-      </button> -->
-
       <swiper-slide>
         <div
-          class="titleup"
+          class="sliderBlock"
           style="
             background-image: url(https://images.pexels.com/photos/2397653/pexels-photo-2397653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
           "
@@ -36,16 +25,11 @@
             <p>一起探索世界潛水景點，以及水下的神秘世界！</p>
             <router-link to="/userProducts" class="btn-animation pulse">來去看看</router-link>
           </div>
-          <!-- <img
-          src="https://images.pexels.com/photos/2397653/pexels-photo-2397653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          class="d-block w-100 img-fluid"
-          alt="圖片"
-        /> -->
         </div>
       </swiper-slide>
       <swiper-slide>
         <div
-          class="titleup"
+          class="sliderBlock"
           style="
             background-image: url(https://images.pexels.com/photos/847393/pexels-photo-847393.jpeg);
           "
@@ -55,16 +39,11 @@
             <p>向陸地請個假，下來吧！來海底！</p>
             <router-link to="/userProducts" class="btn-animation pulse">來去看看</router-link>
           </div>
-          <!-- <img
-          src="https://images.pexels.com/photos/847393/pexels-photo-847393.jpeg"
-          class="d-block w-100"
-          alt="圖片"
-      /> -->
         </div>
       </swiper-slide>
       <swiper-slide>
         <div
-          class="titleup"
+          class="sliderBlock"
           style="
             background-image: url(https://images.pexels.com/photos/762103/pexels-photo-762103.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
           "
@@ -74,17 +53,11 @@
             <p>馬上展開您的冒險，韋恩潛旅給您最大的折扣！</p>
             <router-link to="/userProducts" class="btn-animation pulse">來去看看</router-link>
           </div>
-          <!-- <img
-          src="https://images.pexels.com/photos/762103/pexels-photo-762103.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          class="d-block w-100"
-          alt="圖片"
-      /> -->
         </div>
       </swiper-slide>
-      <div class="titledown"></div>
+      <div class="sliderDown"></div>
     </swiper>
-
-    <div class="container dive">
+    <div class="container mainTop">
       <div class="row align-items-center justify-content-center textItem">
         <div class="col-12 col-md-6 p-3" data-aos="fade-right">
           <img
@@ -135,7 +108,7 @@
         </teleport>
       </div>
     </div>
-    <div class="midAbout my-3 text-titleblue" data-aos="zoom-in">
+    <div class="mainMid my-3 text-titleblue" data-aos="zoom-in">
       <div class="container text-center p-3">
         <h3 class="m-3">韋恩潛旅，超值服務</h3>
 
@@ -182,7 +155,7 @@
       </div>
     </div>
     <div class="container">
-      <div class="a123 p-5 m-2 text-white">
+      <div class="attachBack p-5 m-2 text-white">
         <h4>每年3次，出團潛入世界</h4>
         <p>
           拿到海洋入場券後，想要到國外看不同的生物，但又不知道如何安排嗎？
@@ -260,94 +233,107 @@
 
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Navigation, Pagination, Scrollbar, Autoplay, EffectFade } from 'swiper';
+import { Pagination, Scrollbar, Autoplay, EffectFade } from 'swiper';
 import 'swiper/swiper-bundle.css';
-// A11y,
+// A11y,Navigation,
+import { ref, reactive, onMounted } from 'vue';
 
 export default {
   name: 'HomeView',
-  data() {
-    return {
-      isMounted: false,
-      isDisabled: false,
-      modules: [Navigation, Pagination, Scrollbar, Autoplay, EffectFade],
-    };
-  },
-  mounted() {
-    // 解決Teleport掛載問題
-    this.isMounted = true;
-    if (window.innerWidth < 430) {
-      this.isDisabled = true;
-    }
-    // 判斷當前螢幕關閉Teleport
-    window.addEventListener('resize', () => {
-      console.log(window.screen.width);
-      if (window.innerWidth < 430) {
-        this.isDisabled = true;
-      } else {
-        this.isDisabled = false;
-      }
-    });
-  },
-  methods: {
-    swiper() {
-      // 按鈕2
-      // this.$refs.ss.$el.swiper.slideNext();
-      this.$refs.ss.$el.swiper.slidePrev();
-      console.log(this.$refs.ss);
+  setup() {
+    const isMounted = ref(false);
+    const isDisabled = ref(false);
+    const modules = reactive([Pagination, Scrollbar, Autoplay, EffectFade]);
 
-      console.log(this.$refs.ss.$el.swiper);
-    },
+    onMounted(() => {
+      // 解決Teleport掛載問題
+      isMounted.value = true;
+      if (window.innerWidth < 430) {
+        isDisabled.value = true;
+      }
+      // 判斷當前螢幕關閉Teleport
+      window.addEventListener('resize', () => {
+        console.log(window.screen.width);
+        if (window.innerWidth < 430) {
+          isDisabled.value = true;
+        } else {
+          isDisabled.value = false;
+        }
+      });
+    });
+
+    return { isDisabled, isMounted, modules };
   },
   components: {
     Swiper,
     SwiperSlide,
   },
+
+  // op api
+  // data() {
+  //   return {
+  //     isMounted: false,
+  //     isDisabled: false,
+  //     modules: [Pagination, Scrollbar, Autoplay, EffectFade],
+  //   };
+  // },
 };
 </script>
 
 <style lang="scss" scoped>
-.btn-animation {
-  background: none;
-  text-decoration: none;
-
-  border: 2px solid;
-
-  line-height: 1;
-  margin: 0.5rem;
-  padding: 0.5rem 1em;
-  color: white;
+// 上方區塊
+.swiper {
+  width: 100%;
+  height: 80vh;
+  object-fit: cover;
 }
-.pulse:hover {
-  transform: scale(1);
-  animation: pulse 1s;
-  // color: rgba($color: blue, $alpha: 0.25);
-  box-shadow: 0 0 0 0 rgba($color: white, $alpha: 0.25);
-}
-@keyframes pulse {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba($color: white, $alpha: 0.25);
-  }
-
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 20px rgba($color: white, $alpha: 0.15);
-  }
-
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba($color: blue, $alpha: 0);
-  }
-}
-
-.titleup {
+.sliderBlock {
   width: 100%;
   height: 100%;
   background-position: center;
   background-size: cover;
+  .txt {
+    padding: 1rem;
+    color: white;
+    top: 40%;
+    left: 18%;
+    width: 390px;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+
+    .btn-animation {
+      background: none;
+      text-decoration: none;
+      border: 2px solid;
+      line-height: 1;
+      margin: 0.5rem;
+      padding: 0.5rem 1em;
+      color: white;
+    }
+    .pulse:hover {
+      transform: scale(1);
+      animation: pulse 1s;
+      box-shadow: 0 0 0 0 rgba($color: white, $alpha: 0.25);
+    }
+    @keyframes pulse {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba($color: white, $alpha: 0.25);
+      }
+
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 20px rgba($color: white, $alpha: 0.15);
+      }
+
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba($color: blue, $alpha: 0);
+      }
+    }
+  }
 }
-.titledown {
+.sliderDown {
   height: 80px;
   width: 100%;
   position: absolute;
@@ -358,75 +344,57 @@ export default {
   z-index: 2;
   background-attachment: scroll;
 }
-// 圓形遮罩
-.home {
-  .dive {
-    overflow-x: hidden;
+.mainTop {
+  // 避免aos跑版
+  overflow-x: hidden;
+  .text {
+    background: rgba($color: #0cc6f0, $alpha: 0.3);
+    z-index: 1;
   }
-  .wrap {
-    object-fit: cover;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    &:hover {
-      .overlay {
-        opacity: 1;
-      }
-    }
-    img {
-      width: 150px;
-      height: 150px;
-    }
-    .overlay {
-      transition: all 0.5s;
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      background-color: rgba(0, 0, 0, 0.6);
-      top: 0;
-      opacity: 0;
-    }
+  .text1 {
+    margin-left: -10%;
+  }
+  .text2 {
+    margin-right: -10%;
   }
 }
 
-.a123 {
+.mainMid {
+  background: rgba($color: #0cc6f0, $alpha: 0.3);
+  z-index: 1;
+}
+.attachBack {
   background-image: url('https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
   background-attachment: fixed;
   background-size: cover;
 }
-// .textItem {
-//   margin-right: -10%;
-// }
-.text,
-.midAbout {
-  background: rgba($color: #0cc6f0, $alpha: 0.3);
-  z-index: 1;
-}
-.text1 {
-  margin-left: -10%;
-}
-.text2 {
-  margin-right: -10%;
-}
-// img {
-//   width: 100%;
-//   height: 100%;
-// }
-.swiper {
-  width: 100%;
-  height: 80vh;
+
+// 下方區塊圓遮罩
+.wrap {
   object-fit: cover;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  &:hover {
+    .overlay {
+      opacity: 1;
+    }
+  }
+  img {
+    width: 150px;
+    height: 150px;
+  }
+  .overlay {
+    transition: all 0.5s;
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-color: rgba(0, 0, 0, 0.6);
+    top: 0;
+    opacity: 0;
+  }
 }
 
-.txt {
-  padding: 1rem;
-  color: white;
-  top: 40%;
-  left: 18%;
-  width: 390px;
-  background: rgba(0, 0, 0, 0.3);
-  position: absolute;
-}
 @media screen and (max-width: 650px) {
   .txt {
     left: 0;
@@ -454,7 +422,7 @@ export default {
     height: 40vh;
     object-fit: cover;
   }
-  .midAbout {
+  .mainMid {
     background: white;
   }
 }
