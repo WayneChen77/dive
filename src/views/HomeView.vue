@@ -396,10 +396,12 @@ export default {
 }
 
 @media screen and (max-width: 650px) {
-  .txt {
-    left: 0;
-    right: 0;
-    margin: auto;
+  .sliderBlock {
+    .txt {
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
   }
 }
 @media screen and (max-width: 430px) {
@@ -411,12 +413,12 @@ export default {
   .text2 {
     margin: 0%;
   }
-  .txt {
-    left: 0;
-    right: 0;
-    top: 25%;
-    width: 100%;
+  .sliderBlock {
+    .txt {
+      top: 25%;
+    }
   }
+
   .swiper {
     width: 100%;
     height: 40vh;
