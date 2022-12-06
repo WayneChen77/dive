@@ -4,24 +4,22 @@
       <FormView v-slot="{ errors }" @submit="createSub">
         <div class="mb-3">
           <FieldView
-            id="email"
-            name="email"
-            type="email"
+            id="userEmail"
+            name="userEmail"
+            type="userEmail"
             class="rounded"
             :class="{
-              'is-invalid': errors['email'],
-              'is-valid': !errors[0] && form.user.email != '',
+              'is-invalid': errors['userEmail'],
+              'is-valid': !errors[0] && userEmail != '',
             }"
             placeholder="Email訂閱取得優惠碼"
             rules="email|required"
-            v-model="form.user.email"
+            v-model="userEmail"
           >
           </FieldView>
 
-          <button class="btn btn-sm btn-danger ms-3" :disabled="form.user.email === ''">
-            訂閱
-          </button>
-          <ErrorMessage name="email" class="invalid-feedback d-block"></ErrorMessage>
+          <button class="btn btn-sm btn-danger ms-3" :disabled="userEmail === ''">訂閱</button>
+          <ErrorMessage name="userEmail" class="invalid-feedback d-block"></ErrorMessage>
         </div>
       </FormView>
     </div>
@@ -39,35 +37,56 @@
 
 <script>
 import swal from 'sweetalert';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
-  data() {
-    return {
-      form: {
-        user: {
-          email: '',
-        },
-      },
-    };
-  },
-  methods: {
-    createSub() {
-      // swal('恭喜獲得優惠碼!', 'happy_10!', 'success');
-
+  setup() {
+    const router = useRouter();
+    const userEmail = ref('');
+    const createSub = () => {
       swal({
         title: '恭喜獲得優惠碼!',
         text: 'godive!',
         icon: 'success',
         buttons: ['取消!', '馬上去買!'],
-        // dangerMode: true,
       }).then((res) => {
         if (res) {
-          this.$router.push('userProducts');
+          router.push('userProducts');
         }
-        this.form.user.email = '';
+        userEmail.value = '';
       });
-    },
+    };
+
+    return { userEmail, createSub };
   },
+
+  // op api
+  // data() {
+  //   return {
+  //     form: {
+  //       user: {
+  //         userEmail: '',
+  //       },
+  //     },
+  //   };
+  // },
+  // methods: {
+  //   createSub() {
+
+  //     swal({
+  //       title: '恭喜獲得優惠碼!',
+  //       text: 'godive!',
+  //       icon: 'success',
+  //       buttons: ['取消!', '馬上去買!'],
+  //     }).then((res) => {
+  //       if (res) {
+  //         this.$router.push('userProducts');
+  //       }
+  //       this.form.user.userEmail = '';
+  //     });
+  //   },
+  // },
 };
 </script>
 
