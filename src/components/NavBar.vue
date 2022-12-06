@@ -49,24 +49,21 @@
   </div>
 </template>
 <script>
-export default {
-  mounted() {
-    // const a = document.getElementsByTagName('ul');
+import { ref, onMounted } from 'vue';
 
-    this.$refs.navbarUl.addEventListener('click', () => {
-      if (document.body.offsetWidth < 992) {
-        this.$refs.navbarBtn.click();
-      }
+export default {
+  setup() {
+    // 監聽畫面點擊關閉nav
+    const navbarBtn = ref(null);
+    const navbarUl = ref(null);
+    onMounted(() => {
+      navbarUl.value.addEventListener('click', () => {
+        if (document.body.offsetWidth < 992) {
+          navbarBtn.value.click();
+        }
+      });
     });
-  },
-  watch: {
-    //
-    // 12
-    // $route() {
-    //   if (document.body.offsetWidth < 992) {
-    //     this.$refs.navbarBtn.click();
-    //   }
-    // },
+    return { navbarUl, navbarBtn };
   },
 };
 </script>
