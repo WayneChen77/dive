@@ -34,7 +34,7 @@
               到期日<span>{{ this.$filters.date(product.due_date) }}</span>
             </p>
             <!-- 已成立訂單資料 -->
-            <p>訂單編號:{{ product.id }}</p>
+            <p>編號ID:{{ product.id }}</p>
             <p v-if="product.user">客戶:{{ product.user.name }}</p>
           </h5>
         </div>

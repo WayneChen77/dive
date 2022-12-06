@@ -240,10 +240,6 @@ export default {
     }
   }
 }
-// .bottxt {
-//   padding-top: 1rem;
-//   background-color: rgba($color: blue, $alpha: 0.2);
-// }
 
 .like {
   font-size: 2.5rem;

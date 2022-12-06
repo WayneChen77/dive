@@ -162,12 +162,13 @@
               <hr />
               <div class="row gx-2">
                 <div class="mb-3 col-md-12">
-                  <label for="description" class="form-label"
+                  <label for="description" class="form-label d-block"
                     >課程描述
                     <textarea
                       id="description"
                       type="text"
                       class="form-control"
+                      style="min-height: 5rem"
                       placeholder="請輸入描述"
                       v-model="diveProduct.description"
                     ></textarea>
@@ -176,12 +177,13 @@
               </div>
               <div class="row gx-2">
                 <div class="mb-3 col-12">
-                  <label for="content" class="form-label"
+                  <label for="content" class="form-label d-block"
                     >課程內容
                     <textarea
                       id="content"
                       type="text"
                       class="form-control"
+                      style="min-height: 5rem"
                       placeholder="請輸入課程內容"
                       v-model="diveProduct.content"
                     ></textarea>
@@ -190,12 +192,13 @@
               </div>
               <div class="row gx-2">
                 <div class="mb-3 col-12">
-                  <label for="precautions" class="form-label"
+                  <label for="precautions" class="form-label d-block"
                     >注意事項
                     <textarea
                       id="precautions"
                       type="text"
                       class="form-control"
+                      style="min-height: 5rem"
                       placeholder="請輸入注意事項"
                       v-model="diveProduct.precautions"
                     ></textarea>

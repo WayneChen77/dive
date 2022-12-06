@@ -244,6 +244,18 @@ export default {
     //   color: red;
     // }
   }
+
+  @media screen and (max-width: 890px) {
+    .card {
+      width: 30%;
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    .card {
+      min-height: 40vh;
+    }
+  }
   @media screen and (max-width: 430px) {
     .card {
       position: relative;
@@ -253,12 +265,6 @@ export default {
     }
     .position-relative {
       background-position: center;
-    }
-  }
-
-  @media screen and (min-width: 1600px) {
-    .card {
-      min-height: 40vh;
     }
   }
 }

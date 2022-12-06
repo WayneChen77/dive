@@ -2,10 +2,12 @@ import { createApp } from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
+// 讀取
 import Loading from 'vue3-loading-overlay';
-
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
+// icons
 import 'bootstrap-icons/font/bootstrap-icons.css';
+// mittbus
 import mitt from 'mitt';
 // 表單驗證
 import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate';
@@ -16,11 +18,16 @@ import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 // 套用動畫
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
+// 改寫pinia準備 必須放在App之前
+import { createPinia } from 'pinia';
 // 套用千分號Y
 import { currency, date } from './methods/filter';
-
+// 主資料
 import App from './App.vue';
 import router from './router';
+
+const pinia = createPinia();
 
 Object.keys(AllRules).forEach((rule) => {
   defineRule(rule, AllRules[rule]);
@@ -41,6 +48,10 @@ router.beforeEach((to, from, next) => {
 });
 
 const app = createApp(App);
+
+// 套用pinia資料
+app.use(pinia);
+
 app.config.globalProperties.$emitter = emitter;
 // 套用全域千分號
 app.config.globalProperties.$filters = {
