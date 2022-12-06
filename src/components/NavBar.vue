@@ -60,6 +60,8 @@ export default {
     });
   },
   watch: {
+    //
+    // 12
     // $route() {
     //   if (document.body.offsetWidth < 992) {
     //     this.$refs.navbarBtn.click();
