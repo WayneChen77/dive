@@ -17,11 +17,7 @@
             </p>
           </div>
           <div class="col-12 col-xl-9 imgwrap" data-aos="zoom-in">
-            <img
-              class="col"
-              src="https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg"
-              alt=""
-            />
+            <img src="https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg" alt="pic" />
             <svg height="0" width="0">
               <defs>
                 <clipPath id="svgPath">
@@ -99,24 +95,25 @@ export default {
 <style lang="scss" scoped>
 .imgwrap {
   min-height: 30vh;
-}
-img {
-  width: 100%;
-  background-size: 100% 100%;
-  clip-path: url('#svgPath');
-}
-.pathscale {
-  transform: scale(0.9, 0.9);
+  img {
+    width: 100%;
+    background-size: 100% 100%;
+    clip-path: url('#svgPath');
+  }
+  .pathscale {
+    transform: scale(0.9, 0.9);
+  }
 }
 
 @media screen and (max-width: 993px) {
-  .pathscale {
+  .imgwrap {  .pathscale {
     transform: scale(0.7, 0.7);
-  }
+  }}
 }
 @media screen and (max-width: 600px) {
-  .pathscale {
+  .imgwrap { .pathscale {
     transform: scale(0.5, 0.5);
+  }
   }
 }
 </style>

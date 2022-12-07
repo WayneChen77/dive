@@ -12,7 +12,7 @@
             placeholder="請輸入訂單編號"
             v-model="searchID"
             @keydown.enter="getOrders"
-            class="my-3 rounded me-3 border border-titleblue aaa"
+            class="my-3 rounded me-3 border border-titleblue searchInput"
           />
           <input
             type="button"
@@ -21,7 +21,6 @@
             @keydown.enter="getOrders"
             @click="getOrders"
           />
-          <!-- <button type="button" value="送出" class="btn-outline-gray btn btn-sm">送出</button> -->
         </div>
 
         <!-- 錯誤資料 -->
@@ -119,42 +118,24 @@
 </template>
 <script>
 import TopImg from '@/components/Front/TopImg.vue';
+import ordersStore from '@/stores/ordersStore';
+import { storeToRefs } from 'pinia';
+
+const order = ordersStore();
 
 export default {
-  data() {
-    return {
-      dataList: {},
-      searchID: '',
-      show: false,
-    };
+  setup() {
+    const { dataList, searchID, show } = storeToRefs(order);
+    const { getOrders } = order;
+    return { dataList, searchID, show, getOrders };
   },
+
   components: { TopImg },
-  methods: {
-    getOrders() {
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.searchID}`;
-      console.log(Api);
-      this.$http
-        .get(Api)
-        .then((res) => {
-          if (!res.data.order) {
-            this.show = true;
-            this.dataList = {};
-          } else {
-            this.show = false;
-            this.dataList = res.data.order;
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
-  },
 };
 </script>
 
 <style lang="scss" scoped>
-.aaa:focus {
+.searchInput:focus {
   box-shadow: 0 0 00.3rem rgba(#2660a9, 0.5);
-  // box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
 }
 </style>

@@ -33,7 +33,6 @@
               v-model="search"
               @change="filterData"
             />
-            <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
           </form>
         </div>
 
@@ -68,6 +67,7 @@
             >
           </div>
         </div>
+        <!-- 避免跑版 -->
         <span class="flexwrap"></span>
         <span class="flexwrap"></span>
         <span class="flexwrap"></span>
@@ -77,103 +77,148 @@
 </template>
 
 <script>
+import UserProductsStore from '@/stores/userProductsStore';
+import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { reactive } from 'vue';
+
+const ProductsStore = UserProductsStore();
+
 export default {
   name: 'UserProducts',
-
-  data() {
-    return { products: [], isLoading: false, search: '', likedData: [] };
-  },
-  mounted() {
-    // 最愛
-    this.$emitter.on('push-like', () => {
-      this.getLikes();
-    });
-  },
-  methods: {
+  setup() {
+    ProductsStore.getproducts();
+    const { updateCart } = ProductsStore;
+    const { dataList, search } = storeToRefs(ProductsStore);
+    // 函式
     //  進入商品業面
-    userproduct(i) {
-      this.$router.push(`/UserSelect/${i.id}`);
-    },
-    // 加入購物車
-    updateCart(i) {
-      this.isLoading = true;
-      const cart = {
-        product_id: i.id,
-        qty: 1,
-      };
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.$http
-        .post(Api, { data: cart })
-        .then((res) => {
-          //   吐司回覆
-          this.$emitter.emit('push-cart', {
-            style: 'success',
-            title: res.data.message,
-            content: res.data.message,
-          });
+    const Router = useRouter();
+    const userproduct = (i) => {
+      Router.push(`/UserSelect/${i.id}`);
+    };
 
-          this.isLoading = false;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
-    getproducts() {
-      this.isLoading = true;
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
-      this.$http
-        .get(Api)
-        .then((res) => {
-          this.products = res.data.products;
-          this.isLoading = false;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
-    // 判斷css狀態
-    isLiked(item) {
-      if (this.likedData.indexOf(item.id) > -1) {
+    // 最愛箱關 帶調整位置
+    const likedData = reactive({ data: [] });
+    const isLiked = (item) => {
+      /* eslint-disable */
+      if (likedData.data.indexOf(item.id) > -1) {
         return true;
       }
       return false;
-    },
+    };
     // 取得localStorage計算最愛數量
-    getLikes() {
-      this.likedData = JSON.parse(localStorage.getItem('liked')) || [];
-    },
+    const getLikes = () => {
+      likedData.data = JSON.parse(localStorage.getItem('liked')) || [];
+    };
+    getLikes();
     // 推送資料到localStorage
-    liked(item) {
+    const liked = (item) => {
+      console.log(1);
       const data = localStorage.getItem('liked');
       const dataArry = JSON.parse(data) ?? [];
       const a = dataArry.indexOf(item.id);
       if (a > -1) {
         dataArry.splice(a, 1);
-        this.likedData = dataArry;
+        likedData.data = dataArry;
       } else {
         dataArry.push(item.id);
-        this.likedData = dataArry;
+        likedData.data = dataArry;
       }
-      localStorage.setItem('liked', JSON.stringify(this.likedData));
+      localStorage.setItem('liked', JSON.stringify(likedData.data));
 
       //   吐司回覆
-      this.$emitter.emit('push-like', {
-        style: 'success',
-        title: '關注',
-        content: '已更新最愛標籤',
-      });
-    },
+      // this.$emitter.emit('push-like', {
+      //   style: 'success',
+      //   title: '關注',
+      //   content: '已更新最愛標籤',
+      // });
+    };
+
+    // 設定待調整位置data
+    // isLoading: false, likedData: []
+
+    return { dataList, search, liked, userproduct, updateCart, isLiked, getLikes };
   },
-  computed: {
-    // search
-    dataList() {
-      return this.products.filter((i) => i.title.match(this.search));
-    },
-  },
-  created() {
-    this.getproducts();
-    // 取得localStorage計算最愛數量
-    this.getLikes();
+
+  // mounted() {
+  //   // 最愛 改到狀態管理
+  //   this.$emitter.on('push-like', () => {
+  //     this.getLikes();
+  //   });
+  // },
+  methods: {
+    //  進入商品業面
+    // userproduct(i) {
+    //   this.$router.push(`/UserSelect/${i.id}`);
+    // },
+    // // 加入購物車
+    // updateCart(i) {
+    //   this.isLoading = true;
+    //   const cart = {
+    //     product_id: i.id,
+    //     qty: 1,
+    //   };
+    //   const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
+    //   this.$http
+    //     .post(Api, { data: cart })
+    //     .then((res) => {
+    //       //   吐司回覆
+    //       this.$emitter.emit('push-cart', {
+    //         style: 'success',
+    //         title: res.data.message,
+    //         content: res.data.message,
+    //       });
+    //       this.isLoading = false;
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //     });
+    // },
+    // getproducts() {
+    //   this.isLoading = true;
+    //   const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
+    //   this.$http
+    //     .get(Api)
+    //     .then((res) => {
+    //       this.products = res.data.products;
+    //       this.isLoading = false;
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //     });
+    // },
+    // 以下另外社定
+    // 判斷css狀態
+    // isLiked(item) {
+    //   if (this.likedData.indexOf(item.id) > -1) {
+    //     return true;
+    //   }
+    //   return false;
+    // },
+    // // 取得localStorage計算最愛數量
+    // getLikes() {
+    //   this.likedData = JSON.parse(localStorage.getItem('liked')) || [];
+    // },
+    // // 推送資料到localStorage
+    // liked(item) {
+    //   const data = localStorage.getItem('liked');
+    //   const dataArry = JSON.parse(data) ?? [];
+    //   const a = dataArry.indexOf(item.id);
+    //   if (a > -1) {
+    //     dataArry.splice(a, 1);
+    //     this.likedData = dataArry;
+    //   } else {
+    //     dataArry.push(item.id);
+    //     this.likedData = dataArry;
+    //   }
+    //   localStorage.setItem('liked', JSON.stringify(this.likedData));
+    //   //   吐司回覆
+    //   this.$emitter.emit('push-like', {
+    //     style: 'success',
+    //     title: '關注',
+    //     content: '已更新最愛標籤',
+    //   });
+    // },
   },
 };
 </script>
@@ -240,9 +285,6 @@ export default {
       color: red;
       cursor: pointer;
     }
-    // .liked {
-    //   color: red;
-    // }
   }
 
   @media screen and (max-width: 890px) {
@@ -250,7 +292,6 @@ export default {
       width: 30%;
     }
   }
-
   @media screen and (min-width: 1600px) {
     .card {
       min-height: 40vh;
