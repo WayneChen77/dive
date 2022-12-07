@@ -78,11 +78,13 @@
 
 <script>
 import UserProductsStore from '@/stores/userProductsStore';
+// import Status from '@/stores/statusStore';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { reactive } from 'vue';
 
 const ProductsStore = UserProductsStore();
+// const status = Status();
 
 export default {
   name: 'UserProducts',
@@ -96,6 +98,7 @@ export default {
     const userproduct = (i) => {
       Router.push(`/UserSelect/${i.id}`);
     };
+    // const { isLoading } = storeToRefs(status);
 
     // 最愛箱關 帶調整位置
     const likedData = reactive({ data: [] });

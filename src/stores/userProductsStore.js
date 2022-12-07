@@ -1,20 +1,16 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-// import Status from '@/stores/status';
+import Status from '@/stores/statusStore';
 
-// const status = Status();
+const status = Status();
 
 export default defineStore('UserProductsStore', {
-  state: () => ({ products: [], search: '', likedData: [] }),
+  state: () => ({ products: [], search: '' }),
   getters: { dataList: (state) => state.products.filter((i) => i.title.match(state.search)) },
   actions: {
-    //  進入商品業面
-    // userproduct(i) {
-    //   this.$router.push(`/UserSelect/${i.id}`);
-    // },
     // 加入購物車
     updateCart(i) {
-      // this.isLoading = true;
+      status.isLoading = true;
       const cart = {
         product_id: i.id,
         qty: 1,
@@ -30,20 +26,20 @@ export default defineStore('UserProductsStore', {
           //   title: res.data.message,
           //   content: res.data.message,
           // });
-          // this.isLoading = false;
+          status.isLoading = false;
         })
         .catch((e) => {
           console.log(e);
         });
     },
     getproducts() {
-      // this.isLoading = true;
+      status.isLoading = true;
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       axios
         .get(Api)
         .then((res) => {
           this.products = res.data.products;
-          // this.isLoading = false;
+          status.isLoading = false;
         })
         .catch((e) => {
           console.log(e);

@@ -2,23 +2,32 @@
   <div class="diveBoard">
     <router-view></router-view>
   </div>
+
+  <LoadingView :active="isLoading"></LoadingView>
   <ToastMessages></ToastMessages>
   <CartIcons></CartIcons>
 </template>
 
 <script>
+import Status from '@/stores/statusStore';
+import { storeToRefs } from 'pinia';
 import ToastMessages from '@/components/ToastMessages.vue';
-// import ToastView from '@/components/ToastView.vue';
 import CartIcons from '@/components/Front/CartIcons.vue';
 
 export default {
+  setup() {
+    const status = Status();
+    const { isLoading } = storeToRefs(status);
+
+    return { isLoading };
+  },
   components: {
     ToastMessages,
     CartIcons,
   },
-  created() {
-    this.$router.push('/home');
-  },
+  // created() {
+  //   this.$router.push('/home');
+  // },
 };
 </script>
 
