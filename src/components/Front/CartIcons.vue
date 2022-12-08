@@ -63,7 +63,21 @@
 </template>
 
 <script>
+import UserProductsStore from '@/stores/userProductsStore';
+import StatusStore from '@/stores/statusStore';
+// import { useRouter } from 'vue-router';
+// import { storeToRefs } from 'pinia';
+// import { reactive } from 'vue';
+
 export default {
+  setup() {
+    // const userProductsStore會報錯 statusStore不會
+    const userProductsStore = UserProductsStore();
+    const statusStore = StatusStore();
+    // userProductsStore.getproducts();
+    return { statusStore, userProductsStore };
+  },
+
   data() {
     return { carts: [], products: [], likedData: [], likedStore: [], cartNum: 0 };
   },

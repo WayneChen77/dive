@@ -8,8 +8,9 @@ export default defineStore('StatusStore', {
     messages: [],
   }),
   actions: {
-    pushMessage() {
-      this.messages.push({ style: 'success', title: '已更新資料', content: '內容' });
+    pushMessage(data) {
+      const { style, title, content } = data;
+      this.messages.push({ style, title, content });
     },
   },
 });

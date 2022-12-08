@@ -14,6 +14,8 @@ import { storeToRefs } from 'pinia';
 import ToastMessages from '@/components/ToastMessages.vue';
 import CartIcons from '@/components/Front/CartIcons.vue';
 
+// const status = Status();
+
 export default {
   setup() {
     const status = Status();

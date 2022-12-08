@@ -78,13 +78,13 @@
 
 <script>
 import UserProductsStore from '@/stores/userProductsStore';
-// import Status from '@/stores/statusStore';
+import StatusStore from '@/stores/statusStore';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { reactive } from 'vue';
 
 const ProductsStore = UserProductsStore();
-// const status = Status();
+const statusStore = StatusStore();
 
 export default {
   name: 'UserProducts',
@@ -98,12 +98,10 @@ export default {
     const userproduct = (i) => {
       Router.push(`/UserSelect/${i.id}`);
     };
-    // const { isLoading } = storeToRefs(status);
 
     // 最愛箱關 帶調整位置
     const likedData = reactive({ data: [] });
     const isLiked = (item) => {
-      /* eslint-disable */
       if (likedData.data.indexOf(item.id) > -1) {
         return true;
       }
@@ -130,11 +128,12 @@ export default {
       localStorage.setItem('liked', JSON.stringify(likedData.data));
 
       //   吐司回覆
-      // this.$emitter.emit('push-like', {
-      //   style: 'success',
-      //   title: '關注',
-      //   content: '已更新最愛標籤',
-      // });
+      const statusData = {
+        // style: 'success',
+        // title: '關注',
+        content: '已更新最愛標籤',
+      };
+      statusStore.pushMessage(statusData);
     };
 
     // 設定待調整位置data
