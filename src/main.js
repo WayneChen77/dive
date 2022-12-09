@@ -20,14 +20,18 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 // 改寫pinia準備 必須放在App之前
-import { createPinia } from 'pinia';
+// import { createPinia } from 'pinia';
+// 測試寫法
+import pinia from './stores/store';
+
 // 套用千分號Y
 import { currency, date } from './methods/filter';
 // 主資料
 import App from './App.vue';
 import router from './router';
 
-const pinia = createPinia();
+// 再storeVm0 宣告咯
+// const pinia = createPinia();
 
 Object.keys(AllRules).forEach((rule) => {
   defineRule(rule, AllRules[rule]);

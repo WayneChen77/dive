@@ -1,6 +1,4 @@
 <template>
-  <!-- 全域原件 -->
-  <LoadingView :active="isLoading"></LoadingView>
   <div class="container">
     <div class="title mb-5">
       <nav aria-label="breadcrumb">
@@ -64,11 +62,15 @@
           <div class="like">
             <i
               class="bi"
-              :class="isLiked() ? 'bi-heart-fill' : 'bi-heart'"
-              @click="liked()"
-              @keyup="liked()"
+              :class="isLiked(product) ? 'bi-heart-fill' : 'bi-heart'"
+              @click="liked(product)"
+              @keyup="liked(product)"
             ></i>
-            <button type="button" class="btn btn-titleblue w-50" @click.prevent="updateCart">
+            <button
+              type="button"
+              class="btn btn-titleblue w-50"
+              @click.prevent="updateCart(product, productNum)"
+            >
               加入購物車
             </button>
           </div>
@@ -91,126 +93,87 @@
 </template>
 
 <script>
+import axios from 'axios';
+// components
 import OtherCard from '@/components/Front/OtherCard.vue';
+// stores
+import StatusStore from '@/stores/statusStore';
+import UserProductsStore from '@/stores/userProductsStore';
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+
+const statusStore = StatusStore();
+const userProductsStore = UserProductsStore();
 
 export default {
-  data() {
+  setup() {
+    const mainImg = ref('');
+    const classIndex = ref(-1);
+    const productNum = ref(1);
+    const product = ref({});
+    const Route = useRoute();
+
+    // 取得商品資料
+    const getproduct = () => {
+      statusStore.isLoading = true;
+      const { id } = Route.params;
+      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`;
+      axios
+        .get(Api)
+        .then((res) => {
+          product.value = res.data.product;
+          if (product.value.images) {
+            const mainImgdata = product.value.images[0];
+            mainImg.value = mainImgdata;
+            classIndex.value = 0;
+            console.log(product.value.images[0]);
+          } else {
+            console.log(product.value);
+            mainImg.value = product.value.imageUrl;
+          }
+          statusStore.isLoading = false;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+    getproduct();
+    // 主圖片選擇
+    const pickPic = (i, index) => {
+      classIndex.value = index;
+      mainImg.value = i;
+    };
+    // stores函式
+    const { isLiked, liked, updateCart } = userProductsStore;
+
+    // 限制商品數量
+    watch(productNum, (n, o) => {
+      if (productNum.value <= 0 || productNum.value > 4) {
+        productNum.value = o;
+      }
+    });
+
+    //  路由改變時強制刷新
+    watch(Route, (n) => {
+      if (n.name === 'UserSelect') {
+        getproduct();
+      }
+    });
+
     return {
-      product: {},
-      isLoading: false,
-      mainImg: '',
-      classIndex: -1,
-      productNum: 1,
-      likedData: [],
+      mainImg,
+      productNum,
+      classIndex,
+      product,
+      getproduct,
+      isLiked,
+      liked,
+      pickPic,
+      updateCart,
     };
   },
   components: {
     OtherCard,
-  },
-  mounted() {
-    // 最愛
-    this.$emitter.on('push-like', () => {
-      this.getLikes();
-    });
-  },
-  methods: {
-    // 判斷css狀態
-    isLiked() {
-      if (this.likedData.indexOf(this.product.id) > -1) {
-        return true;
-      }
-      return false;
-    },
-    // 取得localStorage計算最愛數量
-    getLikes() {
-      this.likedData = JSON.parse(localStorage.getItem('liked'));
-    },
-    // 推送資料到localStorage
-    liked() {
-      const data = localStorage.getItem('liked');
-      const dataArry = JSON.parse(data) ?? [];
-      const a = dataArry.indexOf(this.product.id);
-      if (a > -1) {
-        dataArry.splice(a, 1);
-        this.likedData = dataArry;
-      } else {
-        dataArry.push(this.product.id);
-        this.likedData = dataArry;
-      }
-      localStorage.setItem('liked', JSON.stringify(this.likedData));
-
-      //   吐司回覆
-      this.$emitter.emit('push-like', {
-        style: 'success',
-        title: '關注',
-        content: '已更新最愛標籤',
-      });
-    },
-
-    getproduct() {
-      this.isLoading = true;
-      const { id } = this.$route.params;
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`;
-      this.$http
-        .get(Api)
-        .then((res) => {
-          this.product = res.data.product;
-          if (this.product.images) {
-            const mainImg = this.product.images[0];
-            this.mainImg = mainImg;
-            this.classIndex = 0;
-          } else {
-            this.mainImg = this.product.imageUrl;
-          }
-          this.isLoading = false;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
-    updateCart() {
-      this.isLoading = true;
-      const cart = {
-        product_id: this.product.id,
-        qty: this.productNum,
-      };
-
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.$http
-        .post(Api, { data: cart })
-        .then((res) => {
-          //   吐司回覆
-          this.$emitter.emit('push-cart', {
-            style: 'success',
-            title: res.data.message,
-            content: res.data.message,
-          });
-
-          this.isLoading = false;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
-    pickPic(i, index) {
-      this.classIndex = index;
-      this.mainImg = i;
-    },
-  },
-  watch: {
-    productNum(n, o) {
-      if (this.productNum <= 0 || this.productNum > 4) {
-        //  吐司訊息
-        this.productNum = o;
-      }
-    },
-    //  路由改變時強制刷新
-    $route() {
-      this.getproduct();
-    },
-  },
-  created() {
-    this.getproduct();
   },
 };
 </script>
@@ -219,6 +182,7 @@ export default {
 .mainimg {
   img {
     width: 100%;
+    object-fit: cover;
   }
   .propimg {
     position: relative;
@@ -249,9 +213,7 @@ export default {
   }
   color: red;
 }
-// .liked {
-//   color: red;
-// }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

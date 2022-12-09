@@ -12,6 +12,7 @@
         ><span class="visually-hidden">unread messages</span></i
       >
     </a>
+
     <div class="collapse" id="collapseExample">
       <div class="card card-body cartBlock">
         <div class="position-relative">
@@ -26,7 +27,7 @@
         </div>
 
         <div v-if="likedStore.length > 0">
-          <div class="row justify-content-center col-12 g-3" v-for="i in likedStore" :key="i.title">
+          <div class="row justify-content-center col-12 g-3" v-for="i in likedStore" :key="i">
             <span class="col-2 fs-3 btn" @click="deleLike" @keyup="deleLike(i)"
               ><i class="bi bi-trash"></i
             ></span>
@@ -64,23 +65,37 @@
 
 <script>
 import UserProductsStore from '@/stores/userProductsStore';
-import StatusStore from '@/stores/statusStore';
-// import { useRouter } from 'vue-router';
-// import { storeToRefs } from 'pinia';
-// import { reactive } from 'vue';
+import { storeToRefs } from 'pinia';
 
 export default {
   setup() {
-    // const userProductsStore會報錯 statusStore不會
+    // 資料
     const userProductsStore = UserProductsStore();
-    const statusStore = StatusStore();
-    // userProductsStore.getproducts();
-    return { statusStore, userProductsStore };
+    const { likedData, likedStore, cartNum } = storeToRefs(userProductsStore);
+    const { updateCart, getLikeData, deleLike } = userProductsStore;
+    // 函式
+    userProductsStore.getproducts();
+    userProductsStore.getusercarts();
+    userProductsStore.getLikes();
+    const toTop = () => {
+      window.scrollTo({ top: 0 });
+    };
+
+    return {
+      // products,
+      likedData,
+      likedStore,
+      cartNum,
+      // likenum,
+      toTop,
+      updateCart,
+      getLikeData,
+      deleLike,
+    };
   },
 
-  data() {
-    return { carts: [], products: [], likedData: [], likedStore: [], cartNum: 0 };
-  },
+  // 這邊資料想入pinia後是否還需要使用能否直接使用pi資料刷新?
+  // 抓取Stores直接算
   mounted() {
     // 確認有資料更新已抓取api刷新畫面
     this.$emitter.on('push-cart', () => {
@@ -92,91 +107,6 @@ export default {
     });
   },
 
-  methods: {
-    toTop() {
-      window.scrollTo({ top: 0 });
-    },
-    deleLike(i) {
-      const a = this.likedData.indexOf(i.id);
-      this.likedData.splice(a, 1);
-      localStorage.setItem('liked', JSON.stringify(this.likedData));
-      //   吐司回覆
-      this.$emitter.emit('push-like', {
-        style: 'success',
-        title: '關注',
-        content: '已更新最愛標籤',
-      });
-    },
-    updateCart(i) {
-      this.isLoading = true;
-      const cart = {
-        product_id: i.id,
-        qty: 1,
-      };
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.$http
-        .post(Api, { data: cart })
-        .then((res) => {
-          //   吐司回覆
-          this.$emitter.emit('push-cart', {
-            style: 'success',
-            title: res.data.message,
-            content: res.data.message,
-          });
-
-          this.isLoading = false;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
-    // 最愛資料
-    getLikes() {
-      this.likedData = JSON.parse(localStorage.getItem('liked'));
-      const num = this.likedData.length;
-      const data = this.products;
-      const likeArry = [];
-      for (let n = 0; n < num; n += 1) {
-        const a = data.filter((i) => i.id === this.likedData[n]);
-        likeArry.push(a[0]);
-      }
-      this.likedStore = likeArry;
-    },
-    // 取得資料計算購物車數量
-    getusercarts() {
-      this.isLoading = true;
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.$http
-        .get(Api)
-        .then((res) => {
-          // 要先歸0 不然舊資料會加到新資料會多一倍資料
-          this.cartNum = 0;
-          this.carts = res.data.data.carts;
-          this.isLoading = false;
-        })
-        .then(() => {
-          for (let i = 0; i < this.carts.length; i += 1) {
-            this.cartNum += this.carts[i].qty;
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
-    // 取得產品資料 篩選最愛資料
-    getproducts() {
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
-      this.$http
-        .get(Api)
-        .then((res) => {
-          this.products = res.data.products;
-          this.getLikes();
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
-  },
   computed: {
     // 會報錯找不到
     // 監聽資料輸出最愛
@@ -203,10 +133,7 @@ export default {
   //     this.likedStore = likeArry;
   //   },
   // },
-  created() {
-    this.getusercarts();
-    this.getproducts();
-  },
+  created() {},
 };
 </script>
 
