@@ -13,10 +13,13 @@
           name="姓名"
           type="text"
           class="form-control"
-          :class="{ 'is-invalid': errors['姓名'], 'is-valid': !errors[0] && form.user.name != '' }"
+          :class="{
+            'is-invalid': errors['姓名'],
+            'is-valid': !errors[0] && data.form.user.name != '',
+          }"
           placeholder="請輸入聯絡人姓名"
           :rules="isName"
-          v-model="form.user.name"
+          v-model="data.form.user.name"
         ></FieldView>
         <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
       </div>
@@ -29,11 +32,11 @@
           class="form-control"
           :class="{
             'is-invalid': errors['email'],
-            'is-valid': !errors[0] && form.user.email != '',
+            'is-valid': !errors[0] && data.form.user.email != '',
           }"
           placeholder="請輸入聯絡人Email"
           rules="email|required"
-          v-model="form.user.email"
+          v-model="data.form.user.email"
         ></FieldView>
         <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
       </div>
@@ -45,10 +48,13 @@
           name="電話"
           type="tel"
           class="form-control"
-          :class="{ 'is-invalid': errors['電話'], 'is-valid': !errors[0] && form.user.tel != '' }"
+          :class="{
+            'is-invalid': errors['電話'],
+            'is-valid': !errors[0] && data.form.user.tel != '',
+          }"
           placeholder="請輸入聯絡人電話"
           :rules="isPhone"
-          v-model="form.user.tel"
+          v-model="data.form.user.tel"
         ></FieldView>
         <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
       </div>
@@ -62,11 +68,11 @@
           class="form-control"
           :class="{
             'is-invalid': errors['地址'],
-            'is-valid': !errors[0] && form.user.address != '',
+            'is-valid': !errors[0] && data.form.user.address != '',
           }"
           placeholder="請輸入聯絡人地址"
           rules="required"
-          v-model="form.user.address"
+          v-model="data.form.user.address"
         ></FieldView>
         <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
       </div>
@@ -79,7 +85,7 @@
           class="form-control"
           cols="30"
           rows="10"
-          v-model="form.message"
+          v-model="data.form.message"
         ></textarea>
       </div>
       <div class="text-end mb-3">
@@ -90,9 +96,16 @@
 </template>
 
 <script>
+import StatusStore from '@/stores/statusStore';
+import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
+
+const statusStore = StatusStore();
+
 export default {
-  data() {
-    return {
+  setup() {
+    const data = reactive({
       form: {
         user: {
           name: '',
@@ -102,37 +115,85 @@ export default {
         },
         message: '',
       },
-    };
-  },
-
-  methods: {
-    isName(value) {
+    });
+    const isName = (value) => {
       const name = /^[\u4e00-\u9fa5A-Za-z]{0,}$/;
-      if (this.form.user.name === '') {
+      if (data.form.user.name === '') {
         return '姓名為必填';
       }
       return name.test(value) ? true : '需要中文或英文姓名';
-    },
-    isPhone(value) {
+    };
+    const isPhone = (value) => {
       const phoneNumber = /^(09)[0-9]{8}$/;
-      if (this.form.user.tel === '') {
+      if (data.form.user.tel === '') {
         return '電話為必填';
       }
       return phoneNumber.test(value) ? true : '需要正確的電話號碼';
-    },
-    createOrder() {
+    };
+    const Router = useRouter();
+    const createOrder = () => {
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`;
-      const order = this.form;
-      this.$http.post(Api, { data: order }).then((res) => {
-        this.$emitter.emit('push-cart', {
-          style: 'success',
-          title: res.data.message,
+      const order = data.form;
+      axios.post(Api, { data: order }).then((res) => {
+        // this.$emitter.emit('push-cart', {
+        //   style: 'success',
+        //   title: res.data.message,
+        //   content: res.data.message,
+        // });
+        const statusData = {
+          // style: 'success',
+          // title: res.data.message,
           content: res.data.message,
-        });
-        this.$router.push(`/Order/PayView/${res.data.orderId}`);
+        };
+        statusStore.pushMessage(statusData);
+
+        Router.push(`/Order/PayView/${res.data.orderId}`);
       });
-    },
+    };
+    return { data, isName, isPhone, createOrder };
   },
+  // data() {
+  //   return {
+  //     form: {
+  //       user: {
+  //         name: '',
+  //         email: '',
+  //         tel: '',
+  //         address: '',
+  //       },
+  //       message: '',
+  //     },
+  //   };
+  // },
+
+  // methods: {
+  //   isName(value) {
+  //     const name = /^[\u4e00-\u9fa5A-Za-z]{0,}$/;
+  //     if (this.form.user.name === '') {
+  //       return '姓名為必填';
+  //     }
+  //     return name.test(value) ? true : '需要中文或英文姓名';
+  //   },
+  //   isPhone(value) {
+  //     const phoneNumber = /^(09)[0-9]{8}$/;
+  //     if (this.form.user.tel === '') {
+  //       return '電話為必填';
+  //     }
+  //     return phoneNumber.test(value) ? true : '需要正確的電話號碼';
+  //   },
+  //   createOrder() {
+  //     const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`;
+  //     const order = this.form;
+  //     this.$http.post(Api, { data: order }).then((res) => {
+  //       this.$emitter.emit('push-cart', {
+  //         style: 'success',
+  //         title: res.data.message,
+  //         content: res.data.message,
+  //       });
+  //       this.$router.push(`/Order/PayView/${res.data.orderId}`);
+  //     });
+  //   },
+  // },
 };
 </script>
 

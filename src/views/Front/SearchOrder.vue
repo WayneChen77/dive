@@ -11,15 +11,15 @@
             type="text"
             placeholder="請輸入訂單編號"
             v-model="searchID"
-            @keydown.enter="getOrders"
+            @keydown.enter="getOrders(searchID)"
             class="my-3 rounded me-3 border border-titleblue searchInput"
           />
           <input
             type="button"
             value="送出"
             class="btn-outline-titleblue btn btn-sm"
-            @keydown.enter="getOrders"
-            @click="getOrders"
+            @keydown.enter="getOrders(searchID)"
+            @click="getOrders(searchID)"
           />
         </div>
 
@@ -117,6 +117,7 @@
   </div>
 </template>
 <script>
+import { ref } from 'vue';
 import TopImg from '@/components/Front/TopImg.vue';
 import ordersStore from '@/stores/ordersStore';
 import { storeToRefs } from 'pinia';
@@ -125,7 +126,8 @@ const order = ordersStore();
 
 export default {
   setup() {
-    const { dataList, searchID, show } = storeToRefs(order);
+    const searchID = ref('');
+    const { dataList, show } = storeToRefs(order);
     const { getOrders } = order;
     return { dataList, searchID, show, getOrders };
   },

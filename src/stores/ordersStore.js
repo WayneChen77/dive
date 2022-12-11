@@ -2,11 +2,11 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 
 export default defineStore('OrdersStore', {
-  state: () => ({ dataList: {}, searchID: '', show: false }),
+  state: () => ({ dataList: {}, show: false }),
 
   actions: {
-    getOrders() {
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.searchID}`;
+    getOrders(id) {
+      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`;
       console.log(Api);
       axios
         .get(Api)
