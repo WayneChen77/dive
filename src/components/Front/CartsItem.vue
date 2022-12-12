@@ -1,7 +1,5 @@
 <template>
-  <button class="btn btn-outline-titleblue mb-3" type="button" @click="$emit('deleCart')">
-    清空資料
-  </button>
+  <button class="btn btn-outline-titleblue mb-3" type="button" @click="deleteCart">清空資料</button>
   <div class="row">
     <div class="border">
       <div class="container mt-4" v-if="carts.length > 0">
@@ -23,7 +21,7 @@
                   <button
                     type="button"
                     class="btn d-md-block mx-auto btnClose"
-                    @click="$emit('removeCart', item.id)"
+                    @click="removeCartItem(item.id)"
                   >
                     <i class="bi bi-trash"></i>
                   </button>
@@ -69,7 +67,7 @@
                       class="form-select text-center"
                       v-model.number="item.qty"
                       aria-label="Default select example"
-                      @change="$emit('adjCart', item)"
+                      @change="adjCart(item)"
                     >
                       <!-- <option selected disabled>{{ item.qty }}人</option> -->
                       <option value="1">1人</option>
@@ -112,9 +110,8 @@
                   class="form-select px-1"
                   v-model.number="item.qty"
                   aria-label="Default select example"
-                  @change="$emit('adjCart', item)"
+                  @change="adjCart(item)"
                 >
-                  <!-- <option selected disabled>{{ item.qty }}人</option> -->
                   <option value="1">1人</option>
                   <option value="2">2人</option>
                   <option value="3">3人</option>
@@ -128,7 +125,7 @@
                 <button
                   type="button"
                   class="btn d-md-block mx-auto btnClose"
-                  @click="$emit('removeCart', item.id)"
+                  @click="removeCartItem(item.id)"
                 >
                   <i class="bi bi-trash"></i>
                 </button>
@@ -151,23 +148,17 @@
 </template>
 
 <script>
+import { storeToRefs } from 'pinia';
+import UserProductsStore from '@/stores/userProductsStore';
+
+const userProductsStore = UserProductsStore();
+
 export default {
-  data() {
-    return {
-      carts: [],
-    };
-  },
-  props: {
-    data: { type: Object },
-    default() {
-      return {};
-    },
-  },
-  emits: ['deleCart', 'addCart', 'removeCart', 'reduceCart', 'adjCart'],
-  watch: {
-    data() {
-      this.carts = this.data;
-    },
+  setup() {
+    const { carts } = storeToRefs(userProductsStore);
+    // add reduce未使用備用
+    const { adjCart, removeCartItem, deleteCart, reduceCart, addCart } = userProductsStore;
+    return { carts, adjCart, removeCartItem, deleteCart, reduceCart, addCart };
   },
 };
 </script>

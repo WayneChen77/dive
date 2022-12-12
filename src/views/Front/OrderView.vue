@@ -15,7 +15,7 @@
     <div class="position-relative m-4">
       <div class="progress" style="height: 5px">
         <div
-          v-if="num === 66"
+          v-if="progersNum === 66"
           class="progress-bar bg-titleblue"
           role="progressbar"
           style="width: 66%"
@@ -67,17 +67,17 @@
 </template>
 
 <script>
+import OrdersStore from '@/stores/ordersStore';
+import { storeToRefs } from 'pinia';
+
+const ordersStore = OrdersStore();
+
 export default {
-  data() {
-    return {
-      num: 66,
-    };
-  },
-  mounted() {
-    // 確認有資料更新已抓取api刷新畫面
-    this.$emitter.on('push-check', () => {
-      this.num = 100;
-    });
+  setup() {
+    // 進度條位置
+    const { progersNum } = storeToRefs(ordersStore);
+    progersNum.value = 66;
+    return { progersNum };
   },
 };
 </script>

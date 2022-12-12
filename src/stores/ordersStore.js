@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 
 export default defineStore('OrdersStore', {
-  state: () => ({ dataList: {}, show: false }),
+  state: () => ({ dataList: {}, show: false, progersNum: 66 }),
 
   actions: {
     getOrders(id) {

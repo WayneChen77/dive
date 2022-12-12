@@ -15,6 +15,9 @@ export default defineStore('UserProductsStore', {
     // 購物車資料
     cartNum: 0,
     carts: [],
+    price: 0,
+    // 優惠券
+    coupon_code: '',
     // 最愛
     likedData: [1, 2],
     likedStore: [],
@@ -27,6 +30,7 @@ export default defineStore('UserProductsStore', {
   actions: {
     // 加入購物車
     updateCart(i, qt = 1) {
+      console.log(i);
       statusStore.isLoading = true;
       const cart = {
         product_id: i.id,
@@ -50,7 +54,7 @@ export default defineStore('UserProductsStore', {
           console.log(e);
         });
     },
-    // 購物車群資料
+    // 產品資料
     getproducts() {
       statusStore.isLoading = true;
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
@@ -73,6 +77,7 @@ export default defineStore('UserProductsStore', {
           // 要先歸0 不然舊資料會加到新資料會多一倍資料
           this.cartNum = 0;
           this.carts = res.data.data.carts;
+          this.price = res.data.data;
         })
         .then(() => {
           // for (let i = 0; i < this.carts.length; i += 1) {
@@ -90,6 +95,94 @@ export default defineStore('UserProductsStore', {
           console.log(e);
         });
     },
+    // 更新車群資料
+    reduceCart(item) {
+      statusStore.isLoad = true;
+      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
+      const cart = {
+        product_id: item.product_id,
+        qty: item.qty - 1,
+      };
+      axios.put(Api, { data: cart }).then((res) => {
+        const statusData = {
+          style: 'warning',
+          title: res.data.message,
+          content: res.data.message,
+        };
+
+        statusStore.isLoad = false;
+
+        this.getusercarts();
+        statusStore.pushMessage(statusData);
+      });
+    },
+    addCart(item) {
+      statusStore.isLoad = true;
+      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
+      const cart = {
+        product_id: item.product_id,
+        qty: item.qty + 1,
+      };
+      axios.put(Api, { data: cart }).then((res) => {
+        const statusData = {
+          style: 'success',
+          title: res.data.message,
+          content: res.data.message,
+        };
+
+        statusStore.isLoad = false;
+        this.getusercarts();
+        statusStore.pushMessage(statusData);
+      });
+    },
+    adjCart(item) {
+      statusStore.isLoad = true;
+      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
+      const cart = {
+        product_id: item.product_id,
+        qty: item.qty,
+      };
+      axios.put(Api, { data: cart }).then((res) => {
+        const statusData = {
+          style: 'success',
+          title: res.data.message,
+          content: res.data.message,
+        };
+
+        statusStore.isLoad = false;
+        this.getusercarts();
+        statusStore.pushMessage(statusData);
+      });
+    },
+    // 移除單一資料
+    removeCartItem(id) {
+      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`;
+      axios.delete(Api).then((res) => {
+        const statusData = {
+          style: 'warning',
+          title: res.data.message,
+          content: res.data.message,
+        };
+        this.getusercarts();
+        statusStore.pushMessage(statusData);
+      });
+    },
+    // 清空資料
+    deleteCart() {
+      this.isLoading = true;
+      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
+      axios.delete(Api).then((res) => {
+        this.isLoading = false;
+        const statusData = {
+          style: 'danger',
+          title: res.data.message,
+          content: res.data.message,
+        };
+        this.getusercarts();
+        statusStore.pushMessage(statusData);
+      });
+    },
+
     // like相關
     // 判斷css用
     isLiked(item) {
@@ -155,5 +248,6 @@ export default defineStore('UserProductsStore', {
       }
       this.likedStore = likeArry;
     },
+    // 優惠券
   },
 });

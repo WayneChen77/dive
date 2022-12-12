@@ -1,6 +1,4 @@
 <template>
-  <!-- 全域原件 -->
-  <LoadingView :active="isLoading"></LoadingView>
   <div class="container UserCarts">
     <div class="title mb-5">
       <nav aria-label="breadcrumb">
@@ -67,15 +65,7 @@
     <div class="row">
       <!-- 下方左區塊 -->
       <div class="col-12 col-sm-8">
-        <CartsItem
-          :data="carts"
-          @reduce-Cart="reduceCart"
-          @add-Cart="addCart"
-          @remove-Cart="removeCartItem"
-          @dele-Cart="deleteCart"
-          @adj-Cart="adjCart"
-          v-if="!sendData"
-        ></CartsItem>
+        <CartsItem v-if="!sendData"> </CartsItem>
         <div class="cartsrwd"></div>
       </div>
       <div class="col-12 col-md-4">
@@ -85,7 +75,7 @@
             ><input
               type="text"
               class="form-control mb-3"
-              v-model="coupon_code"
+              v-model="couponCode"
               placeholder="請輸入優惠碼"
           /></label>
           <div class="input-group-append ms-3">
@@ -99,7 +89,7 @@
               套用優惠碼
             </button>
           </div>
-          <span class="mt-3 text-primary">迎接假期！輸入： godive ，即享88折優惠！</span>
+          <span class="mt-3 text-titleblue">迎接假期！輸入： godive ，即享88折優惠！</span>
         </div>
         <!-- 伸縮品項 -->
         <div class="col-12 col-md-10 rounded mb-3" v-if="sendData">
@@ -136,7 +126,7 @@
         </div>
         <div class="mb-3 pe-2 col-12 col-md-10">
           <div class="border rounded p-0">
-            <div class="bg-bgblue rounded-top text-center text-textblue py-3 mb-3">
+            <div class="bg-bgblue rounded-top text-center text-titleblue py-3 mb-3">
               <h3>訂單資料</h3>
             </div>
             <div class="text-gray mx-3">
@@ -177,164 +167,194 @@
 import CartsItem from '@/components/Front/CartsItem.vue';
 import CartsForm from '@/components/Front/CartsForm.vue';
 
-export default {
-  data() {
-    return {
-      carts: [],
-      price: {},
-      coupon_code: '',
-      // 控制畫面顯示進度
-      sendData: false,
-      isload: false,
-      isLoading: false,
+import { ref, onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
+import axios from 'axios';
+import UserProductsStore from '@/stores/userProductsStore';
+import statusStore from '@/stores/statusStore';
 
-      // Teleport掛載使用
-      isMounted: false,
-      isDisabled: false,
+const userProductsStore = UserProductsStore();
+
+export default {
+  setup() {
+    const isMounted = ref(false);
+    const isDisabled = ref(false);
+    const sendData = ref(false);
+    const couponCode = ref('');
+
+    onMounted(() => {
+      // 解決Teleport掛載問題
+      isMounted.value = true;
+      if (window.innerWidth < 430) {
+        isDisabled.value = true;
+      }
+      // 判斷當前螢幕關閉Teleport
+      window.addEventListener('resize', () => {
+        console.log(window.screen.width);
+        if (window.innerWidth < 430) {
+          isDisabled.value = true;
+        } else {
+          isDisabled.value = false;
+        }
+      });
+    });
+
+    // 取得資料
+    const { carts, price } = storeToRefs(userProductsStore);
+    const { getusercarts } = userProductsStore;
+    getusercarts();
+    const addCouponCode = () => {
+      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`;
+      const coupon = {
+        code: couponCode.value,
+      };
+      // this.isLoading = true;
+      axios.post(Api, { data: coupon }).then((res) => {
+        const statusData = {
+          style: 'info',
+          title: res.data.message,
+          content: res.data.message,
+        };
+        statusStore.pushMessage(statusData);
+      });
+
+      this.getusercarts();
+      // this.isLoading = false;
+    };
+
+    return {
+      couponCode,
+      sendData,
+      isDisabled,
+      isMounted,
+      carts,
+      price,
+      getusercarts,
+      addCouponCode,
     };
   },
+
   components: {
     CartsItem,
     CartsForm,
   },
-  mounted() {
-    // 解決Teleport掛載問題
-    this.isMounted = true;
-    if (window.innerWidth < 430) {
-      this.isDisabled = true;
-    }
-    // 判斷當前螢幕關閉Teleport
-    window.addEventListener('resize', () => {
-      console.log(window.screen.width);
-      if (window.innerWidth < 430) {
-        this.isDisabled = true;
-      } else {
-        this.isDisabled = false;
-      }
-    });
-
-    // 確認有資料更新已抓取api刷新畫面
-    this.$emitter.on('push-cart', () => {
-      this.getusercarts();
-    });
-  },
   methods: {
-    // 更新資料
-    reduceCart(item) {
-      this.isLoad = true;
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
-      const cart = {
-        product_id: item.product_id,
-        qty: item.qty - 1,
-      };
-      this.$http.put(Api, { data: cart }).then((res) => {
-        this.$emitter.emit('push-cart', {
-          style: 'warning',
-          title: res.data.message,
-          content: res.data.message,
-        });
-        console.log(res);
-        this.isLoad = false;
-        this.getusercarts();
-      });
-    },
-    addCart(item) {
-      this.isLoad = true;
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
-      const cart = {
-        product_id: item.product_id,
-        qty: item.qty + 1,
-      };
-      this.$http.put(Api, { data: cart }).then((res) => {
-        this.$emitter.emit('push-cart', {
-          style: 'success',
-          title: res.data.message,
-          content: res.data.message,
-        });
-        console.log(res);
-        this.isLoad = false;
-        this.getusercarts();
-      });
-    },
-    adjCart(item) {
-      this.isLoad = true;
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
-      const cart = {
-        product_id: item.product_id,
-        qty: item.qty,
-      };
-      this.$http.put(Api, { data: cart }).then((res) => {
-        this.$emitter.emit('push-cart', {
-          style: 'success',
-          title: res.data.message,
-          content: res.data.message,
-        });
-        console.log(res);
-        this.isLoad = false;
-        this.getusercarts();
-      });
-    },
-    // 移除單一資料
-    removeCartItem(id) {
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`;
-      this.$http.delete(Api).then((res) => {
-        this.$emitter.emit('push-cart', {
-          style: 'warning',
-          title: res.data.message,
-          content: res.data.message,
-        });
-        this.getusercarts();
-      });
-    },
-    // 清空資料
-    deleteCart() {
-      this.isLoading = true;
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
-      this.$http.delete(Api).then((res) => {
-        this.isLoading = false;
-        this.$emitter.emit('push-cart', {
-          style: 'danger',
-          title: res.data.message,
-          content: res.data.message,
-        });
-        this.getusercarts();
-      });
-    },
-    addCouponCode() {
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`;
-      const coupon = {
-        code: this.coupon_code,
-      };
-      this.isLoading = true;
-      this.$http.post(Api, { data: coupon }).then((res) => {
-        this.$emitter.emit('push-cart', {
-          style: 'info',
-          title: res.data.message,
-          content: res.data.message,
-        });
-        this.getusercarts();
-        this.isLoading = false;
-      });
-    },
-    // 取得購物車群資料
-    getusercarts() {
-      this.isLoading = true;
-      const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.$http
-        .get(Api)
-        .then((res) => {
-          this.price = res.data.data;
-          this.carts = res.data.data.carts;
-          this.isLoading = false;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
+    // 更新車群資料
+    // reduceCart(item) {
+    //   this.isLoad = true;
+    //   const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
+    //   const cart = {
+    //     product_id: item.product_id,
+    //     qty: item.qty - 1,
+    //   };
+    //   this.$http.put(Api, { data: cart }).then((res) => {
+    //     this.$emitter.emit('push-cart', {
+    //       style: 'warning',
+    //       title: res.data.message,
+    //       content: res.data.message,
+    //     });
+    //     console.log(res);
+    //     this.isLoad = false;
+    //     this.getusercarts();
+    //   });
+    // },
+    // addCart(item) {
+    //   this.isLoad = true;
+    //   const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
+    //   const cart = {
+    //     product_id: item.product_id,
+    //     qty: item.qty + 1,
+    //   };
+    //   this.$http.put(Api, { data: cart }).then((res) => {
+    //     this.$emitter.emit('push-cart', {
+    //       style: 'success',
+    //       title: res.data.message,
+    //       content: res.data.message,
+    //     });
+    //     console.log(res);
+    //     this.isLoad = false;
+    //     this.getusercarts();
+    //   });
+    // },
+    // adjCart(item) {
+    //   this.isLoad = true;
+    //   const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
+    //   const cart = {
+    //     product_id: item.product_id,
+    //     qty: item.qty,
+    //   };
+    //   this.$http.put(Api, { data: cart }).then((res) => {
+    //     this.$emitter.emit('push-cart', {
+    //       style: 'success',
+    //       title: res.data.message,
+    //       content: res.data.message,
+    //     });
+    //     console.log(res);
+    //     this.isLoad = false;
+    //     this.getusercarts();
+    //   });
+    // },
+    // // 移除單一資料
+    // removeCartItem(id) {
+    //   const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`;
+    //   this.$http.delete(Api).then((res) => {
+    //     this.$emitter.emit('push-cart', {
+    //       style: 'warning',
+    //       title: res.data.message,
+    //       content: res.data.message,
+    //     });
+    //     this.getusercarts();
+    //   });
+    // },
+    // // 清空資料
+    // deleteCart() {
+    //   this.isLoading = true;
+    //   const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
+    //   this.$http.delete(Api).then((res) => {
+    //     this.isLoading = false;
+    //     this.$emitter.emit('push-cart', {
+    //       style: 'danger',
+    //       title: res.data.message,
+    //       content: res.data.message,
+    //     });
+    //     this.getusercarts();
+    //   });
+    // },
+    // addCouponCode() {
+    //   const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`;
+    //   const coupon = {
+    //     code: this.coupon_code,
+    //   };
+    //   this.isLoading = true;
+    //   this.$http.post(Api, { data: coupon }).then((res) => {
+    //     this.$emitter.emit('push-cart', {
+    //       style: 'info',
+    //       title: res.data.message,
+    //       content: res.data.message,
+    //     });
+    //     this.getusercarts();
+    //     this.isLoading = false;
+    //   });
+    // },
+    // // 取得購物車群資料
+    // getusercarts() {
+    //   this.isLoading = true;
+    //   const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
+    //   this.$http
+    //     .get(Api)
+    //     .then((res) => {
+    //       this.price = res.data.data;
+    //       this.carts = res.data.data.carts;
+    //       this.isLoading = false;
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //     });
+    // },
   },
-  created() {
-    this.getusercarts();
-  },
+  // created() {
+  //   this.getusercarts();
+  // },
 };
 </script>
 

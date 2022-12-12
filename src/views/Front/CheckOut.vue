@@ -17,19 +17,17 @@
 <script>
 // import { ref } from 'vue';
 import { useRoute } from 'vue-router';
+import OrdersStore from '@/stores/ordersStore';
+
+const ordersStore = OrdersStore();
 
 export default {
   setup() {
     // const dataID = ref('');
     const Route = useRoute();
     const { id } = Route.params;
-    // const getParams = () => {
-    // const Route = useRoute();
-    // const { id } = Route.params;
-    // dataID.value = id;
-    // this.$emitter.emit('push-check', 'check');
-    // };
-    // getParams();
+    // 進度條位置
+    ordersStore.progersNum = 100;
 
     return { id };
   },
