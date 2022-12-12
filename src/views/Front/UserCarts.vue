@@ -33,28 +33,28 @@
         </div>
         <button
           type="button"
-          class="position-absolute top-0 translate-middle btn btn-primary rounded-pill btnadj"
+          class="position-absolute top-0 translate-middle btn btn-titleblue rounded-pill btnadj"
           style="left: 0"
         >
           <i class="bi bi-cart2"></i>
         </button>
         <button
           type="button"
-          class="position-absolute top-0 translate-middle btn btn-primary rounded-pill btnadj"
+          class="position-absolute top-0 translate-middle btn btn-titleblue rounded-pill btnadj"
           style="left: 33%"
         >
           <i class="bi bi-card-checklist"></i>
         </button>
         <button
           type="button"
-          class="position-absolute top-0 translate-middle btn btn-primary rounded-pill btnadj"
+          class="position-absolute top-0 translate-middle btn btn-titleblue rounded-pill btnadj"
           style="will-change: ; left: 66%"
         >
           <i class="bi bi-cash-coin"></i>
         </button>
         <button
           type="button"
-          class="position-absolute top-0 translate-middle btn btn-primary rounded-pill btnadj"
+          class="position-absolute top-0 translate-middle btn btn-titleblue rounded-pill btnadj"
           style="left: 100%"
         >
           <i class="bi bi-emoji-smile"></i>
@@ -97,7 +97,7 @@
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingOne">
                 <button
-                  class="accordion-button"
+                  class="accordion-button text-titleblue"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseOne"
@@ -109,7 +109,7 @@
               </h2>
               <div
                 id="collapseOne"
-                class="accordion-collapse collapse show"
+                class="accordion-collapse collapse show text-titleblue"
                 aria-labelledby="headingOne"
                 data-bs-parent="#accordionExample"
               >
@@ -129,7 +129,7 @@
             <div class="bg-bgblue rounded-top text-center text-titleblue py-3 mb-3">
               <h3>訂單資料</h3>
             </div>
-            <div class="text-gray mx-3">
+            <div class="mx-3">
               商品金額:
               <p class="text-end">${{ this.$filters.currency(price.total) }}</p>
             </div>

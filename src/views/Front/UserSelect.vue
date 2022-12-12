@@ -87,7 +87,7 @@
         <p style="white-space: pre-wrap">{{ product.precautions }}</p>
       </div>
     </div>
-    <h3 class="text-textblue mt-3">你可能有興趣</h3>
+    <h3 class="text-titleblue mt-3">你可能有興趣</h3>
     <OtherCard></OtherCard>
   </div>
 </template>

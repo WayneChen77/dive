@@ -7,7 +7,7 @@
       aria-expanded="false"
       aria-controls="collapseExample"
     >
-      <i class="bi bi-heart fs-3" type="button">
+      <i class="bi bi-heart fs-3 text-titleblue" type="button">
         <span class="badge rounded-pill cartnum" v-if="likedData">{{ likedData.length }}</span
         ><span class="visually-hidden">unread messages</span></i
       >
@@ -48,14 +48,14 @@
       </div>
     </div>
     <router-link to="/UserCarts"
-      ><i class="bi bi-cart-fill position-relative d-block fs-3"
+      ><i class="bi bi-cart-fill position-relative d-block fs-3 text-titleblue"
         ><span class="badge rounded-pill cartnum"
           >{{ cartNum }}<span class="visually-hidden">unread messages</span></span
         ></i
       ></router-link
     >
     <i
-      class="bi bi-arrow-up-square d-block fs-3"
+      class="bi bi-arrow-up-square d-block fs-3 text-titleblue"
       type="button"
       @click="toTop"
       @keyup.enter="toTop"
@@ -82,58 +82,15 @@ export default {
     };
 
     return {
-      // products,
       likedData,
       likedStore,
       cartNum,
-      // likenum,
       toTop,
       updateCart,
       getLikeData,
       deleLike,
     };
   },
-
-  // 這邊資料想入pinia後是否還需要使用能否直接使用pi資料刷新?
-  // 抓取Stores直接算
-  mounted() {
-    // 確認有資料更新已抓取api刷新畫面
-    this.$emitter.on('push-cart', () => {
-      this.getusercarts();
-    });
-    // 最愛
-    this.$emitter.on('push-like', () => {
-      this.getLikes();
-    });
-  },
-
-  computed: {
-    // 會報錯找不到
-    // 監聽資料輸出最愛
-    // likedStore() {
-    //   const num = this.likedData.length ?? 10;
-    //   const data = this.products;
-    //   const likeArry = [];
-    //   for (let n = 0; n < num; n += 1) {
-    //     const a = data.filter((i) => i.id === this.likedData[n]);
-    //     likeArry.push(a[0]);
-    //   }
-    //   return likeArry;
-    // },
-  },
-  // watch: {
-  //   likedData() {
-  //     const num = this.likedData.length;
-  //     const data = this.products;
-  //     const likeArry = [];
-  //     for (let n = 0; n < num; n += 1) {
-  //       const a = data.filter((i) => i.id === this.likedData[n]);
-  //       likeArry.push(a[0]);
-  //     }
-  //     this.likedStore = likeArry;
-  //   },
-  // },
-  created() {},
 };
 </script>
 
@@ -169,7 +126,7 @@ export default {
   z-index: 99;
   bottom: 30vh;
   right: 5vw;
-  background-color: rgba($color: rgb(7, 7, 78), $alpha: 0.3);
+  background-color: rgba($color: white, $alpha: 0.6);
 
   .cartnum {
     position: absolute;

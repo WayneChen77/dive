@@ -268,15 +268,6 @@ export default {
     Swiper,
     SwiperSlide,
   },
-
-  // op api
-  // data() {
-  //   return {
-  //     isMounted: false,
-  //     isDisabled: false,
-  //     modules: [Pagination, Scrollbar, Autoplay, EffectFade],
-  //   };
-  // },
 };
 </script>
 
@@ -409,10 +400,14 @@ export default {
     background: rgba($color: #0cc6f0, $alpha: 0.3);
     z-index: 1;
   }
-  .text1,
-  .text2 {
-    margin: 0%;
+
+  .mainTop {
+    .text1,
+    .text2 {
+      margin: 0%;
+    }
   }
+
   .sliderBlock {
     .txt {
       top: 25%;

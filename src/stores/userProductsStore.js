@@ -30,7 +30,6 @@ export default defineStore('UserProductsStore', {
   actions: {
     // 加入購物車
     updateCart(i, qt = 1) {
-      console.log(i);
       statusStore.isLoading = true;
       const cart = {
         product_id: i.id,

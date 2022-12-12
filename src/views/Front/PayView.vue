@@ -62,7 +62,9 @@
       </div>
     </div>
     <div class="col-8 text-end">
-      <button type="button" class="btn btn-outline-primary" @click="CheckOut(id)">我要付款</button>
+      <button type="button" class="btn btn-outline-titleblue" @click="CheckOut(id)">
+        我要付款
+      </button>
     </div>
   </div>
 </template>
@@ -98,43 +100,6 @@ export default {
     };
     return { dataList, id, CheckOut };
   },
-  // data() {
-  //   return {
-  //     dataList: {},
-  //   };
-  // },
-  methods: {
-    // getorder() {
-    //   const { id } = this.$route.params;
-    //   const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`;
-    //   this.$http
-    //     .get(Api)
-    //     .then((res) => {
-    //       this.dataList = res.data.order;
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //     });
-    // },
-    // CheckOut() {
-    //   const { id } = this.$route.params;
-    //   const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${id}`;
-    //   this.$http
-    //     .post(Api)
-    //     .then((res) => {
-    //       this.$emitter.emit('push-cart', {
-    //         style: 'success',
-    //         title: res.data.message,
-    //         content: res.data.message,
-    //       });
-    //     })
-    //     .catch((e) => console.log(e));
-    //   this.$router.push(`/Order/CheckOut/${id}`);
-    // },
-  },
-  // created() {
-  //   this.getorder();
-  // },
 };
 </script>
 

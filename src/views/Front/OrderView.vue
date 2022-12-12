@@ -35,31 +35,31 @@
       </div>
       <button
         type="button"
-        class="position-absolute top-0 translate-middle btn btn-primary rounded-pill btnadj"
+        class="position-absolute top-0 translate-middle btn bg-titleblue rounded-pill btnadj"
         style="left: 0"
       >
-        <i class="bi bi-cart2"></i>
+        <i class="bi text-white bi-cart2"></i>
       </button>
       <button
         type="button"
-        class="position-absolute top-0 translate-middle btn btn-primary rounded-pill btnadj"
+        class="position-absolute top-0 translate-middle btn bg-titleblue rounded-pill btnadj"
         style="left: 33%"
       >
-        <i class="bi bi-card-checklist"></i>
+        <i class="bi text-white bi-card-checklist"></i>
       </button>
       <button
         type="button"
-        class="position-absolute top-0 translate-middle btn btn-primary rounded-pill btnadj"
+        class="position-absolute top-0 translate-middle btn bg-titleblue rounded-pill btnadj"
         style="will-change: ; left: 66%"
       >
-        <i class="bi bi-cash-coin"></i>
+        <i class="bi text-white bi-cash-coin"></i>
       </button>
       <button
         type="button"
-        class="position-absolute top-0 translate-middle btn btn-primary rounded-pill btnadj"
+        class="position-absolute top-0 translate-middle btn bg-titleblue rounded-pill btnadj"
         style="left: 100%"
       >
-        <i class="bi bi-emoji-smile"></i>
+        <i class="bi bi-emoji-smile text-white"></i>
       </button>
     </div>
     <router-view></router-view>

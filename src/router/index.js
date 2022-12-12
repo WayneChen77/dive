@@ -45,11 +45,7 @@ const routes = [
         name: 'searchorder',
         component: () => import('../views/Front/SearchOrder.vue'),
       },
-      {
-        path: 'Know',
-        name: 'Know',
-        component: () => import('../views/Front/KnowView.vue'),
-      },
+
       {
         path: 'Order',
         name: 'OrderView',

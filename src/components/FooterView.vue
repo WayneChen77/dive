@@ -7,7 +7,7 @@
             id="userEmail"
             name="userEmail"
             type="userEmail"
-            class="rounded"
+            class="rounded border-titleblue"
             :class="{
               'is-invalid': errors['userEmail'],
               'is-valid': !errors[0] && userEmail != '',
@@ -107,11 +107,9 @@ export default {
   align-items: center;
   align-content: center;
   flex-wrap: wrap;
-
   ul {
     left: 0;
     right: 0;
-
     list-style: none;
 
     display: flex;
@@ -125,5 +123,10 @@ export default {
       }
     }
   }
+}
+.border-titleblue {
+  outline: none !important;
+  box-shadow: none !important;
+  color: red;
 }
 </style>

@@ -2,7 +2,9 @@
   <div class="nav">
     <div class="container pt-2">
       <nav class="navbar navbar-expand-lg">
-        <router-link class="text-dark" to="/home"><i class="bi bi-tsunami fs-1"></i></router-link>
+        <router-link class="text-titleblue" to="/home"
+          ><i class="bi bi-tsunami fs-1"></i
+        ></router-link>
         <button
           ref="navbarBtn"
           class="navbar-toggler"
@@ -30,12 +32,6 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/userCarts">購物車</router-link>
             </li>
-            <!-- <li class="nav-item">
-              <router-link class="nav-link" to="/Know">潛水知識</router-link>
-            </li> -->
-            <!-- <li class="nav-item">
-              <router-link class="nav-link" to="/contact">連絡我們</router-link>
-            </li> -->
             <li class="nav-item">
               <router-link class="nav-link phoneRwd" to="/login">管理員登入</router-link>
             </li>
@@ -70,7 +66,6 @@ export default {
 
 <style lang="scss" scoped>
 .nav {
-  color: black;
   #navbarNav {
     justify-content: space-around;
     ul li {
@@ -83,13 +78,6 @@ export default {
     font-size: 1.5rem;
     ul li {
       padding: 0rem 2rem;
-      a {
-        color: black;
-      }
-
-      .active {
-        color: rgb(244, 228, 142);
-      }
     }
     .rwd {
       display: none;
