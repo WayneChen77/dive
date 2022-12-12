@@ -73,7 +73,7 @@ export default {
     }
   }
 }
-@media (max-width: 430px) {
+@media (max-width: 992px) {
   #navbarNav {
     font-size: 1.5rem;
     ul li {
@@ -84,7 +84,7 @@ export default {
     }
   }
 }
-@media (min-width: 431px) {
+@media (min-width: 990px) {
   .phoneRwd {
     display: none;
   }

@@ -325,7 +325,7 @@ export default {
   }
 }
 .sliderDown {
-  height: 80px;
+  height: 11%;
   width: 100%;
   position: absolute;
   background-image: url(https://www.longjing.com.tw/Templates/TEZ_109061EZW/images/all/banner_bottom.png);
