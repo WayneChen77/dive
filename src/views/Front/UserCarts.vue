@@ -171,9 +171,10 @@ import { ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import axios from 'axios';
 import UserProductsStore from '@/stores/userProductsStore';
-import statusStore from '@/stores/statusStore';
+import StatusStore from '@/stores/statusStore';
 
 const userProductsStore = UserProductsStore();
+const statusStore = StatusStore();
 
 export default {
   setup() {
@@ -211,14 +212,14 @@ export default {
       // this.isLoading = true;
       axios.post(Api, { data: coupon }).then((res) => {
         const statusData = {
-          style: 'info',
-          title: res.data.message,
+          // style: 'info',
+          // title: res.data.message,
           content: res.data.message,
         };
         statusStore.pushMessage(statusData);
       });
 
-      this.getusercarts();
+      getusercarts();
       // this.isLoading = false;
     };
 

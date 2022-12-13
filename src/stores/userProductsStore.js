@@ -143,8 +143,8 @@ export default defineStore('UserProductsStore', {
       };
       axios.put(Api, { data: cart }).then((res) => {
         const statusData = {
-          style: 'success',
-          title: res.data.message,
+          // style: 'success',
+          // title: res.data.message,
           content: res.data.message,
         };
 
@@ -158,8 +158,8 @@ export default defineStore('UserProductsStore', {
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`;
       axios.delete(Api).then((res) => {
         const statusData = {
-          style: 'warning',
-          title: res.data.message,
+          // style: 'warning',
+          // title: res.data.message,
           content: res.data.message,
         };
         this.getusercarts();
@@ -173,8 +173,8 @@ export default defineStore('UserProductsStore', {
       axios.delete(Api).then((res) => {
         this.isLoading = false;
         const statusData = {
-          style: 'danger',
-          title: res.data.message,
+          // style: 'danger',
+          // title: res.data.message,
           content: res.data.message,
         };
         this.getusercarts();

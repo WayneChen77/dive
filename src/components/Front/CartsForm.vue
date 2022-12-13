@@ -97,11 +97,13 @@
 
 <script>
 import StatusStore from '@/stores/statusStore';
+import UserProductsStore from '@/stores/userProductsStore';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 
 const statusStore = StatusStore();
+const userProductsStore = UserProductsStore();
 
 export default {
   setup() {
@@ -146,6 +148,7 @@ export default {
           content: res.data.message,
         };
         statusStore.pushMessage(statusData);
+        userProductsStore.getusercarts();
 
         Router.push(`/Order/PayView/${res.data.orderId}`);
       });

@@ -52,7 +52,7 @@ export default {
         buttons: ['取消!', '馬上去買!'],
       }).then((res) => {
         if (res) {
-          router.push('userProducts');
+          router.push('/userProducts');
         }
         userEmail.value = '';
       });

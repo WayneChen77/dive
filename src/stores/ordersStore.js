@@ -7,7 +7,6 @@ export default defineStore('OrdersStore', {
   actions: {
     getOrders(id) {
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`;
-      console.log(Api);
       axios
         .get(Api)
         .then((res) => {

@@ -123,7 +123,7 @@ export default {
 @media screen and (max-width: 430px) {
   .card {
     position: relative;
-    width: 90%;
+    min-width: 90%;
     margin: auto;
   }
 }
