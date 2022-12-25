@@ -70,11 +70,11 @@
 </template>
 
 <script>
-// import { ref } from 'vue';
 import OrdersStore from '@/stores/ordersStore';
 import StatusStore from '@/stores/statusStore';
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
+import { storeToRefs } from 'pinia';
 
 export default {
   setup() {
@@ -82,8 +82,11 @@ export default {
     const Router = useRouter();
     const { id } = Route.params;
     const ordersStore = OrdersStore();
-    const { dataList } = ordersStore;
-    ordersStore.getOrders(id);
+    const { getOrders } = ordersStore;
+    getOrders(id);
+
+    const { dataList } = storeToRefs(ordersStore);
+
     const CheckOut = (ID) => {
       const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${ID}`;
       axios
@@ -98,8 +101,45 @@ export default {
         .catch((e) => console.log(e));
       Router.push(`/Order/CheckOut/${id}`);
     };
-    return { dataList, id, CheckOut };
+    return { dataList, id, CheckOut, getOrders };
   },
+  // data() {
+  //   return {
+  //     dataList: {},
+  //   };
+  // },
+  methods: {
+    // getorder() {
+    //   const { id } = this.$route.params;
+    //   const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${id}`;
+    //   this.$http
+    //     .get(Api)
+    //     .then((res) => {
+    //       this.dataList = res.data.order;
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //     });
+    // },
+    // CheckOut() {
+    //   const { id } = this.$route.params;
+    //   const Api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${id}`;
+    //   this.$http
+    //     .post(Api)
+    //     .then((res) => {
+    //       this.$emitter.emit('push-cart', {
+    //         style: 'success',
+    //         title: res.data.message,
+    //         content: res.data.message,
+    //       });
+    //     })
+    //     .catch((e) => console.log(e));
+    //   this.$router.push(`/Order/CheckOut/${id}`);
+    // },
+  },
+  // created() {
+  //   this.getOrders(this.id);
+  // },
 };
 </script>
 

@@ -210,16 +210,20 @@ export default {
         code: couponCode.value,
       };
       // this.isLoading = true;
-      axios.post(Api, { data: coupon }).then((res) => {
-        const statusData = {
-          // style: 'info',
-          // title: res.data.message,
-          content: res.data.message,
-        };
-        statusStore.pushMessage(statusData);
-      });
+      axios
+        .post(Api, { data: coupon })
+        .then((res) => {
+          const statusData = {
+            // style: 'info',
+            // title: res.data.message,
+            content: res.data.message,
+          };
+          statusStore.pushMessage(statusData);
+        })
+        .then(() => {
+          getusercarts();
+        });
 
-      getusercarts();
       // this.isLoading = false;
     };
 

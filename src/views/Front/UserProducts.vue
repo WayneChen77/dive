@@ -48,7 +48,10 @@
           </div>
           <div class="overlay card-img-top">
             <a href="#" @click.prevent="userproduct(i)">
-              <div class="text-center py-5 text-bgblue">了解更多</div>
+              <div class="text-bgblue">
+                <i class="bi bi-search fs-1"></i>
+                <p class="acr">1</p>
+              </div>
             </a>
           </div>
           <i
@@ -99,13 +102,6 @@ export default {
     getLikes();
     return { dataList, search, liked, userproduct, updateCart, isLiked, getLikes };
   },
-
-  // mounted() {
-  //   // 最愛 改到狀態管理
-  //   this.$emitter.on('push-like', () => {
-  //     this.getLikes();
-  //   });
-  // },
 };
 </script>
 <style lang="scss" scoped>
@@ -151,6 +147,15 @@ export default {
       background-color: rgba(0, 0, 0, 0.6);
       top: 0;
       opacity: 0;
+      a {
+        text-decoration: none;
+        .text-bgblue {
+          height: 30vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
     }
     &:hover {
       .cardImg.card-img-top {
@@ -164,9 +169,14 @@ export default {
         opacity: 1;
       }
     }
+
+    .acr {
+      overflow: hidden;
+      width: 1px;
+    }
     .like {
       top: 0;
-      left: 2vw;
+      left: 10px;
       z-index: 5;
       font-size: 2.5rem;
       color: red;

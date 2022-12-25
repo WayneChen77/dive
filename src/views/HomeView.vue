@@ -383,6 +383,9 @@ export default {
     background-color: rgba(0, 0, 0, 0.6);
     top: 0;
     opacity: 0;
+    a {
+      text-decoration: none;
+    }
   }
 }
 

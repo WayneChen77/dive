@@ -1,35 +1,47 @@
 <template>
   <footer class="footer bg-titleblue py-3">
-    <div class="text-white d-flex justify-content-center g-3">
-      <FormView v-slot="{ errors }" @submit="createSub">
-        <div class="mb-3">
-          <FieldView
-            id="userEmail"
-            name="userEmail"
-            type="userEmail"
-            class="rounded border-titleblue"
-            :class="{
-              'is-invalid': errors['userEmail'],
-              'is-valid': !errors[0] && userEmail != '',
-            }"
-            placeholder="Email訂閱取得優惠碼"
-            rules="email|required"
-            v-model="userEmail"
-          >
-          </FieldView>
-
-          <button class="btn btn-sm btn-danger ms-3" :disabled="userEmail === ''">訂閱</button>
-          <ErrorMessage name="userEmail" class="invalid-feedback d-block"></ErrorMessage>
-        </div>
-      </FormView>
+    <div class="d-flex justify-content-center g-3">
+      <div class="text-white subWidth container">
+        <FormView v-slot="{ errors }">
+          <div class="input-group mb-3">
+            <FieldView
+              id="userEmail"
+              name="userEmail"
+              type="text"
+              class="form-control border-titleblue text-titleblue"
+              placeholder="Email訂閱取得優惠碼"
+              aria-label="Email訂閱取得優惠碼"
+              rules="email|required"
+              aria-describedby="button-addon2"
+              :class="{
+                'is-invalid': errors['userEmail'],
+                'is-valid': !errors[0] && userEmail != '',
+              }"
+              v-model="userEmail"
+            >
+            </FieldView>
+            <button
+              class="btn btn-danger"
+              type="button"
+              id="button-addon2"
+              @click="createSub"
+              :disabled="userEmail === ''"
+            >
+              訂閱
+            </button>
+            <ErrorMessage name="userEmail" class="invalid-feedback d-block"></ErrorMessage>
+          </div>
+        </FormView>
+      </div>
     </div>
+
     <div class="copyright">
       <p class="text-center text-white">Copyright © 2022 Wayne Dives. All Rights Reserved.</p>
-      <ul class="addressLink">
-        <li><router-link class="nav-link" to="/about">關於我們</router-link></li>
-        <li><router-link class="nav-link" to="/contact">連絡我們</router-link></li>
-        <li><router-link class="nav-link" to="/userProducts">產品介紹</router-link></li>
-        <li><a href="https://www.pexels.com/zh-tw/" target="_blank"> 本網站照片來源</a></li>
+      <ul>
+        <li><router-link to="/about">關於我們</router-link></li>
+        <li><router-link to="/contact">連絡我們</router-link></li>
+        <li><router-link to="/userProducts">產品介紹</router-link></li>
+        <li><a href="https://www.pexels.com/zh-tw/" target="_blank"> 照片來源</a></li>
       </ul>
     </div>
   </footer>
@@ -94,11 +106,9 @@ export default {
 .footer {
   width: 100%;
 }
-// .text-white {
-//   position: absolute;
 
-//   left: 50%;
-//   transform: translateX(-50%);
+// .subWidth {
+//   width: 60%;
 // }
 .copyright {
   min-height: 10vh;
@@ -108,14 +118,11 @@ export default {
   align-content: center;
   flex-wrap: wrap;
   ul {
-    left: 0;
-    right: 0;
     list-style: none;
-
+    padding: 0;
     display: flex;
     li {
       color: white;
-
       margin: 0.5rem;
       a {
         color: white;
